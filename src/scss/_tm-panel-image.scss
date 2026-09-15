@@ -1,0 +1,36 @@
+// Слот изображения в панели велаята.
+// Брейкпоинт должен совпадать с media в src/config/images.config.mjs → ART.
+
+@use 'images' as *;
+
+.tm-panel {
+  &__wrapper-image {
+    // Место зарезервировано ДО загрузки: панель не прыгает при переключении
+    // велаята и не портит CLS.
+    @include image-slot-fluid(panelSm);
+
+    margin-block: 16px;
+    overflow: hidden;
+    border-radius: 10px;
+
+    // Плейсхолдер вместо белой дыры, пока картинка едет
+    background-color: #e8edf0;
+
+    @media (min-width: 768px) {
+      @include image-slot-fluid(panelLg);
+    }
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

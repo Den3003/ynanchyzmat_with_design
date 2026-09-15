@@ -1,0 +1,781 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as mixins;
+
+/* ===========================================================================
+   Секция «Turkmenistan»
+   Блоки: .tm (каркас), .tm-legend, .tm-projects, .tm-notes, .tm-marker (оверлей)
+
+   Адаптив: секция переехала на общие брейкпоинты проекта (mixins.down),
+   собственные $tm-bp-* больше не используются — иначе точки переключения
+   секции разъезжались бы с остальным сайтом.
+   =========================================================================== */
+
+.tm {
+  --tm-label-size: 13px;
+  //  Маркеры заданы в пикселях, причём часть значений приезжает ИНЛАЙНОМ из
+  //  data/facilities.js (diameter, fontSize) и перебивает любой медиазапрос
+  //  на том же элементе. Вместе со сценой они не уменьшаются, поэтому на узком
+  //  экране 58-пиксельный круг Ашхабада закрывал пол-страны. Общий множитель —
+  //  единственный способ ужать их, не трогая данные.
+  --tm-marker-scale: 1;
+
+  position: relative;
+  padding: mixins.fluid(40px, 70px) 0 mixins.fluid(56px, 160px);
+  background: radial-gradient(120% 90% at 30% 10%, #394854 0%, $tm-bg 45%, $tm-bg-deep 100%);
+  color: $tm-ink;
+  overflow: hidden;
+
+  //  Подвал страницы (position: absolute) лежит поверх нижнего отступа секции,
+  //  поэтому отступ должен быть не меньше высоты подвала — иначе он налезает на сноски
+  @include mixins.down('lg') {
+    padding-bottom: 120px;
+  }
+
+  @include mixins.down('md') {
+    --tm-marker-scale: 0.85;
+  }
+
+  @include mixins.down('xs') {
+    padding-bottom: 140px;
+  }
+
+  @include mixins.down('sm') {
+    --tm-label-size: 11px;
+    --tm-marker-scale: 0.7;
+  }
+
+  @include mixins.down('xs') {
+    --tm-label-size: 10px;
+    --tm-marker-scale: 0.55;
+  }
+
+  @include mixins.down('xxs') {
+    --tm-marker-scale: 0.45;
+  }
+}
+
+.tm__title {
+  margin: 0 0 mixins.fluid(16px, 32px);
+  font-family: $tm-font-display;
+  font-size: mixins.fluid(32px, 76px);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  line-height: 1;
+}
+
+.tm__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 560px;
+  gap: mixins.fluid(24px, 56px);
+  align-items: start;
+
+  //  Панель в 560px на ноутбуке забирала у 3D-сцены почти половину ширины
+  @include mixins.down('xl') {
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 440px);
+  }
+
+  //  Текстовая панель уходит под карту: рядом с панелью (440px) на планшете
+  //  и маленьком ноутбуке карте остаётся меньше 500px, и 3D-сцена превращается в марку.
+  @include mixins.down('lg') {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --- Сцена ---------------------------------------------------------------- */
+
+.tm__stage {
+  position: relative;
+  //  Высота сцены задаётся ТОЛЬКО пропорцией. min-height/max-height здесь
+  //  ставить нельзя: при заданном aspect-ratio ограничение по высоте
+  //  пересчитывает и ширину, и канвас перестаёт заполнять свою колонку.
+  //  Страна вытянута по горизонтали (≈1.36:1), поэтому чем уже экран, тем
+  //  «квадратнее» кадр — иначе камера отъезжает и карта тонет в пустоте.
+  aspect-ratio: 16 / 10;
+  touch-action: pan-y;
+  contain: layout paint;
+
+  &.is-hovering {
+    cursor: pointer;
+  }
+
+  //  Панель ушла вниз, сцена растянулась на всю ширину — 16/10 дало бы 600+px
+  @include mixins.down('md') {
+    aspect-ratio: 16 / 9;
+  }
+
+  @include mixins.down('sm') {
+    aspect-ratio: 3 / 2;
+  }
+
+  @include mixins.down('xs') {
+    aspect-ratio: 4 / 3;
+  }
+
+  //  Телефон «на боку»: экран ниже 600px, сцена не должна занимать его весь
+  @include mixins.landscape-short {
+    aspect-ratio: 12 / 5;
+  }
+}
+
+// Канвас вынут из потока намеренно: если чужие глобальные стили зададут ему
+// height: auto, он начнёт влиять на высоту .tm__stage, ResizeObserver поймает
+// изменение, пересоздаст буфер кадра — и так по кругу каждый кадр.
+.tm__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
+.tm__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.tm__loader {
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  margin: 0;
+  text-align: center;
+  color: $tm-ink-dim;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: opacity 0.4s ease;
+
+  .tm.is-ready & {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .tm.is-fallback & {
+    position: static;
+    padding: 3rem 1rem;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  @include mixins.down('xs') {
+    font-size: 0.75rem;
+  }
+}
+
+.tm.is-fallback {
+  .tm__canvas,
+  .tm__overlay {
+    display: none;
+  }
+
+  .tm__stage {
+    aspect-ratio: auto;
+  }
+
+  .tm__a11y {
+    position: static;
+    width: auto;
+    height: auto;
+    clip-path: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 1rem;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.tm__stage-foot {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 34px;
+  margin-top: 8px;
+
+  //  Подсказка и кнопка «All welayats» не помещаются в строку на телефоне
+  @include mixins.down('xs') {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+}
+
+.tm__hint {
+  margin: 0;
+  color: $tm-ink-dim;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  @include mixins.down('sm') {
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+  }
+}
+
+.tm__reset {
+  padding: 6px 14px;
+  border: 1px solid $tm-line;
+  border-radius: 999px;
+  background: transparent;
+  color: $tm-ink-muted;
+  font: inherit;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+
+  //  На тач-экранах :hover залипает после тапа
+  @include mixins.hover-supported {
+    &:hover {
+      color: $tm-ink;
+      border-color: rgba(240, 126, 38, 0.6);
+    }
+  }
+
+  //  Палец должен попадать по кнопке, а не по 26px-полоске
+  @include mixins.touch {
+    @include mixins.tap-target(40px);
+    padding: 6px 18px;
+  }
+
+  .tm.is-welayat-selected & {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* --- Текстовая панель ------------------------------------------------------ */
+
+.tm__wrapper-panel {
+  position: relative;
+}
+
+//  Кнопка закрытия нужна только модалке
+.tm__panel-close {
+  display: none;
+}
+
+.tm__wrapper-panel.welayat-selected {
+  background: $color-main;
+
+  .tm__panel {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;      /* нет дёрганья layout при появлении скроллбара */
+  }
+
+  //  Одна колонка: информация о велаяте открывается модалкой на весь экран,
+  //  а не длинным блоком под легендами. Открытие/закрытие и Esc —
+  //  в modules/turkmenistan/index.js
+  @include mixins.down('lg') {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    //  iOS 26 рисует страницу под строкой состояния, и тап в этой зоне Safari
+    //  забирает себе (прокрутка наверх) — крестик там не нажимался.
+    //  Отступаем на safe-area (нужен viewport-fit=cover в sectors.html)
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) 0 env(safe-area-inset-left, 0px);
+    background: $color-main;
+    animation: tm-modal-in 0.3s ease both;
+
+    .tm__dialog {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      background: $color-main;
+    }
+
+    //  Панель с крестиком не прокручивается вместе с содержимым
+    .tm__panel-close {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: flex-end;
+      width: 48px;
+      height: 48px;
+      margin: 8px 8px 8px 0;
+      padding: 0;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 50%;
+      background: $color-main;
+      color: $color-black;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    .tm__panel {
+      position: relative;
+      inset: auto;
+      flex: 1 1 auto;
+      min-height: 0;
+      //  Последние строки не должны прятаться под плавающей панелью Safari
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 96px);
+    }
+  }
+
+  .tm-panel__text {
+    color: $color-black;
+  }
+}
+
+.tm-panel__wrapper-image {
+  width: 100%;
+  max-width: 560px;
+  height: 500px;
+  overflow: hidden;
+  margin: 0 0 30px;
+
+  @include mixins.down('xl') {
+    height: 360px;
+  }
+
+  //  Панель на всю ширину: фиксированная высота превратила бы фото в полосу
+  @include mixins.down('lg') {
+    max-width: none;
+    height: auto;
+    aspect-ratio: 21 / 9;
+  }
+
+  @include mixins.down('md') {
+    aspect-ratio: 16 / 9;
+  }
+
+  @include mixins.down('sm') {
+    aspect-ratio: 4 / 3;
+    margin: 0 0 20px;
+  }
+}
+
+.tm-panel__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+
+  //  .tm-panel__image — это <picture> из welayat-image.js, сам <img> внутри
+  //  без класса: без этого он оставался в родных 560px и не заполнял слот
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.tm-panel__heading {
+  margin: 0 0 30px;
+  font-size: mixins.fluid(18px, 24px);
+  font-weight: 700;
+  color: $color-orange-primary;
+  padding: 0 30px;
+
+  @include mixins.down('sm') {
+    margin: 0 0 18px;
+    padding: 0 16px;
+  }
+}
+
+.tm-panel__span-text {
+  font-weight: 700;
+}
+
+.tm-panel__text {
+  margin: 0 0 1.25em;
+  padding: 0 45px 0 30px;
+  color: $color-main;
+  hyphens: auto;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  //  Выключка по ширине на узкой колонке рвёт строки «реками» из пробелов
+  @include mixins.down('sm') {
+    text-align: left;
+    line-height: 1.65;
+    padding: 0 16px;
+  }
+}
+
+.tm-panel__list {
+  color: $color-black;
+  margin: 0 0 20px;
+  padding: 0 45px 0 55px;
+
+  @include mixins.down('sm') {
+    padding: 0 16px 0 36px;
+  }
+}
+
+.tm-panel__table {
+  color: $color-black;
+  margin: 0 30px 20px;
+  border-collapse: collapse;
+
+  //  Таблица не должна вылезать за белую панель: ширина ограничена,
+  //  длинные значения переносятся
+  @include mixins.down('sm') {
+    width: calc(100% - 32px);
+    margin: 0 16px 20px;
+    table-layout: fixed;
+    overflow-wrap: anywhere;
+  }
+}
+
+.tm-panel__table-title {
+  font-size: mixins.fluid(16px, 20px);
+  font-weight: 500;
+  text-align: left;
+  margin: 0 0 5px;
+}
+
+.tm-panel__table-label {
+  background: #99a9b6;
+  border: 1px solid #a39c9c;
+  font-size: 14px;
+
+  @include mixins.down('sm') {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
+
+.tm-panel__table-value {
+  border: 1px solid #a39c9c;
+  font-size: 14px;
+  padding: 10px;
+
+  @include mixins.down('sm') {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
+
+.tm__panel.is-entering {
+  animation: tm-fade-up 0.45s ease both;
+}
+
+@keyframes tm-modal-in {
+  from {
+    opacity: 0;
+  }
+}
+
+//  Пока открыта модалка велаята, страница под ней не прокручивается
+body.is-tm-modal-open {
+  overflow: hidden;
+}
+
+html:has(body.is-tm-modal-open) {
+  overflow: hidden;
+}
+
+@keyframes tm-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* --- Легенды --------------------------------------------------------------- */
+
+.tm__bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 22.5rem);
+  gap: mixins.fluid(24px, 56px);
+  margin-top: mixins.fluid(24px, 44px);
+
+  //  Легенды теперь живут в колонке карты, а не на всю ширину секции —
+  //  рядом с панелью две колонки легенд налезали друг на друга
+  @include mixins.down('xl') {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  //  Панель ушла под карту — места снова хватает на две колонки
+  @include mixins.between('md', 'lg') {
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 22.5rem);
+  }
+}
+
+.tm-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 4px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include mixins.down('sm') {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2px 16px;
+  }
+}
+
+.tm-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  @include mixins.down('sm') {
+    gap: 10px;
+  }
+}
+
+.tm-legend__icon {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+
+  @include mixins.down('sm') {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.tm-legend__label {
+  color: $tm-ink-muted;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+
+  @include mixins.down('sm') {
+    font-size: 0.75rem;
+  }
+}
+
+.tm-projects__title {
+  margin: 0 0 12px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: $tm-ink;
+
+  //  В одну колонку легенды идут друг за другом — нужен воздух между ними
+  @include mixins.down('md') {
+    margin-top: 8px;
+  }
+}
+
+.tm-projects__list {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  //  Список коротких подписей на всю ширину — в две колонки
+  @include mixins.between('xs', 'md') {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px 20px;
+  }
+}
+
+.tm-projects__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: $tm-ink-muted;
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+.tm-projects__dot {
+  flex: 0 0 auto;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--tm-project-color, #{$tm-accent});
+
+  @include mixins.down('sm') {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.tm-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px clamp(24px, 8vw, 120px);
+  margin-top: mixins.fluid(20px, 40px);
+}
+
+.tm-notes__item {
+  margin: 0;
+  color: rgba(240, 126, 38, 0.85);
+  font-size: 0.6875rem;
+  letter-spacing: 0.01em;
+}
+
+/* --- Маркеры поверх сцены --------------------------------------------------- */
+
+.tm-marker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // will-change здесь намеренно нет: полсотни постоянно поднятых композитных
+  // слоёв обходятся дороже, чем выигрыш. translate3d и так задействует GPU.
+  transition: opacity 0.3s ease, filter 0.3s ease;
+
+  &.is-hidden {
+    opacity: 0;
+  }
+
+  &.is-dimmed {
+    opacity: 0.35;
+    filter: saturate(0.5);
+  }
+}
+
+.tm-marker--label {
+  .tm-marker__text {
+    color: $tm-ink;
+    font-family: $tm-font-display;
+    font-size: var(--tm-label-size);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    white-space: nowrap;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+    transition: color 0.3s ease;
+
+    @include mixins.down('sm') {
+      letter-spacing: 0.08em;
+    }
+  }
+
+  &.is-active .tm-marker__text {
+    color: #fff;
+    text-shadow: 0 2px 14px rgba(240, 126, 38, 0.75);
+  }
+}
+
+.tm-marker--capital .tm-marker__text {
+  font-size: calc(var(--tm-label-size) * 0.82);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: $tm-ink-muted;
+}
+
+.tm-marker--project {
+  // Значения по умолчанию. Любое из них перебивается полями в data/facilities.js
+  // (diameter, fontSize, color, textColor, glow) — они приходят инлайн-стилем.
+  --tm-dot-size: 12px;
+  --tm-dot-font: 8px;
+  --tm-dot-text: rgba(255, 255, 255, 0.92);
+  --tm-dot-glow: 0;
+
+  //  Итоговые размеры считаются от --tm-marker-scale, поэтому работают и
+  //  тогда, когда --tm-dot-size/--tm-dot-font пришли инлайном из данных.
+  --tm-dot-px: calc(var(--tm-dot-size) * var(--tm-marker-scale));
+  --tm-dot-font-px: calc(var(--tm-dot-font) * var(--tm-marker-scale));
+
+  flex-direction: column;
+  gap: calc(4px * var(--tm-marker-scale));
+
+  .tm-marker__dot {
+    width: var(--tm-dot-px);
+    height: var(--tm-dot-px);
+    border-radius: 50%;
+    background: var(--tm-project-color, #{$tm-accent});
+    box-shadow:
+      0 0 0 2px rgba(0, 0, 0, 0.25),
+      0 0 calc(var(--tm-dot-px) * 0.5 * var(--tm-dot-glow))
+        calc(var(--tm-dot-px) * 0.26 * var(--tm-dot-glow))
+        color-mix(in srgb, var(--tm-project-color) 45%, transparent),
+      0 0 calc(var(--tm-dot-px) * 1.2 * var(--tm-dot-glow))
+        calc(var(--tm-dot-px) * 0.48 * var(--tm-dot-glow))
+        color-mix(in srgb, var(--tm-project-color) 20%, transparent);
+  }
+
+  .tm-marker__caption {
+    font-size: var(--tm-dot-font-px);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--tm-dot-text);
+    white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  &.tm-marker--md {
+    --tm-dot-size: 16px;
+  }
+
+  // Крупный круг: текст печатается внутри него.
+  &.tm-marker--lg {
+    --tm-dot-size: 54px;
+    --tm-dot-font: 7px;
+    --tm-dot-glow: 1;
+
+    .tm-marker__caption {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 0 6px;
+      text-align: center;
+      white-space: normal;
+      letter-spacing: 0.06em;
+      text-shadow: none;
+    }
+  }
+
+  //  Ужатая подпись внутри круга (7px × 0.7 ≈ 5px) всё равно нечитаема и
+  //  превращается в грязь. Круг остаётся как акцент, название города рядом
+  //  даёт отдельный маркер .tm-marker--capital.
+  @include mixins.down('sm') {
+    &.tm-marker--lg .tm-marker__caption {
+      display: none;
+    }
+  }
+}
+
+/* --- Служебное -------------------------------------------------------------- */
+
+.tm__a11y,
+.tm__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  list-style: none;
+
+  button:focus-visible {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    width: auto;
+    height: auto;
+    clip-path: none;
+    padding: 8px 14px;
+    background: $tm-bg-deep;
+    color: $tm-ink;
+    border: 2px solid $tm-accent;
+    z-index: 10;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tm *,
+  .tm *::before,
+  .tm *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

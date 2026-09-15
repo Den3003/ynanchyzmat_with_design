@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <load src="/src/html/head.html" />
+  <link rel="preload" href="/fonts/Futura-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Futura-500.woff2" as="font" type="font/woff2" crossorigin>
+  <title>Safety & Compliance - Learn more | Ynanch Hyzmat</title>
+</head>
+<body>
+  <load src="/src/html/loader.html" />
+  <script>
+  /* Оверлей скрывается после загрузки страницы, но не раньше, чем
+     проиграет вся секвенция (2.95 с). MIN_MS можно менять. */
+  (function () {
+    var MIN_MS = 2950, start = Date.now();
+    function hide() {
+      var wait = Math.max(0, MIN_MS - (Date.now() - start));
+      setTimeout(function () {
+        var el = document.getElementById('yh-loader');
+        if (el) el.classList.add('yh-hidden');
+      }, wait);
+    }
+    if (document.readyState === 'complete') hide();
+    else window.addEventListener('load', hide);
+  })();
+  </script>
+  <load src="/src/html/header-black.html" />
+
+  <main>
+    <section class="sub-safety">
+      <div class="container">
+        <div class="sub-safety__line"></div>
+        <a class="sub-safety__link" href="/safety.html#overview">
+          Safety & Complience
+          <svg class="sub-safety__link-arrow" width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.29693 0.287676C7.69033 -0.0999452 8.32348 -0.0952564 8.7111 0.298149C9.09873 0.691555 9.09404 1.3247 8.70063 1.71232L3.33027 7.00372H17.0015C17.5538 7.00372 18.0015 7.45144 18.0015 8.00372C18.0015 8.55601 17.5537 9.00372 17.0015 9.00372H3.33688L8.70063 14.2886C9.09404 14.6762 9.09873 15.3094 8.7111 15.7028C8.32348 16.0962 7.69033 16.1009 7.29693 15.7133L0.372738 8.89087C-0.124176 8.40126 -0.124176 7.59967 0.372738 7.11006L7.29693 0.287676Z" fill="white" />
+          </svg>
+        </a>
+        <div class="sub-safety__wrapper-grid">
+          <h1 class="sub-safety__title">HSE Objectives & Targets</h1>
+          <ol class="sub-safety__list">
+
+            <li class="sub-safety__item sub-safety__item-risk">
+
+              <p class="sub-safety__item-text sub-safety__item-text-risk">
+                <span>1.</span>
+                Every task we perform is guided by rigorous risk assessment
+                - from routine job safety analyses to formal reviews before
+                new projects or equipment changes. High-risk activities are
+                governed by strict Permit to Work controls, and our teams
+                conduct monthly cross-departmental Hazard Hunts to catch
+                risks before they become incidents.
+              </p>
+
+              <div class="sub-safety__item-wrapper-image sub-safety__item-wrapper-image-risk">
+                <img class="sub-safety__item-image" src="/src/assets/images/subsafety/risk.png" alt="">
+              </div>
+
+              <svg class="sub-safety__item-arrow sub-safety__item-arrow-risk" width="90" height="150" viewBox="0 0 90 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M89.2719 0.0214844L89.3977 0.0773136C89.3545 0.171549 84.8448 3.5809 84.4425 3.90705C80.4762 7.12326 77.0857 10.6476 73.8182 14.5288C60.1636 30.7478 53.2659 51.3343 54.3496 72.5095C54.4751 74.9634 54.7293 77.7218 55.0174 80.1747C55.2035 81.7597 55.7183 83.3792 55.8723 85.0905C63.7111 85.4667 71.9927 84.89 79.9585 85.3146C78.9271 86.3887 75.3814 92.6817 74.423 94.3073L63.5493 112.631C58.228 121.425 52.9884 130.268 47.8309 139.159C46.491 141.425 45.1288 143.678 43.7445 145.919C43.0919 146.996 41.9521 148.787 41.4934 149.864C39.6063 147.234 37.3854 143.471 35.5832 140.651C33.8943 137.891 32.1343 135.123 30.3939 132.391C20.353 116.636 10.6654 100.604 0.531006 84.9121C8.18824 84.8793 15.8456 84.8929 23.5026 84.9529C23.9703 82.2143 24.0948 79.596 24.5071 76.9184C25.4154 71.3586 26.7786 65.883 28.5828 60.5469C35.9578 38.7773 52.0125 18.9955 72.0801 7.74123C75.7931 5.62884 79.6437 3.76848 83.6056 2.1726C85.2135 1.51451 87.8756 0.711733 89.2719 0.0214844Z" fill="currentColor" />
+              </svg>
+
+            </li>
+
+            <li class="sub-safety__item sub-safety__item-training">
+
+              <p class="sub-safety__item-text sub-safety__item-text-training">
+                <span>2.</span>
+                Safety starts with knowledge. Every employee, contractor, and visitor
+                completes HSE induction before site access, and our workforce maintains
+                98%+ on-time completion of safety certifications. Weekly Toolbox
+                Talks keep teams aware of the risks specific to their daily tasks.
+              </p>
+
+              <div class="sub-safety__item-wrapper-image sub-safety__item-wrapper-image-training">
+                <img class="sub-safety__item-image" src="/src/assets/images/subsafety/training.png" alt="">
+              </div>
+
+              <svg class="sub-safety__item-arrow sub-safety__item-arrow-training" width="150" height="90" viewBox="0 0 150 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.0212402 0.727821L0.0770695 0.60202C0.171304 0.645287 3.58065 5.15493 3.90681 5.55721C7.12302 9.52357 10.6474 12.914 14.5286 16.1815C30.7475 29.8362 51.3341 36.7339 72.5093 35.6502C74.9632 35.5246 77.7215 35.2704 80.1744 34.9823C81.7594 34.7963 83.379 34.2815 85.0903 34.1275C85.4665 26.2886 84.8897 18.007 85.3143 10.0412C86.3885 11.0727 92.6814 14.6183 94.3071 15.5768L112.631 26.4505C121.425 31.7717 130.267 37.0114 139.159 42.1688C141.425 43.5088 143.678 44.871 145.918 46.2552C146.995 46.9079 148.787 48.0476 149.863 48.5064C147.234 50.3934 143.47 52.6144 140.651 54.4166C137.891 56.1055 135.123 57.8655 132.391 59.6059C116.636 69.6467 100.604 79.3344 84.9118 89.4688C84.8791 81.8115 84.8926 74.1542 84.9526 66.4971C82.214 66.0294 79.5958 65.9049 76.9182 65.4927C71.3583 64.5844 65.8827 63.2212 60.5467 61.4169C38.7771 54.0419 18.9953 37.9872 7.74099 17.9197C5.62859 14.2066 3.76823 10.3561 2.17235 6.39417C1.51426 4.78626 0.711489 2.12417 0.0212402 0.727821Z" fill="currentColor" />
+              </svg>
+            </li>
+
+            <li class="sub-safety__item sub-safety__item-culture">
+
+              <p class="sub-safety__item-text sub-safety__item-text-culture">
+                <span>3.</span>
+                We're shifting from reacting to incidents to predicting and preventing
+                them. Every employee contributes at least 3 safety observations a year,
+                near misses are investigated within 48 hours, and corrective actions
+                are closed at a 95%+ rate. Our goal: no hazard should ever be found
+                by an external auditor before we've found it ourselves.
+              </p>
+
+              <div class="sub-safety__item-wrapper-image sub-safety__item-wrapper-image-culture">
+                <img class="sub-safety__item-image" src="/src/assets/images/subsafety/culture.png" alt="">
+              </div>
+
+              <svg class="sub-safety__item-arrow sub-safety__item-arrow-culture" width="173" height="166" viewBox="0 0 173 166" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.489524 98.0668L0.450149 97.9349C0.549877 97.9065 6.07232 99.1162 6.58168 99.2097C11.6041 100.132 16.4863 100.417 21.5596 100.376C42.7604 100.205 62.8864 92.0607 78.2703 77.4696C80.053 75.7787 81.9835 73.7922 83.6598 71.9784C84.7431 70.8066 85.6389 69.3624 86.839 68.1327C82.0281 61.9324 76.2054 56.0152 71.3488 49.6869C72.8355 49.7722 79.9221 48.3745 81.7804 48.0457L102.772 44.3937C112.914 42.7186 123.039 40.9504 133.147 39.0881C135.74 38.6329 138.338 38.2026 140.94 37.7977C142.183 37.5935 144.285 37.2947 145.401 36.9431C144.63 40.0864 143.215 44.221 142.245 47.4233C141.245 50.5012 140.286 53.6383 139.343 56.7365C133.9 74.6093 128.018 92.3935 122.685 110.296C117.682 104.499 112.713 98.6727 107.781 92.816C105.396 94.2412 103.326 95.849 101.023 97.2767C96.2083 100.201 91.1617 102.726 85.9344 104.825C64.5992 113.375 39.131 114.039 17.5327 106.11C13.5136 104.662 9.59654 102.946 5.80805 100.973C4.26262 100.18 1.92184 98.6789 0.489524 98.0668Z" fill="currentColor" />
+              </svg>
+            </li>
+
+            <li class="sub-safety__item sub-safety__item-leadership">
+
+              <svg class="sub-safety__item-arrow sub-safety__item-arrow-leadership" width="90" height="150" viewBox="0 0 90 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_339_4926)">
+                  <path d="M0.728065 149.979L0.602264 149.923C0.645531 149.828 5.15517 146.419 5.55746 146.093C9.52382 142.877 12.9143 139.352 16.1818 135.471C29.8364 119.252 36.7341 98.6657 35.6504 77.4905C35.5249 75.0366 35.2707 72.2782 34.9826 69.8253C34.7965 68.2403 34.2817 66.6208 34.1277 64.9095C26.2889 64.5333 18.0073 65.11 10.0415 64.6854C11.0729 63.6113 14.6186 57.3183 15.577 55.6927L26.4507 37.3691C31.772 28.5746 37.0116 19.7323 42.1691 10.8411C43.509 8.57521 44.8712 6.32158 46.2555 4.08127C46.9081 3.00446 48.0479 1.2131 48.5066 0.136292C50.3937 2.76553 52.6146 6.52937 54.4168 9.34863C56.1057 12.109 57.8657 14.8772 59.6061 17.6086C69.647 33.3641 79.3346 49.3963 89.469 65.0879C81.8118 65.1207 74.1544 65.1071 66.4974 65.0471C66.0297 67.7857 65.9052 70.404 65.4929 73.0816C64.5846 78.6414 63.2214 84.117 61.4172 89.4531C54.0422 111.223 37.9875 131.004 17.9199 142.259C14.2069 144.371 10.3563 146.232 6.39442 147.827C4.78651 148.485 2.12441 149.288 0.728065 149.979Z" fill="currentColor" />
+                </g>
+                <defs>
+                  <clipPath id="clip0_339_4926">
+                    <rect width="90" height="150" fill="white" transform="matrix(-1 0 0 -1 90 150)" />
+                  </clipPath>
+                </defs>
+              </svg>
+
+              <div class="sub-safety__item-wrapper-image sub-safety__item-wrapper-image-leadership">
+                <img class="sub-safety__item-image" src="/src/assets/images/subsafety/leadership.png" alt="">
+              </div>
+
+              <p class="sub-safety__item-text sub-safety__item-text-leadership">
+                <span>4.</span>
+                Safety commitment starts at the top. Senior managers conduct monthly
+                site safety walkthroughs, lead Toolbox Talks, and participate in
+                monthly HSE Committee Meetings - and HSE performance is now built
+                into every employee's annual appraisal.
+              </p>
+            </li>
+
+            <li class="sub-safety__item sub-safety__item-hse">
+
+              <div class="sub-safety__item-wrapper-image sub-safety__item-wrapper-image-hse">
+                <img class="sub-safety__item-image" src="/src/assets/images/subsafety/hse.png" alt="">
+              </div>
+
+              <p class="sub-safety__item-text sub-safety__item-text-hse">
+                <span>5.</span>
+                Safety is everyone's responsibility. Each employee reports at least 3
+                safety observations or near misses per year, complies fully with our
+                Golden Rules and PPE requirements, and completes assigned training on
+                time - with quarterly feedback on personal HSE performance.
+              </p>
+            </li>
+
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <load src="/src/html/footer.html" theme="footer_black" />
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

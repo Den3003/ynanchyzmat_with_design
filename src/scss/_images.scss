@@ -1,0 +1,54 @@
+// Хелперы над пресетами: CSS-ширина слота берётся из тех же чисел,
+// что и размеры экспортированных файлов.
+
+@use 'sass:map';
+@use 'sass:math';
+@use 'image-presets' as gen;
+
+@function preset($name, $key) {
+  $p: map.get(gen.$image-presets, $name);
+  @if $p == null {
+    @error 'Неизвестный пресет изображения: #{$name}. Проверь src/config/images.config.mjs';
+  }
+  @return map.get($p, $key);
+}
+
+@function preset-w($name) {
+  @return preset($name, w) * 1px;
+}
+
+@function preset-h($name) {
+  @return preset($name, h) * 1px;
+}
+
+@function preset-ratio($name) {
+  @return math.div(preset($name, w), preset($name, h));
+}
+
+/// Слот фиксированного размера: CSS-ширина строго равна пресету.
+@mixin image-slot($name) {
+  width: preset-w($name);
+  height: preset-h($name);
+  aspect-ratio: preset-ratio($name);
+}
+
+/// Слот, который тянется до ширины пресета, но не шире.
+/// Место резервируется через aspect-ratio — вёрстка не прыгает.
+@mixin image-slot-fluid($name) {
+  width: 100%;
+  max-width: preset-w($name);
+  height: auto;
+  aspect-ratio: preset-ratio($name);
+}
+
+// ── Базовые стили для всех изображений проекта ──────────────────────────────
+
+picture {
+  display: block;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto; // вместе с атрибутами width/height даёт aspect-ratio → нет CLS
+}

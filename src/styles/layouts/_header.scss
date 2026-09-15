@@ -1,0 +1,93 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.header {
+  padding: 60px 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+
+  //  Пока открыт мобильный drawer — шапка поверх любого контента страницы
+  body.is-menu-open & {
+    z-index: 100;
+  }
+
+  &_contacts {
+    position: static;
+    margin: 0 0 40px;
+
+    @include mixins.down('sm') {
+      margin: 0 0 20px;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(170px, 380px) minmax(785px, 1fr) minmax(330px, 380px);
+    align-items: center;
+
+    //  На узких десктопах колонки перестают быть фиксированными.
+    //  Боковые колонки одинаковой ширины (1fr) — иначе центральная колонка
+    //  с меню смещается влево на половину разницы «логотип минус поиск»
+    @include mixins.down('xxl') {
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 0 20px;
+    }
+
+    //  Меню уезжает в бургер — остаётся строка: лого / поиск / бургер
+    @include mixins.down('nav') {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0 16px;
+    }
+
+    //  На телефоне раскрытому поиску нужна вся строка
+    @include mixins.down('sm') {
+
+      &:has(.search.is-expanded) {
+
+        .header__logo-link {
+          display: none;
+        }
+      }
+    }
+
+  }
+
+  &__logo-link {
+    font-size: 0;
+    line-height: 0;
+    max-width: max-content;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 70;
+  }
+
+  &__logo {
+    @include mixins.down('nav') {
+      width: 122px;
+      height: 48px;
+    }
+
+    @include mixins.down('xs') {
+      width: 100px;
+      height: 40px;
+    }
+  }
+
+  @include mixins.down('xl') {
+    padding: 36px 0 0;
+  }
+
+  @include mixins.down('nav') {
+    padding: 22px 0 0;
+  }
+
+  @include mixins.down('xs') {
+    padding: 14px 0 0;
+  }
+}

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <load src="/src/html/head.html" />
+  <link rel="preload" href="/fonts/Futura-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Futura-500.woff2" as="font" type="font/woff2" crossorigin>
+  <title>Contact Us | Ynanch Hyzmat</title>
+</head>
+<body class="contacts-body">
+  <load src="/src/html/loader.html" />
+  <script>
+/* Оверлей скрывается после загрузки страницы, но не раньше, чем
+   проиграет вся секвенция (2.95 с). MIN_MS можно менять. */
+(function () {
+  var MIN_MS = 2950, start = Date.now();
+  function hide() {
+    var wait = Math.max(0, MIN_MS - (Date.now() - start));
+    setTimeout(function () {
+      var el = document.getElementById('yh-loader');
+      if (el) el.classList.add('yh-hidden');
+    }, wait);
+  }
+  if (document.readyState === 'complete') hide();
+  else window.addEventListener('load', hide);
+})();
+</script>
+
+  <div class="contacts-wrapper">
+    <img class="contacts-bg" alt="" fetchpriority="high" decoding="async"
+      src="/src/assets/images/contacts/contacts.jpg">
+  
+    <load src="/src/html/header.html" theme="header_contacts"/>
+    
+    <main>
+      <section class="contacts">
+        <h1 class="visually-hidden">Contact details for the company Ynanch Hyzmat</h1>
+        <!-- <img class="contacts__image" src="/src/assets/images/contacts/contacts.jpg" alt=""> -->
+        <div class="container contacts__container">
+          <form class="contacts__form contacts-form" id="contactsForm" novalidate>
+
+            <!-- Name -->
+            <div class="contacts-form__group">
+              <label for="name" class="contacts-form__label">Name</label>
+              
+              <input
+                class="contacts-form__input"
+                id="name"
+                type="text"
+                name="name"
+                autocomplete="name"
+                required
+                minlength="2"
+                maxlength="100"
+              >
+
+              <span class="contacts-form__error" id="name-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <!-- Organization -->
+            <div class="contacts-form__group">
+              <label for="organization" class="contacts-form__label">Organization</label>
+
+              <input
+                class="contacts-form__input"
+                id="organization"
+                type="text"
+              >
+
+              <span class="contacts-form__error" id="organization-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <!-- Phone number -->
+            <div class="contacts-form__group">
+              <label for="phone" class="contacts-form__label">Phone number</label>
+
+              <input
+                class="contacts-form__input"
+                id="phone"
+                name="phone"
+                autocomplete="tel"
+                type="tel"
+                required
+              >
+
+              <span class="contacts-form__error" id="phone-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="contacts-form__group">
+              <label for="email" class="contacts-form__label">Email</label>
+              
+              <input
+                class="contacts-form__input"
+                id="email"
+                type="email"
+                name="email"
+                autocomplete="email"
+                maxlength="150"
+                required
+              >
+
+              <span class="contacts-form__error" id="email-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <!-- Subject and Message -->
+            <div class="contacts-form__group">
+              <label for="message" class="contacts-form__label">Subject and Message</label>
+
+              <textarea
+                class="contacts-form__textarea"
+                id="message"
+                rows="8"
+                name="message"
+                required
+                minlength="10"
+                maxlength="2000"
+              >
+              </textarea>
+
+              <span class="contacts-form__error" id="message-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="contacts-form__hp" aria-hidden="true">
+              <label for="website">Website</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button class="contacts-form__button" type="submit">
+              <span class="contacts-form__button-text">Submit</span>
+            </button>
+
+            <div class="contacts-form__status" id="contactsFormStatus" aria-live="polite"></div>
+
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <load src="/src/html/footer.html" theme="footer_contacts"/>
+  </div>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

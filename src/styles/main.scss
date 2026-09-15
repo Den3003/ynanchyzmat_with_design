@@ -1,0 +1,55 @@
+// ── 1. Абстракции (без вывода CSS) ────────────── 
+// Папка abstracts ← не генерирует CSS
+// 
+
+@use 'abstracts/mixins';    // ← многоразовые блоки кода
+@use 'abstracts/variables'; // ← цвета, размеры, типографика
+@use 'abstracts/fonts';     // ← шрифты
+
+// ── 2. Базовые стили ────────────────────────────
+// Папка base ← сброс и глобальные стили
+
+@use 'base/default';                     //  Глобальные стили
+
+// ── 3. Компоновка ───────────────────────────────
+// Папка layout ← каркас страницы
+
+@use 'layouts/header';   // Шапка сайта
+@use 'layouts/header-black';   
+@use 'layouts/footer';   
+@use 'layouts/footer-flex';   
+@use 'layouts/main-body';   //  Стили body главной страницы с слайдером
+
+// ── 4. Компоненты ───────────────────────────────
+// Папка components ← независимые блоки
+
+@use 'components/navigation';  //  Лист-меню в шапке
+@use 'components/burger';  //  Кнопка-бургер и подложка мобильного меню
+@use 'components/modal';  //  Модальное окно
+@use 'components/modal-h2s';  //  Модальное окно секции main-h2s на главном экране
+@use 'components/modal-analyzers';  //  Модальное окно секции modal-analyzers на главном экране
+@use 'components/modal-laboratory';  //  Модальное окно секции main-laboratory на главном экране
+@use 'components/search';  //  Форма поиска по сайту
+@use 'components/main-swiper';  //  Стили Swiper`а на главной странице
+@use 'components/time-zone';  //  Стили компонента timeZone
+@use 'components/risk-section';  //  Стили компонента risk-section
+@use 'components/contacts-form';  //  Стили компонента contacts-form (форма отправки контактов на странице Contact Us)
+
+// ── 5. Страницы ─────────────────────────────────
+// Папка pages ← стили конкретных страниц
+
+@use 'pages/main-celebration';     //  Главный блок на главной странице
+@use 'pages/main-analyzers';     //  Блок об анализаторах на главной странице 
+@use 'pages/main-laboratory';     //  Блок laboratory на главной странице 
+@use 'pages/main-h2s';     //  Блок h2s на главной странице 
+@use 'pages/turkmenistan';     //  Блок карты на странице Sectors
+@use 'pages/about';     //  Страница About Us 
+@use 'pages/services';     //  Страница Services 
+@use 'pages/sectors';     //  Страница Sectors 
+@use 'pages/safety';     //  Страница Safety & Compliance 
+@use 'pages/methodology';     //  Страница Methodology
+@use 'pages/philosophy';     //  Страница Philosophy
+@use 'pages/culture';     //  Страница Culture
+@use 'pages/team';     //  Страница Our team
+@use 'pages/subsafety';     //  Страница Sub-Safety
+@use 'pages/contacts';     //  Страница Contact Us

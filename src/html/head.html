@@ -1,0 +1,126 @@
+<!-- 1. Метка наличия JS. Ставится синхронно, до первой отрисовки -->
+<script>
+  document.documentElement.classList.add('js', 'is-loading');
+</script>
+
+<!-- 2. Критические стили лоадера — инлайн, чтобы он был виден мгновенно -->
+<style>
+/* ============================================================
+   YH LOADER (вариант 4): контур → заливка → огонёк → 10
+   Всё на инлайн-SVG + CSS. JS нужен только чтобы скрыть оверлей.
+   Настройки: --yh-bg, --yh-brand, --yh-digit, --yh-size
+   ============================================================ */
+  /* html.is-loading, html.is-loading body { overflow: hidden; } */
+#yh-loader {
+  --yh-bg: #2f3d46;
+  --yh-brand: #f37021;
+  --yh-digit: #f37021;
+  --yh-size: 118px;              /* высота знака */
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--yh-bg);
+  transition: opacity .4s ease, visibility .4s ease;
+}
+#yh-loader.yh-hidden { opacity: 0; visibility: hidden; }
+
+.yh-lockup { display: flex; align-items: flex-end; }
+
+.yh-mark {
+  position: relative;
+  height: var(--yh-size);
+  width: calc(var(--yh-size) * 0.8305);   /* 338 / 407 */
+  z-index: 2;
+}
+.yh-mark svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+.yh-outline {
+  fill: none;
+  stroke: var(--yh-brand);
+  stroke-width: 5;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: yh-draw 1.5s cubic-bezier(.5,0,.3,1) forwards,
+             yh-line-out .5s linear 1.5s forwards;
+}
+.yh-fill { fill: var(--yh-brand); opacity: 0; animation: yh-in .55s ease-out 1.45s forwards; }
+
+/* огонёк на кончике правой ветви */
+.yh-flame {
+  position: absolute;
+  left: 98.2%;
+  top: 1%;
+  width: 0; height: 0;
+  transform-origin: 0 0;
+  opacity: 0;
+  animation: yh-ignite .5s cubic-bezier(.34,1.4,.64,1) 2.05s forwards;
+}
+.yh-flame > i { position: absolute; left: 0; top: 0; display: block; }
+.yh-glow {
+  width: calc(var(--yh-size) * .37); height: calc(var(--yh-size) * .37);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,190,95,.38) 0%, rgba(243,112,33,0) 70%);
+  transform: translate(-50%,-50%);
+  animation: yh-glow 2.2s ease-in-out infinite;
+}
+.yh-body {
+  width: calc(var(--yh-size) * .085); height: calc(var(--yh-size) * .161);
+  border-radius: 50% 50% 46% 46% / 64% 64% 36% 36%;
+  background: radial-gradient(ellipse at 50% 78%, #fffaf0 0%, #ffd977 26%, #fb9b3a 54%, rgba(243,112,33,.85) 74%, rgba(243,112,33,0) 88%);
+  transform: translate(-50%,-100%);
+  animation: yh-flicker .62s ease-in-out infinite;
+}
+.yh-core {
+  width: calc(var(--yh-size) * .034); height: calc(var(--yh-size) * .068);
+  border-radius: 50% 50% 45% 45% / 62% 62% 38% 38%;
+  background: radial-gradient(ellipse at 50% 75%, #fff 0%, #fff3c4 55%, rgba(255,214,120,0) 100%);
+  transform: translate(-50%,-100%);
+  animation: yh-flicker .44s ease-in-out infinite reverse;
+}
+
+/* цифра заходит под правую ветвь знака */
+.yh-ten {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: calc(var(--yh-size) * 1.05);
+  line-height: .7;
+  font-weight: 250;
+  letter-spacing: -.06em;
+  color: var(--yh-digit);
+  margin-left: calc(var(--yh-size) * -.22);
+  z-index: 1;
+  opacity: 0;
+  animation: yh-digit-in .6s cubic-bezier(.22,1,.36,1) 2.35s forwards;
+}
+
+@keyframes yh-draw      { from { stroke-dashoffset: 100 } to { stroke-dashoffset: 0 } }
+@keyframes yh-line-out  { from { opacity: 1 } to { opacity: 0 } }
+@keyframes yh-in        { from { opacity: 0 } to { opacity: 1 } }
+@keyframes yh-ignite    { 0% { opacity: 0; transform: scale(.12) } 55% { opacity: 1; transform: scale(1.14) } 100% { opacity: 1; transform: scale(1) } }
+@keyframes yh-digit-in  { from { opacity: 0; transform: translateX(-16px) } to { opacity: 1; transform: translateX(0) } }
+@keyframes yh-glow      { 0%,100% { transform: translate(-50%,-50%) scale(1); opacity: .45 } 50% { transform: translate(-50%,-50%) scale(1.25); opacity: .8 } }
+@keyframes yh-flicker   {
+  0%,100% { transform: translate(-50%,-100%) scale(1,1) rotate(0deg); opacity: .96 }
+  22%     { transform: translate(-50%,-100%) scale(.88,1.14) rotate(-4deg); opacity: 1 }
+  47%     { transform: translate(-50%,-100%) scale(1.08,.92) rotate(3deg); opacity: .86 }
+  71%     { transform: translate(-50%,-100%) scale(.94,1.09) rotate(-2deg); opacity: 1 }
+}
+@media (prefers-reduced-motion: reduce) {
+  .yh-outline { display: none }
+  .yh-fill, .yh-flame, .yh-ten { opacity: 1; animation: none }
+  .yh-body, .yh-core, .yh-glow { animation: none }
+}
+/* Адаптив знака. Брейкпоинты совпадают с $bp-sm/$bp-xs/$bp-xxs из
+   src/styles/abstracts/_variables.scss — стили лоадера инлайновые и до SCSS
+   не дотягиваются, поэтому значения продублированы числами. */
+@media (max-width: 768px) { #yh-loader { --yh-size: 96px } }
+@media (max-width: 576px) { #yh-loader { --yh-size: 78px } }
+@media (max-width: 400px) { #yh-loader { --yh-size: 62px } }
+/* Телефон «на боку»: по высоте места нет, знак не должен упираться в края */
+@media (max-height: 600px) and (orientation: landscape) {
+  #yh-loader { --yh-size: min(86px, 34vh) }
+}
+
+</style>

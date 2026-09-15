@@ -1,0 +1,497 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.safety-body {
+  position: relative;
+}
+
+.safety {
+  background-color: variable.$color-main;
+  //  Секция Hero
+
+  &__hero {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    min-height: 420px;
+    margin: 0 0 120px;
+
+    @include mixins.down('md') {
+      min-height: 380px;
+      margin: 0 0 64px;
+    }
+
+    @include mixins.down('sm') {
+      min-height: 320px;
+      margin: 0 0 48px;
+    }
+  }
+
+  &__container {
+    height: 100%;
+    display: flex;
+    align-items: end;
+
+    @include mixins.down('nav') {
+      padding-top: 100px;
+    }
+  }
+
+  &__hero-background {
+    position: absolute;
+    inset: 0;
+    // height: 100%;
+  }
+
+  &__hero-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__hero-content {
+    // position: relative;
+    z-index: 1;
+    // padding: 5px 20px 10px 20px;
+    // width: 990px;
+    // -webkit-backdrop-filter: blur(14px);
+    // backdrop-filter: blur(5px);
+    // background-color: rgba(0, 0, 0, 0.1);
+    margin: 0 0 30px;
+
+    @include mixins.down('sm') {
+      margin: 0 0 20px;
+    }
+  }
+
+  &__title {
+    font-size: mixins.fluid(26px, 36px);
+    font-weight: 500;
+    margin: 0 0 5px;
+  }
+
+  &__hero-text {
+    font-size: mixins.fluid(15px, 20px);
+    margin: 0;
+    max-width: 950px;
+  }
+
+  // Секция Overview
+
+  &__overview {
+    margin: 0 0 155px;
+
+    @include mixins.down('lg') {
+      margin: 0 0 90px;
+    }
+
+    @include mixins.down('sm') {
+      margin: 0 0 56px;
+    }
+  }
+
+  &__overview-wrapper {
+    color: variable.$color-black;
+  }
+
+  &__overview-title {
+    font-size: mixins.fluid(26px, 36px);
+    font-weight: 500;
+    margin: 0 0 30px;
+
+    @include mixins.down('sm') {
+      margin: 0 0 20px;
+    }
+  }
+
+  &__overview-text {
+    font-size: mixins.fluid(15px, 20px);
+    max-width: 600px;
+
+    &:not(:last-child) {
+      margin: 0 0 25px;
+    }
+
+    @include mixins.down('lg') {
+      max-width: none;
+    }
+  }
+
+  &__overview-link-arrow {
+    transition: transform .6s cubic-bezier(.55, 0, .1, 1);
+  }
+
+  &__overview-link {
+    display: flex;
+    align-items: center;
+    gap: 0 10px;
+    text-decoration: none;
+    color: variable.$color-main;
+    background: variable.$color-orange-primary;
+    font-size: mixins.fluid(15px, 20px);
+    padding: 14px 29px;
+    max-width: max-content;
+
+    @include mixins.hover-supported {
+
+      &:hover {
+        .safety__overview-link-arrow {
+          transform: translateX(5px);
+        }
+      }
+    }
+
+    @include mixins.down('xs') {
+      max-width: none;
+      justify-content: center;
+    }
+  }  
+
+  &__overview-grid {
+    display: grid;
+    grid-template-columns: 1fr minmax(550px, 600px);
+    justify-content: space-between;
+    gap: 0 40px;
+
+    //  Таймлайн рисков уезжает под текстовый блок
+    @include mixins.down('lg') {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 48px 0;
+    }
+  }
+
+
+  // Секция Description
+
+
+  &__description {
+    color: variable.$color-black;
+    padding: 0 0 120px;
+
+    @include mixins.down('lg') {
+      padding: 0 0 72px;
+    }
+
+    @include mixins.down('sm') {
+      padding: 0 0 48px;
+    }
+  }
+
+  &__description-title {
+    font-size: mixins.fluid(32px, 64px);
+    font-weight: 500;
+    margin: 0 0 30px;
+  }
+
+  &__description-text-wrapper {
+    margin: 0 0 120px;
+
+    @include mixins.down('lg') {
+      margin: 0 0 64px;
+    }
+
+    @include mixins.down('sm') {
+      margin: 0 0 40px;
+    }
+  }
+
+  &__description-text {
+    font-size: mixins.fluid(15px, 20px);
+    margin: 0;
+  }
+
+  &__description-swiper {
+    height: 450px;
+    display: grid;
+    //  Фото и список — одна пара по центру секции. Раньше фото прижималось
+    //  к правому краю колонки в 700px, а список растягивался до края экрана,
+    //  и весь блок заметно уезжал вправо. Ширина колонки списка — 150px число
+    //  + 135px отступ + ~545px самый длинный заголовок в активном размере
+    //  («Risk Assessments Completed»). Заголовки центрированы в своей колонке,
+    //  поэтому колонка ровно по длинному заголовку = пара стоит строго по центру
+    grid-template-columns: auto minmax(0, 830px);
+    justify-content: center;
+    gap: 0 mixins.fluid(24px, 40px);
+
+    @include mixins.down('md') {
+      gap: 0;
+    }
+
+    @include mixins.down('lg') {
+      height: 380px;
+    }
+
+    //  Фотография рядом со списком не помещается — оставляем только список
+    @include mixins.down('md') {
+      grid-template-columns: minmax(0, 1fr);
+      height: 300px;
+    }
+  }
+
+  &__description-image-wrapper {
+    position: relative;
+    width: 323px;
+    height: 435px;
+
+    @include mixins.down('lg') {
+      width: 240px;
+      height: 330px;
+    }
+
+    @include mixins.down('md') {
+      display: none;
+    }
+  }
+
+  &__description-image {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+    // animation: fadeIn 0.3s ease forwards;
+
+    &_active {
+      opacity: 1;
+    }
+  }
+
+  &__description-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__description-item {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 700px);
+    gap: 0 135px;
+    // color: variable.$color-gray-safety-description-hidden;
+    opacity: 0.1;
+    align-items: center;
+    transition: opacity .3s ease;
+    // justify-content: end;
+
+    &.swiper-slide-active {
+      .safety__description-item-span {
+        font-size: mixins.fluid(56px, 128px);
+      }
+
+      .safety__description-item-title {
+        font-size: mixins.fluid(22px, 48px);
+      }
+
+      & {
+        opacity: 1;
+      }
+    }
+
+    &.swiper-slide-next {
+      .safety__description-item-span {
+        font-size: mixins.fluid(52px, 118px);
+      }
+
+      .safety__description-item-title {
+        font-size: mixins.fluid(20px, 42px);
+      }
+
+      & {
+        opacity: 0.3;
+      }
+    }
+
+    @include mixins.down('xxl') {
+      grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+      gap: 0 60px;
+    }
+
+    @include mixins.down('sm') {
+      gap: 0 24px;
+      align-items: center;
+    }
+  }
+
+  &__description-item-span {
+    font-size: mixins.fluid(44px, 98px);
+    font-weight: 500;
+    //  Колонка шириной по самому длинному числу («12»): при выравнивании
+    //  по правому краю однозначные цифры уезжали от своего заголовка
+    justify-self: center;
+    line-height: 1;
+    transition: font-size .3s ease;
+  }
+
+  &__description-item-title {
+    font-size: mixins.fluid(18px, 40px);
+    font-weight: 500;
+    justify-self: center;
+    margin: 0;
+    transition: font-size .3s ease;
+
+    @include mixins.down('sm') {
+      justify-self: start;
+    }
+  }
+
+
+  // Секция Certificates
+
+  &__certificates {
+    padding: 60px 0 300px;
+    background: variable.$color-about-gray-bg;
+
+    @include mixins.down('lg') {
+      padding: 48px 0 160px;
+    }
+
+    @include mixins.down('sm') {
+      padding: 36px 0 96px;
+    }
+  }
+
+  &__certificates-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 75px 0;
+
+    @include mixins.down('lg') {
+      gap: 40px 0;
+    }
+
+    @include mixins.down('sm') {
+      gap: 24px 0;
+    }
+  }
+
+  &__certificates-title {
+    font-size: mixins.fluid(24px, 40px);
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+  }
+
+  &__certificates-swiper-wrapper-with-control {
+    display: flex;
+    align-items: center;
+    gap: 0 50px;
+    max-width: 100%;
+
+    @include mixins.down('lg') {
+      gap: 0 20px;
+    }
+
+    @include mixins.down('sm') {
+      gap: 0 10px;
+    }
+  }
+
+  &__certificates-swiper {
+    min-width: 0;
+  }
+
+  &__certificates-swiper-wrapper {
+    align-items: center;
+    height: 700px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    @include mixins.down('lg') {
+      height: 540px;
+    }
+
+    @include mixins.down('sm') {
+      height: 420px;
+    }
+  }
+
+  &__certificates-swiper {
+    max-width: 1499px;
+  }
+
+  &__certificates-button {
+    all: unset;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    @include mixins.tap-target(44px);
+
+    svg {
+      @include mixins.down('sm') {
+        width: 22px;
+        height: auto;
+      }
+    }
+  }
+
+  &__certificates-slider-item-four {
+    z-index: -1;
+  }
+  
+
+  &__certificates-slider-item {
+    width: 300px;
+    height: 435px;
+    transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+
+    @include mixins.down('lg') {
+      width: 230px;
+      height: 334px;
+    }
+
+    @include mixins.down('sm') {
+      width: 170px;
+      height: 246px;
+    }
+
+    &.swiper-slide-prev, 
+    &.swiper-slide-next {
+      transform: translateY(-30px);
+      z-index: 2;
+    }
+
+    &.swiper-slide-active {
+      transform: scale(1.05) translateY(-60px); // чуть крупнее, можно подкрутить 1.05–1.15
+      position: relative;
+      z-index: 3;
+      // z-index: 2;
+      // opacity: 1;
+
+      /* .product-card {
+        box-shadow: 0 16px 32px rgba(0,0,0,0.12); // тень только у активной
+        border-color: #ccc;
+      } */
+    }
+
+    /* &.swiper-slide-active {
+      transform: scale(1.20);
+      position: relative;
+      z-index: 10;
+    }
+
+    &.swiper-slide-next,
+    &.swiper-slide-prev {
+      transform: scale(1.10);
+    } */
+  }
+
+  &__certificates-image {
+    // position: absolute;
+    // inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+}
+
+

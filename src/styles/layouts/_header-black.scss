@@ -1,0 +1,83 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.header-black {
+  color: variable.$color-black;
+  padding: 60px 0 0;
+  margin: 0 0 50px;
+  position: relative;
+  z-index: 10;
+
+  body.is-menu-open & {
+    z-index: 100;
+  }
+
+  //  Та же сетка, что у .header__grid: при flex + space-between меню стояло
+  //  посередине между логотипом и поиском, а не страницы — логотип уже поиска,
+  //  и меню уезжало влево на половину разницы
+  &-flex {
+    display: grid;
+    grid-template-columns: minmax(170px, 380px) minmax(785px, 1fr) minmax(330px, 380px);
+    align-items: center;
+
+    @include mixins.down('xxl') {
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 0 20px;
+    }
+
+    @include mixins.down('nav') {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      gap: 0 16px;
+    }
+
+    //  На телефоне раскрытому поиску нужна вся строка
+    @include mixins.down('sm') {
+
+      &:has(.search.is-expanded) {
+
+        .header-black__logo-link {
+          display: none;
+        }
+      }
+    }
+
+  }
+
+  &__logo-link {
+    max-width: max-content;
+    flex-shrink: 0;
+    font-size: 0;
+    line-height: 0;
+    position: relative;
+    z-index: 70;
+  }
+
+  &__logo {
+    @include mixins.down('nav') {
+      width: 122px;
+      height: 48px;
+    }
+
+    @include mixins.down('xs') {
+      width: 100px;
+      height: 40px;
+    }
+  }
+
+  @include mixins.down('xl') {
+    padding: 36px 0 0;
+    margin: 0 0 40px;
+  }
+
+  @include mixins.down('nav') {
+    padding: 22px 0 0;
+    margin: 0 0 32px;
+  }
+
+  @include mixins.down('xs') {
+    padding: 14px 0 0;
+    margin: 0 0 24px;
+  }
+}

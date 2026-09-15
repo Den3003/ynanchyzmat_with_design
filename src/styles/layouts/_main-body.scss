@@ -1,0 +1,19 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.main-body {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  //  lvh — полная высота экрана, включая зону под панелями мобильного браузера.
+  //  С dvh страница заканчивалась над плавающей панелью Safari, и фото на неё
+  //  не заходило. Текст слайдов и подвал держим в видимой области (dvh) —
+  //  см. .main-* { height: 100dvh } и .footer ниже
+  height: 100lvh;
+  overflow: hidden;
+
+  //  Подвал привязан к низу видимой области, а не к низу body (он теперь выше экрана)
+  .footer {
+    position: fixed;
+  }
+}

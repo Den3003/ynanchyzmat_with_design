@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <load src="/src/html/head.html" />
+  <link rel="preload" href="/fonts/Futura-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Futura-500.woff2" as="font" type="font/woff2" crossorigin>
+  <title>Our Approach | Our Partnership Philosophy</title>
+</head>
+<body>
+  <load src="/src/html/loader.html" />
+  <script>
+  /* Оверлей скрывается после загрузки страницы, но не раньше, чем
+     проиграет вся секвенция (2.95 с). MIN_MS можно менять. */
+  (function () {
+    var MIN_MS = 2950, start = Date.now();
+    function hide() {
+      var wait = Math.max(0, MIN_MS - (Date.now() - start));
+      setTimeout(function () {
+        var el = document.getElementById('yh-loader');
+        if (el) el.classList.add('yh-hidden');
+      }, wait);
+    }
+    if (document.readyState === 'complete') hide();
+    else window.addEventListener('load', hide);
+  })();
+  </script>
+  <load src="/src/html/header-black.html" />
+
+  <main>
+    <div class="container">
+      <section class="philosophy">
+        <div class="philosophy__grid">
+          <h1 class="philosophy__title content-section js-content-section">Our Partnership Philosophy</h1>
+
+          <div class="philosophy__line"></div>
+          <div class="philosophy__content">
+
+            <p class="philosophy__text content-section js-content-section">
+              At Ynanch Hyzmat, we believe that an industrial project is more
+              than just a transaction—it is a collaboration. We view ourselves
+              as an extension of your team, dedicated to the sustained performance,
+              safety, and productivity of your operations in Turkmenistan.
+            </p>
+
+            <!-- The "Partner-First" Approach -->
+            <dl id="partner-first" class="philosophy__dl">
+              <dt class="philosophy__sub-title content-section js-content-section">The "Partner-First" Approach</dt>
+              <dd class="philosophy__dd content-section js-content-section">
+                <p class="philosophy__text">
+                  We operate on the conviction that our growth is
+                  inextricably linked to yours. This is how we define our partnership:
+                </p>
+                <ul class="philosophy__list">
+
+                  <li class="philosophy__text">
+                    Engineering Integrity: We prioritize honesty over easy sales.
+                    If a technical solution is not in your best long-term interest,
+                    we will tell you and propose a more sustainable alternative.
+                    Reliability is the cornerstone of our brand.
+                  </li>
+
+                  <li class="philosophy__text">
+                    Deep-Rooted Reliability: Our presence is defined by stability.
+                    We understand the specific demands of the Turkmen industrial landscape,
+                    allowing us to anticipate challenges before they disrupt your workflow.
+                    We are here for the long haul.
+                  </li>
+
+                  <li class="philosophy__text">
+                    Full-Cycle Stewardship: We do not walk away when a shipment arrives or
+                    a task is finished. We remain involved to ensure the solution performs
+                    under pressure, providing the ongoing technical support and knowledge
+                    transfer necessary to keep your facility running at peak capacity.
+                  </li>
+
+                  <li class="philosophy__text">
+                    Collaborative Innovation: We bridge the gap between world-class
+                    international technology and local operational requirements.
+                    By maintaining strong relationships with global manufacturers,
+                    we bring advanced solutions to your doorstep while ensuring
+                    they are perfectly adapted for local conditions.
+                  </li>
+
+                </ul>
+              </dd>
+            </dl>
+
+            <!-- What You Can Expect From Us -->
+            <dl id="expect" class="philosophy__dl philosophy__dl-expect">
+              <dt class="philosophy__sub-title content-section js-content-section">What You Can Expect From Us</dt>
+              <dd class="philosophy__dd  content-section js-content-section">
+                <p class="philosophy__text">
+                  Working with Ynanch Hyzmat means working with a partner who is:
+                </p>
+                <ol class="philosophy__list">
+
+                  <li class="philosophy__text">
+                    Responsive: When you have an operational challenge,
+                    you need a partner who understands the urgency.
+                    We prioritize clear, proactive communication.
+                  </li>
+
+                  <li class="philosophy__text">
+                    Transparent: From pricing and timelines to technical feasibility,
+                    we provide complete clarity. There are no surprises in our partnerships.
+                  </li>
+
+                  <li class="philosophy__text">
+                    Invested: We measure our success not by the completion of a project,
+                    but by the measurable improvement in your operational uptime and
+                    efficiency over time.
+                  </li>
+
+                </ol>
+              </dd>
+            </dl>
+
+            <a class="philosophy__button" href="/about.html#approach">
+              Back to Our Approach
+              <svg class="philosophy__button-icon" width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.29693 0.287676C7.69033 -0.0999452 8.32348 -0.0952564 8.7111 0.298149C9.09873 0.691555 9.09404 1.3247 8.70063 1.71232L3.33027 7.00372H17.0015C17.5538 7.00372 18.0015 7.45144 18.0015 8.00372C18.0015 8.55601 17.5537 9.00372 17.0015 9.00372H3.33688L8.70063 14.2886C9.09404 14.6762 9.09873 15.3094 8.7111 15.7028C8.32348 16.0962 7.69033 16.1009 7.29693 15.7133L0.372738 8.89087C-0.124176 8.40126 -0.124176 7.59967 0.372738 7.11006L7.29693 0.287676Z" fill="white"/>
+              </svg>
+            </a>
+          </div>
+
+          <div class="philosophy__image-wrapper">
+            <img
+              class="philosophy__image"
+              src="/src/assets/images/about/approach/philosophy.jpg"
+              alt=""
+              width="800"
+              height="583"
+            >
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <load src="/src/html/footer.html" theme="footer_black" />
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

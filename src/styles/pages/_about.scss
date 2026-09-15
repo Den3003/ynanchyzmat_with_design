@@ -1,0 +1,1175 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.about {
+
+  // Одинаковые стили
+
+  &__sub-title {
+    color: variable.$color-black;
+    font-size: mixins.fluid(26px, 40px);
+    font-weight: 700;
+    margin: 0 0 20px;
+  }
+
+  // Секция hero
+
+  &__hero {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    background: variable.$color-about-gray-bg;
+
+    //  На низком экране (телефон в landscape) высоту диктует контент
+    @include mixins.landscape-short {
+      height: auto;
+      min-height: 100vh;
+    }
+  }
+
+  &__hero-container {
+    position: relative;
+    height: 100%;
+  }
+
+  &__hero-flex {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+    @include mixins.down('nav') {
+      padding-top: 120px;
+    }
+  }
+
+  &__title {
+    font-size: mixins.fluid(48px, 150px);
+    font-weight: 500;
+    line-height: 1.05;
+    margin: 0 0 30px;
+
+    @include mixins.down('sm') {
+      margin: 0 0 18px;
+    }
+  }
+
+  &__text {
+    font-size: mixins.fluid(15px, 20px);
+    line-height: 1.3;
+    max-width: 800px;
+    margin: 0 0 80px;
+
+    //  Логотип занимает правую половину экрана — текст удерживаем в левой,
+    //  иначе абзац ложится прямо поверх фотографии
+    @include mixins.down('xxl') {
+      max-width: 46%;
+      font-size: 16px;
+    }
+
+    @include mixins.down('nav') {
+      max-width: 48%;
+      margin: 0 0 48px;
+    }
+
+    @include mixins.down('sm') {
+      max-width: none;
+      font-size: mixins.fluid(15px, 20px);
+      margin: 0 0 32px;
+    }
+  }
+
+  &__hero-image-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 1137px;
+
+    //  PNG фиксированного размера: ниже 1600px он шире экрана и наезжает
+    //  на текст, поэтому ширину привязываем к экрану
+    @include mixins.down('xxl') {
+      width: 50%;
+    }
+
+    @include mixins.down('nav') {
+      width: 48%;
+    }
+
+    //  На телефоне фото встаёт обычным блоком над заголовком
+    @include mixins.down('sm') {
+      position: static;
+      order: -1;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 0 24px;
+    }
+  }
+
+  &__hero-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+
+  // Секция purpose
+
+  &__purpose {
+    padding: 60px 0 0;
+    margin: 0 0 100px;
+
+    @include mixins.down('md') {
+      padding: 40px 0 0;
+      margin: 0 0 64px;
+    }
+
+    @include mixins.down('sm') {
+      margin: 0 0 48px;
+    }
+  }
+
+  &__purpose-title {
+    color: variable.$color-black;
+    font-size: mixins.fluid(26px, 40px);
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+
+  &__purpose-text {
+    color: variable.$color-black;
+    font-size: mixins.fluid(15px, 20px);
+    margin: 0 0 20px;
+  }
+
+  &__purpose-grid {
+    display: grid;
+    grid-template-areas: 
+      "img mission"
+      "img vision";
+
+    @include mixins.down('xxl') {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    //  Картинка уходит наверх, блоки Mission/Vision — под неё
+    @include mixins.down('md') {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas:
+        "img"
+        "mission"
+        "vision";
+    }
+  }
+
+  &__purpose-image {
+    grid-area: img;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+
+    @include mixins.down('md') {
+      height: auto;
+      max-height: 320px;
+    }
+  }
+
+  &__purpose-mission {
+    grid-area: mission;
+    background: variable.$color-blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 50px;
+
+    @include mixins.down('lg') {
+      padding: 32px;
+    }
+
+    @include mixins.down('sm') {
+      padding: 24px;
+    }
+  }
+
+  &__purpose-vision {
+    grid-area: vision;
+    background: variable.$color-orange-secondary;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 50px;
+
+    @include mixins.down('lg') {
+      padding: 32px;
+    }
+
+    @include mixins.down('sm') {
+      padding: 24px;
+    }
+  }
+
+  &__purpose-sub-title {
+    font-size: mixins.fluid(22px, 32px);
+    font-weight: 500;
+    margin: 0 0 15px;
+  }
+
+  &__purpose-sub-text {
+    font-size: mixins.fluid(15px, 20px);
+    margin: 0;
+
+    &:not(:last-child) {
+      margin: 0 0 25px;
+    }
+  }
+
+
+  // Секция history
+
+  &__history {
+    margin: 0 0 100px;
+
+    @include mixins.down('md') {
+      margin: 0 0 64px;
+    }
+
+    @include mixins.down('sm') {
+      margin: 0 0 48px;
+    }
+  }
+
+  &__history-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 0 40px;
+
+    //  Текст и фото встают друг под друга
+    @include mixins.down('md') {
+      flex-direction: column;
+      gap: 32px 0;
+    }
+  }
+
+  &__history-wrapper-text {
+    color: variable.$color-black;
+    max-width: 800px;
+    min-width: 0;
+  }
+
+  &__history-wrapper-image {
+    flex: 0 1 auto;
+    min-width: 0;
+
+    //  Фото стояло в высокой колонке с object-fit: contain и висело в пустоте:
+    //  сверху и снизу оставались поля в полтора абзаца. Отдаём ему больше
+    //  ширины, а высоту добираем заполнением (см. &__history-image)
+    @include mixins.down('xxl') {
+      flex: 0 0 42%;
+    }
+  }
+
+  &__history-text {
+    font-size: mixins.fluid(15px, 20px);
+    line-height: 1.4;
+    margin: 0;
+
+    &:not(:last-child) {
+      margin: 0 0 25px;
+    }
+  }
+
+  &__history-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+
+    //  Заполняем всю высоту текстовой колонки — иначе фото «плавает» в ней
+    @include mixins.down('xxl') {
+      object-fit: cover;
+    }
+
+    @include mixins.down('md') {
+      height: auto;
+      max-height: 340px;
+    }
+  }
+
+
+
+  // Секция approach
+
+  &__approach {
+    margin: 0 0 100px;
+
+    @include mixins.down('md') {
+      margin: 0 0 64px;
+    }
+
+    @include mixins.down('sm') {
+      margin: 0 0 48px;
+    }
+  }
+
+  &__approach-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__approach-item {
+    background: variable.$color-about-gray-bg;
+    display: grid;
+    grid-template-columns: minmax(600px, 660px) 1fr;
+
+    &:not(:last-child) {
+      margin: 0 0 40px;
+    }
+
+    @include mixins.down('xxl') {
+      grid-template-columns: minmax(0, 45%) minmax(0, 1fr);
+    }
+
+    //  Фото сверху, текст снизу
+    @include mixins.down('md') {
+      grid-template-columns: minmax(0, 1fr);
+
+      &:not(:last-child) {
+        margin: 0 0 24px;
+      }
+    }
+  }
+
+  &__approach-image-wrapper {
+    width: 660px;
+    height: 440px;
+
+    @include mixins.down('xxl') {
+      width: 100%;
+      height: 100%;
+    }
+
+    @include mixins.down('md') {
+      height: auto;
+      aspect-ratio: 3 / 2;
+    }
+  }
+
+  &__approach-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__approach-content-wrapper {
+    flex:  1 1 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 30px 0;
+    padding: 0 50px;
+
+    @include mixins.down('lg') {
+      gap: 20px 0;
+      padding: 32px;
+    }
+
+    @include mixins.down('sm') {
+      padding: 24px;
+    }
+  }
+
+  &__approach-content-title {
+    font-size: mixins.fluid(22px, 32px);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  &__approach-content-text {
+    font-size: mixins.fluid(15px, 20px);
+    margin: 0;
+  }
+
+  &__approach-content-link-arrow {
+    transition: transform .6s cubic-bezier(.55, 0, .1, 1);
+  }
+
+  &__approach-content-link {
+    display: flex;
+    align-items: center;
+    gap: 0 10px;
+    text-decoration: none;
+    color: inherit;
+    background: variable.$color-orange-primary;
+    font-size: mixins.fluid(15px, 20px);
+    padding: 12px 22px;
+
+    @include mixins.hover-supported {
+
+      &:hover {
+        .about__approach-content-link-arrow {
+          transform: translateX(10px);
+        }
+      }
+    }
+
+    @include mixins.down('xs') {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+
+  // Секция achievements
+
+  &__achievements {
+    margin: 0 0 100px;
+
+    @include mixins.down('md') {
+      margin: 0 0 64px;
+    }
+
+    @include mixins.down('sm') {
+      margin: 0 0 48px;
+    }
+  }
+
+  &__achievements-flex {
+    display: flex;
+    justify-content: space-between;
+    gap: 0 40px;
+    color: variable.$color-black;
+
+    //  Иллюстрация уходит под текст, слайдер занимает всю ширину
+    @include mixins.down('lg') {
+      flex-direction: column;
+      gap: 32px 0;
+    }
+  }
+
+  &__achievements-image-wrapper {
+    flex: 0 1 auto;
+    min-width: 0;
+
+    @include mixins.down('lg') {
+      display: none;
+    }
+  }
+
+  &__achievements-content-wrapper {
+    max-width: 1160px;
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 155px 0;
+
+    @include mixins.down('xxl') {
+      gap: 90px 0;
+    }
+
+    @include mixins.down('lg') {
+      max-width: none;
+      gap: 56px 0;
+    }
+
+    @include mixins.down('sm') {
+      gap: 36px 0;
+    }
+  }
+
+  &__achievements-text {
+    font-size: mixins.fluid(15px, 20px);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  &__achievements-equipment-image {
+    margin: 0 0 10px;
+  }
+
+  //  Swiper
+
+  &__achievements-swiper-wrapper-with-control {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 380px;
+    gap: 0 12px;
+
+    @include mixins.down('lg') {
+      height: 300px;
+    }
+
+    @include mixins.down('sm') {
+      height: 240px;
+    }
+  }
+
+  &__achievements-swiper-wrapper {
+    max-width: 1030px;
+    height: 100%;
+    //  min-width: 0 не даёт flex-элементу распирать строку шире экрана
+    min-width: 0;
+    flex: 1 1 auto;
+
+    @include mixins.down('lg') {
+      max-width: none;
+    }
+  }
+
+  &__achievements-sliders-wrapper {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+  }
+
+  &__achievements-slider-item {
+    width: max-content;
+    background: inherit;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px 0;
+    transition: transform 0.3s ease;
+
+    &.swiper-slide-prev, 
+    &.swiper-slide-next {
+      transform: scale(1.10) translateY(-10px);
+    }
+
+    &.swiper-slide-active {
+      transform: scale(1.50) translateY(-20px);
+    }
+
+    //  При меньшем числе видимых слайдов крупный масштаб приводит к наложению
+    @include mixins.down('md') {
+
+      &.swiper-slide-prev,
+      &.swiper-slide-next {
+        transform: scale(1.02) translateY(-5px);
+      }
+
+      &.swiper-slide-active {
+        transform: scale(1.20) translateY(-10px);
+      }
+    }
+  }
+
+  //  Иконка слайда. Без ограничения она идёт в натуральную величину (~100px)
+  //  и вместе с активным масштабом 1.5 забивает всю ширину слайдера
+  &__achievements-slider-item img {
+    display: block;
+    width: auto;
+    max-height: 100px;
+
+    @include mixins.down('xxl') {
+      max-height: 80px;
+    }
+
+    @include mixins.down('lg') {
+      max-height: 64px;
+    }
+
+    @include mixins.down('sm') {
+      max-height: 52px;
+    }
+  }
+
+  &__achievements-slider-item-equipment {
+    min-width: 165px;
+    gap: 0;
+
+    @include mixins.down('md') {
+      min-width: 0;
+    }
+  }
+
+  &__achievements-slide-title {
+    font-size: mixins.fluid(13px, 18px);
+    margin: 0;
+    text-align: center;
+    hyphens: auto;
+  }
+
+  &__achievements-slide-title-equipment {
+    margin: 0 0 3px;
+  }
+
+  &__achievements-projects-title {
+    max-width: 100px;
+
+    @include mixins.down('md') {
+      max-width: none;
+    }
+  }
+
+  &__achievements-engineers-title {
+    max-width: 118px;
+
+    @include mixins.down('md') {
+      max-width: none;
+    }
+  }
+
+  &__achievements-number-work {
+    margin: 0;
+    font-size: mixins.fluid(15px, 20px);
+    font-weight: 700;
+  }
+
+  &__achievements-number-span {
+    font-size: mixins.fluid(13px, 16px);
+    font-weight: 400;
+  }
+
+  &__achievements-button-icon {
+    width: 100%;
+    height: auto;
+
+    @include mixins.down('sm') {
+      width: 18px;
+    }
+  }
+
+  &__achievements-button {
+    all: unset;
+    cursor: pointer;
+    flex-shrink: 0;
+    @include mixins.tap-target(28px);
+  }
+
+
+  // Секция Our key Clients
+
+  &__clients {
+    margin: 0 0 100px;
+
+    @include mixins.down('md') {
+      margin: 0 0 64px;
+    }
+
+    @include mixins.down('sm') {
+      margin: 0 0 48px;
+    }
+  }
+
+  &__clients-flex {
+    display: flex;
+    justify-content: space-between;
+    gap: 0 40px;
+    color: variable.$color-black;
+
+    @include mixins.down('lg') {
+      flex-direction: column;
+      gap: 32px 0;
+    }
+  }
+
+  &__clients-image-wrapper {
+    flex: 0 1 auto;
+    min-width: 0;
+
+    @include mixins.down('lg') {
+      display: none;
+    }
+  }
+
+  &__clients-image {
+    display: block;
+  }
+
+  &__clients-content-wrapper {
+    max-width: 1160px;
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+
+    @include mixins.down('lg') {
+      max-width: none;
+    }
+  }
+
+  &__clients-text {
+    font-size: mixins.fluid(15px, 20px);
+    line-height: 1.4;
+    margin: 0 0 140px;
+
+    @include mixins.down('xxl') {
+      margin: 0 0 80px;
+    }
+
+    @include mixins.down('lg') {
+      margin: 0 0 48px;
+    }
+
+    @include mixins.down('sm') {
+      margin: 0 0 32px;
+    }
+  }
+
+  //  Swiper
+
+  &__clients-swiper-wrapper-with-control {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 265px;
+    gap: 0 12px;
+
+    @include mixins.down('lg') {
+      height: 220px;
+    }
+
+    @include mixins.down('sm') {
+      height: 170px;
+    }
+  }
+
+  &__clients-swiper-wrapper {
+    max-width: 1000px;
+    height: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+
+    @include mixins.down('lg') {
+      max-width: none;
+    }
+  }
+
+  &__clients-sliders-wrapper {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+  }
+
+  &__clients-slider-item {
+    width: max-content;
+    // background: inherit;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // gap: 10px 0;
+    transition: transform 0.3s ease;
+
+    &.swiper-slide-prev, 
+    &.swiper-slide-next {
+      transform: scale(1.10) translateY(-10px);
+    }
+
+    &.swiper-slide-active {
+      transform: scale(1.50) translateY(-20px);
+    }
+
+    @include mixins.down('md') {
+
+      &.swiper-slide-prev,
+      &.swiper-slide-next {
+        transform: scale(1.02) translateY(-5px);
+      }
+
+      &.swiper-slide-active {
+        transform: scale(1.20) translateY(-10px);
+      }
+    }
+  }
+
+  &__clients-slider-item img {
+    display: block;
+    width: auto;
+    max-height: 90px;
+
+    @include mixins.down('xxl') {
+      max-height: 72px;
+    }
+
+    @include mixins.down('lg') {
+      max-height: 60px;
+    }
+
+    @include mixins.down('sm') {
+      max-height: 48px;
+    }
+  }
+
+  &__clients-button-icon {
+    width: 100%;
+    height: auto;
+
+    @include mixins.down('sm') {
+      width: 18px;
+    }
+  }
+
+  &__clients-button {
+    all: unset;
+    cursor: pointer;
+    flex-shrink: 0;
+    @include mixins.tap-target(28px);
+  }
+
+  // Секция Company Timeline
+
+
+  &__timeline {
+    margin: 0 0 240px;
+
+    @include mixins.down('xxl') {
+      margin: 0 0 160px;
+    }
+
+    @include mixins.down('lg') {
+      margin: 0 0 96px;
+    }
+
+    @include mixins.down('sm') {
+      margin: 0 0 64px;
+    }
+  }
+
+  &__timeline-title {
+    color: variable.$color-black;
+    font-size: mixins.fluid(26px, 40px);
+    font-weight: 700;
+    margin: 0 0 5px;
+  }
+
+  &__timeline-line {
+    height: 1px;
+    background: variable.$color-black;
+    margin: 0 0 40px;
+
+    @include mixins.down('sm') {
+      margin: 0 0 24px;
+    }
+  }
+
+
+  //  Swiper
+
+  &__timeline-swiper-wrapper-with-control {
+    display: grid;
+    grid-template-columns: minmax(100px, 240px) minmax(222px, 225px) 1fr;
+    align-items: center;
+
+    @include mixins.down('xxl') {
+      grid-template-columns: minmax(70px, 150px) auto minmax(0, 1fr);
+    }
+
+    //  Стрелки переезжают под таймлайн и становятся горизонтальным рядом
+    @include mixins.down('md') {
+      grid-template-columns: auto minmax(0, 1fr);
+      row-gap: 24px;
+    }
+  }
+
+  &__timeline-swiper {
+    position: relative;
+    margin-left: 0;
+    height: 732px;   /* видно 3 слайда: prev / active / next */
+    overflow: hidden;
+
+    @include mixins.down('xxl') {
+      height: 560px;
+    }
+
+    @include mixins.down('lg') {
+      height: 440px;
+    }
+
+    @include mixins.down('md') {
+      grid-column: 2;
+      grid-row: 1;
+      height: 380px;
+    }
+
+    //  Слайд стал выше на увеличенные отступы — добавляем их и слайдеру,
+    //  иначе соседние годы обрезаются на середине строки
+    @include mixins.down('xs') {
+      height: 380px;
+    }
+  }
+
+  &__timeline-swiper-wrapper {
+    margin: 0;
+    padding: 0 0 0 10px;
+    list-style: none;
+
+    @include mixins.down('xxl') {
+      padding: 0;
+    }
+  }
+
+  &__timeline-swiper-buttons-control {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 50px 0;
+
+    @include mixins.down('lg') {
+      gap: 28px 0;
+    }
+
+    @include mixins.down('md') {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 0 48px;
+    }
+  }
+
+
+  &__timeline-button {
+    all: unset;
+    cursor: pointer;
+    @include mixins.tap-target(44px);
+
+    @include mixins.down('md') {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__timeline-button-icon {
+    width: 100%;
+    height: auto;
+
+    @include mixins.down('lg') {
+      width: 34px;
+    }
+
+    @include mixins.down('md') {
+      width: 28px;
+    }
+  }
+
+  //  Статичная приставка "20" — вместе с годом слайда даёт «2016», «2017» …
+  //  Размер должен совпадать с .about__timeline-year, иначе цифры разъедутся
+  &__timeline-20 {
+    position: relative;
+    z-index: 1;
+    font-size: mixins.fluid(44px, 200px);
+    font-weight: 700;
+    background-color: transparent;
+    color: variable.$color-black;
+    user-select: none;
+
+    @include mixins.down('xxl') {
+      line-height: 1;
+    }
+
+    @include mixins.down('md') {
+      grid-column: 1;
+      grid-row: 1;
+    }
+  }
+
+  &__timeline-20-circle {
+    position: absolute;
+    right: -138%;
+    z-index: -1;
+    //  Глобальное svg { max-width: 100% } сжимало кольцо до ширины "20"
+    max-width: none;
+    top: 50%;
+    transform: translateY(-50%);
+
+    @include mixins.down('xxl') {
+      width: 240px;
+      height: 240px;
+      right: -110%;
+    }
+
+    //  Кольцо уменьшается вместе с цифрой года, но остаётся на всех экранах
+    @include mixins.down('lg') {
+      width: 180px;
+      height: 180px;
+      right: -105%;
+    }
+
+    @include mixins.down('md') {
+      width: 140px;
+      height: 140px;
+      right: -100%;
+    }
+
+    @include mixins.down('sm') {
+      width: 104px;
+      height: 104px;
+      right: -95%;
+    }
+
+    @include mixins.down('xs') {
+      width: 84px;
+      height: 84px;
+    }
+  }
+
+  &__timeline-slider-item {
+    position: relative;
+    height: auto;
+    display: grid;
+    grid-template-columns: minmax(100px, 415px) 1fr;
+    z-index: 10;
+
+    //  Ниже xxl заменяет swiper'овский spaceBetween: линия идёт по нижней
+    //  границе слайда, поэтому содержимое центрируется ровно между двумя линиями.
+    //  На десктопе — как в макете: spaceBetween 30 (см. main.js)
+    @include mixins.down('xxl') {
+      padding: 15px 0;
+    }
+
+    @include mixins.down('lg') {
+      padding: 12px 0;
+    }
+
+    //  На телефоне текст почти упирался в разделительные линии
+    @include mixins.down('sm') {
+      padding: 22px 0;
+    }
+
+    &:not(:last-child) {
+      &:after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        content: '';
+        display: block;
+        width: 850px;
+        max-width: 100%;
+        height: 2px;
+        background: variable.$color-black;
+      }
+    }
+
+    @include mixins.down('xxl') {
+      grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+      align-items: center;
+    }
+
+    //  На планшете колонка с годом заметно сдвигала текст вправо от середины
+    //  разделительной линии. Год вынимаем из потока — описание центрируется
+    //  по всей ширине слайда, то есть ровно по линии. min-height страхует
+    //  высоту слайда: год больше не участвует в её расчёте.
+    @include mixins.between('sm', 'lg') {
+      display: block;
+      position: relative;
+      min-height: mixins.fluid(44px, 200px);
+
+      .about__timeline-year {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      //  Симметричные поля шириной с год: длинная строка описания не должна
+      //  заезжать под цифру слева. Отступ задаём здесь, а не на слайде:
+      //  у слайдов Swiper box-sizing: content-box, и padding расширил бы их.
+      //  Глобальное `* { box-sizing: inherit }` тянет content-box и сюда —
+      //  поэтому модель переопределяем явно, иначе padding уедет за край.
+      .about__timeline-content {
+        box-sizing: border-box;
+        padding: 0 mixins.fluid(80px, 170px);
+      }
+    }
+
+    &.swiper-slide-active {
+      .about__timeline-year {
+        color: variable.$color-black;
+        // font-weight: 700;
+      }
+
+      .about__timeline-sub-title {
+        color: variable.$color-black;
+      }
+
+      .about__timeline-text {
+        color: variable.$color-black;
+      }
+    }
+  }
+
+  &__timeline-year {
+    font-size: mixins.fluid(44px, 200px);
+    color: variable.$color-gray-year;
+    font-weight: 700;
+    transition: color .3s ease;
+
+    @include mixins.down('xxl') {
+      line-height: 1;
+    }
+  }
+
+  &__timeline-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include mixins.down('xxl') {
+      justify-content: center;
+    }
+  }
+
+  &__timeline-sub-title {
+    color: variable.$color-gray-year;
+    font-size: mixins.fluid(22px, 50px);
+    font-weight: 500;
+    margin: 0 0 20px;
+    transition: color .3s ease;
+    text-align: center;
+
+    @include mixins.down('sm') {
+      margin: 0 0 10px;
+    }
+  }
+
+  &__timeline-text {
+    font-size: mixins.fluid(14px, 20px);
+    color: variable.$color-gray-year;
+    margin: 0;
+    text-align: center;
+    transition: color .3s ease;
+  }
+
+
+
+
+  /* .ring{
+    position:absolute;
+    left: -30px;
+    top: 50%;
+    // width: 300px;
+    // height: 300px;
+    transform: translateY(-50%);
+    z-index: 5;
+    pointer-events:none;
+  } */
+  /* .ring circle{
+    fill:none;
+    stroke:orange;
+    stroke-width:2px;
+    transition: stroke-width .3s ease;
+  } */
+
+}

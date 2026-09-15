@@ -1,0 +1,124 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+//  Кнопка-бургер. На десктопе скрыта, ниже $bp-nav заменяет горизонтальное меню.
+
+.burger {
+  display: none;
+  position: relative;
+  z-index: 70;
+  padding: 10px;
+  margin: 0 -10px 0 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+  @include mixins.tap-target(44px);
+
+  @include mixins.down('nav') {
+    display: block;
+    //  В разметке бургер стоит перед поиском, а визуально должен быть последним
+    order: 2;
+  }
+
+  &:focus-visible {
+    outline: 2px solid variable.$color-orange-primary;
+    outline-offset: 2px;
+  }
+
+  &__box {
+    display: block;
+    position: relative;
+    width: 26px;
+    height: 18px;
+  }
+
+  &__line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: 2px;
+    transition: transform .3s cubic-bezier(.4, 0, .2, 1),
+                opacity .2s ease,
+                top .3s cubic-bezier(.4, 0, .2, 1);
+
+    &:nth-child(1) {
+      top: 0;
+    }
+
+    &:nth-child(2) {
+      top: 8px;
+    }
+
+    &:nth-child(3) {
+      top: 16px;
+    }
+  }
+
+  //  Открытое состояние — линии складываются в крестик.
+  //  Внутри drawer'а фон белый, поэтому крестик всегда тёмный.
+  &[aria-expanded="true"] {
+    color: variable.$color-black;
+
+    .burger__line {
+
+      &:nth-child(1) {
+        top: 8px;
+        transform: rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+
+      &:nth-child(3) {
+        top: 8px;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+//  Затемняющая подложка под выехавшим меню
+
+.nav-backdrop {
+  display: none;
+
+  @include mixins.down('nav') {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .35s ease, visibility .35s ease;
+
+    body.is-menu-open & {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+
+//  Ниже этой ширины drawer занимает всю ширину экрана, и светлый логотип
+//  с иконкой поиска оказались бы поверх белой панели меню — прячем их.
+//  Порог = максимальная ширина drawer'а (420px) плюс небольшой запас.
+@media (max-width: 440px) {
+
+  body.is-menu-open {
+
+    .header__logo-link,
+    .header-black__logo-link,
+    .search-wrapper {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+    }
+  }
+}

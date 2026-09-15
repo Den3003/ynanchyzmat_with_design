@@ -1,0 +1,153 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.contacts-form {
+  background: variable.$color-black-contacts-form-bg;
+  padding: 30px 40px 40px;
+  width: 770px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include mixins.down('sm') {
+    padding: 24px 20px 28px;
+  }
+
+  //  Honeypot: поле-ловушка для ботов. Его не видно и не слышно,
+  //  живой человек его не заполнит — значит, заполненное поле = бот.
+  &__hp {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  //  Обёртка «label + input + сообщение об ошибке».
+  //  Высоту под текст ошибки резервирует __error, но без собственного отступа
+  //  группы сообщение вплотную прилипает к подписи следующего поля.
+  &__group {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+
+    @include mixins.down('sm') {
+      padding-bottom: 6px;
+    }
+  }
+
+  &__label {
+    margin: 0 0 17px;
+    font-size: mixins.fluid(16px, 20px);
+    font-weight: 500;
+
+    @include mixins.down('sm') {
+      margin: 0 0 12px;
+    }
+  }
+
+  &__input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid variable.$color-orange-primary;
+    outline: none;
+    color: variable.$color-main;
+    font-size: 20px;
+    //  Без этого длинный input распирает форму на узком экране
+    width: 100%;
+    min-width: 0;
+
+    @include mixins.down('sm') {
+      //  16px — порог, ниже которого iOS зумит страницу при фокусе
+      font-size: 16px;
+      min-height: 40px;
+    }
+  }
+
+  &__textarea {
+    margin: 0 0 20px;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    resize: vertical;
+
+    @include mixins.down('sm') {
+      //  rows="8" из разметки на телефоне занимает почти весь экран
+      min-height: 120px;
+      height: 120px;
+    }
+  }
+
+  //  Строка ошибки всегда занимает место (min-height), иначе появление
+  //  текста дёргает всю форму вниз. Она же задаёт отступ между полями.
+  &__error {
+    display: block;
+    min-height: 20px;
+    font-size: 12px;
+    line-height: 1.4;
+    color: variable.$color-main;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+
+    @include mixins.down('sm') {
+      min-height: 18px;
+      font-size: 11px;
+    }
+  }
+
+  &__group-error {
+    .contacts-form__input,
+    .contacts-form__textarea {
+      border-color: variable.$color-red-error;
+    }
+
+    .contacts-form__error {
+      opacity: 1;
+    }
+  }
+
+  &__group-success {
+    .contacts-form__input,
+    .contacts-form__textarea {
+      border-color: variable.$color-main;
+    }
+  }
+
+  &__button {
+    height: 51px;
+    background: variable.$color-orange-primary;
+    border: none;
+    cursor: pointer;
+    color: variable.$color-main;
+    font-size: mixins.fluid(16px, 20px);
+    font-weight: 500;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    &:not(:disabled):active {
+      transform: scale(0.98);
+    }
+
+    @include mixins.touch {
+      @include mixins.tap-target;
+    }
+  }
+
+  &__status {
+    margin-top: 12px;
+    font-size: mixins.fluid(13px, 15px);
+    line-height: 1.5;
+
+    &-success {
+      color: variable.$color-main;
+    }
+
+    &-error {
+      color: variable.$color-red-error;
+    }
+  }
+}

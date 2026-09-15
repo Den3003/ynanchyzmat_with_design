@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <load src="/src/html/head.html" />
+  <link rel="preload" href="/fonts/Futura-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Futura-500.woff2" as="font" type="font/woff2" crossorigin>
+  <title>Sectors | Ynanch Hyzmat</title>
+</head>
+<body class="body-sectors">
+  <load src="/src/html/loader.html" />
+  <script>
+  /* Оверлей скрывается после загрузки страницы, но не раньше, чем
+     проиграет вся секвенция (2.95 с). MIN_MS можно менять. */
+  (function () {
+    var MIN_MS = 2950, start = Date.now();
+    function hide() {
+      var wait = Math.max(0, MIN_MS - (Date.now() - start));
+      setTimeout(function () {
+        var el = document.getElementById('yh-loader');
+        if (el) el.classList.add('yh-hidden');
+      }, wait);
+    }
+    if (document.readyState === 'complete') hide();
+    else window.addEventListener('load', hide);
+  })();
+  </script>
+  <load src="/src/html/header.html" />
+
+  <main class="sectors">
+
+    <!-- Hero -->
+    <section class="sectors__hero">
+      <div class="sectors__hero-background">
+        <img
+          class="sectors__hero-image"
+          src="src/assets/images/sectors/hero/sectors-hero.jpg"
+          alt=""
+          width="1920"
+          height="600"
+        >
+      </div>
+      <div class="container sectors__container">
+        <div class="sectors__hero-flex">
+          <h1 class="sectors__title content-section js-content-section">Sectors</h1>
+          <p class="sectors__hero-text content-section js-content-section">
+            Industrial infrastructure is an interconnected
+            ecosystem, and Ynanch Hyzmat operates across
+            the disciplines that keep it functioning
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview -->
+    <section id="overview" class="sectors__overview">
+      <div class="container">
+        <h2 class="sectors__overview-title content-section js-content-section">Overview</h2>
+        <p class="sectors__overview-text content-section js-content-section">
+          Modern industry relies on the seamless interaction
+          of multiple sectors, where the performance of one
+          directly influences the success of another.
+          Ynanch Hyzmat supports this interconnected industrial
+          ecosystem by delivering engineering and technical
+          solutions across the oil & gas, petrochemical, energy,
+          construction, and infrastructure sectors. This multidisciplinary
+          expertise enables us to address complex project requirements
+          through integrated solutions that improve operational efficiency,
+          reliability, and long-term asset performance.
+        </p>
+
+        <ul id="support" class="sectors__overview-list">
+
+          <li id="gas" class="sectors__overview-item">
+            <img class="sectors__overview-item-image" src="/src/assets/images/sectors/overview/oil.jpg" alt="" width="418" height="330">
+            <h3 class="sectors__overview-item-title content-section js-content-section">
+              Oil and Gas
+            </h3>
+            <div class="sectors__overview-item-hover">
+              <p class="sectors__overview-item-text sectors__overview-text-oil">
+                From upstream production facilities to processing,
+                transportation, and storage infrastructure,
+                Ynanch Hyzmat supports the oil and gas industry with
+                engineering, maintenance, automation, and project
+                execution services that help operators maintain safe,
+                efficient, and reliable operations.
+              </p>
+            </div>
+          </li>
+
+          <li id="energy" class="sectors__overview-item">
+            <img class="sectors__overview-item-image" src="/src/assets/images/sectors/overview/energy.jpg" alt="" width="418" height="330">
+            <h3 class="sectors__overview-item-title content-section js-content-section">
+              Energy and Power
+            </h3>
+            <div class="sectors__overview-item-hover">
+              <p class="sectors__overview-item-text">
+                Reliable power infrastructure is essential for
+                industrial growth and economic development.
+                Ynanch Hyzmat supports power generation, transmission,
+                and distribution facilities through engineering
+                solutions, maintenance programs, electrical systems
+                integration, and technical support services.
+              </p>
+            </div>
+          </li>
+
+          <li id="petrochemistry" class="sectors__overview-item">
+            <img class="sectors__overview-item-image" src="/src/assets/images/sectors/overview/petrochemsitry.jpg" alt="" width="418" height="330">
+            <h3 class="sectors__overview-item-title content-section js-content-section">
+              Petrochemistry
+            </h3>
+            <div class="sectors__overview-item-hover">
+              <p class="sectors__overview-item-text">
+                Petrochemical facilities require precise process control,
+                dependable equipment performance, and strict safety standards.
+                Ynanch Hyzmat delivers technical solutions that help operators
+                maintain efficient production, improve reliability,
+                and support long-term asset performance.
+              </p>
+            </div>
+          </li>
+
+          <li id="civil" class="sectors__overview-item">
+            <img class="sectors__overview-item-image" src="/src/assets/images/sectors/overview/civil.jpg" alt="" width="418" height="330">
+            <h3 class="sectors__overview-item-title content-section js-content-section">
+              Civil Construction
+            </h3>
+            <div class="sectors__overview-item-hover">
+              <p class="sectors__overview-item-text">
+                Industrial development depends on robust infrastructure
+                and quality construction. Ynanch Hyzmat supports industrial
+                and infrastructure projects through engineering,
+                construction, project management, and technical services
+                that ensure facilities are built to perform safely and
+                reliably throughout their lifecycle.
+              </p>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <section class="tm" id="turkmenistan" aria-labelledby="tm-title">
+      <div class="container">
+        <header class="tm__header">
+          <h2 class="tm__title" id="tm-title" data-tm-title>Turkmenistan</h2>
+        </header>
+
+        <div class="tm__layout">
+          <div class="tm__map">
+            <div class="tm__stage" data-tm-stage>
+              <canvas class="tm__canvas" data-tm-canvas aria-hidden="true"></canvas>
+              <div class="tm__overlay" data-tm-overlay aria-hidden="true"></div>
+              <p class="tm__loader" data-tm-loader>Building terrain…</p>
+            </div>
+
+            <div class="tm__stage-foot">
+              <p class="tm__hint" data-tm-hint></p>
+              <button class="tm__reset" type="button" data-tm-reset></button>
+            </div>
+
+            <!-- Дублирующее управление для клавиатуры и скринридеров -->
+            <ul class="tm__a11y" data-tm-a11y aria-label="Select a welayat"></ul>
+            <p class="tm__sr-only" role="status" aria-live="polite" data-tm-live></p>
+
+            <div class="tm__bottom">
+              <ul class="tm-legend" data-tm-legend-facilities></ul>
+
+              <div class="tm-projects">
+                <h3 class="tm-projects__title" data-tm-projects-title></h3>
+                <ul class="tm-projects__list" data-tm-legend-projects></ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- До 1280px выбранный велаят открывается модалкой на весь экран.
+               На десктопе обе обёртки ведут себя как обычная колонка -->
+          <aside class="tm__wrapper-panel" data-tm-wrapper-panel>
+            <div class="tm__dialog">
+              <button class="tm__panel-close" type="button" data-tm-panel-close aria-label="Close">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <path d="M2 2l14 14M16 2L2 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </button>
+              <div class="tm__panel" data-tm-panel></div>
+            </div>
+          </aside>
+        </div>
+
+        
+
+        <footer class="tm-notes" data-tm-notes></footer>
+      </div>
+    </section>
+
+  </main>
+
+  <load src="/src/html/footer.html"/>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

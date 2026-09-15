@@ -1,0 +1,423 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.services-body {
+  background: variable.$color-gray-services-bg;
+}
+
+.services {
+  // Секция hero
+
+  &__hero {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    background: variable.$color-about-gray-bg;
+
+    @include mixins.landscape-short {
+      height: auto;
+      min-height: 100vh;
+    }
+  }
+
+  &__hero-container {
+    position: relative;
+    height: 100%;
+  }
+
+  &__hero-flex {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+    @include mixins.down('nav') {
+      padding-top: 120px;
+    }
+  }
+
+  &__title {
+    font-size: mixins.fluid(48px, 150px);
+    font-weight: 500;
+    line-height: 1.05;
+    margin: 0 0 30px;
+
+    @include mixins.down('sm') {
+      margin: 0 0 18px;
+    }
+  }
+
+  &__text {
+    font-size: mixins.fluid(15px, 20px);
+    max-width: 800px;
+    margin: 0 0 80px;
+
+    //  Логотип занимает правую половину экрана — текст удерживаем в левой,
+    //  иначе абзац ложится прямо поверх фотографии
+    @include mixins.down('xxl') {
+      max-width: 46%;
+      font-size: 16px;
+    }
+
+    @include mixins.down('nav') {
+      max-width: 48%;
+      margin: 0 0 48px;
+    }
+
+    @include mixins.down('sm') {
+      max-width: none;
+      font-size: mixins.fluid(15px, 20px);
+      margin: 0 0 32px;
+    }
+  }
+
+  &__hero-image-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 1137px;
+
+    //  PNG фиксированного размера: ниже 1600px он шире экрана и наезжает
+    //  на текст, поэтому ширину привязываем к экрану
+    @include mixins.down('xxl') {
+      width: 50%;
+    }
+
+    @include mixins.down('nav') {
+      width: 48%;
+    }
+
+    //  На телефоне фото встаёт обычным блоком над заголовком
+    @include mixins.down('sm') {
+      position: static;
+      order: -1;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 0 24px;
+    }
+  }
+
+  &__hero-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+
+  // Секция description
+
+  &__description {
+    padding: 80px 0 70px;
+
+    @include mixins.down('md') {
+      padding: 48px 0 40px;
+    }
+
+    @include mixins.down('sm') {
+      padding: 32px 0;
+    }
+  }
+
+  &__description-grid {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 60px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(4, 550px);
+
+    @include mixins.down('xxl') {
+      gap: 40px;
+      grid-template-rows: repeat(4, 480px);
+    }
+
+    //  Две колонки: широкие карточки занимают всю строку
+    @include mixins.down('lg') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: none;
+      grid-auto-rows: 460px;
+      gap: 30px;
+    }
+
+    //  Одна колонка, высота карточки — по содержимому
+    @include mixins.down('sm') {
+      grid-template-columns: minmax(0, 1fr);
+      grid-auto-rows: auto;
+      gap: 24px;
+    }
+
+    //  На тач-устройствах список раскрыт всегда, поэтому высота строки — по контенту
+    @include mixins.touch {
+      grid-template-rows: none;
+      grid-auto-rows: auto;
+    }
+  }
+
+  &__description-point-dynamic {
+    grid-column: 1 / 3;
+
+    @include mixins.down('lg') {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__description-point-hvac {
+    grid-column: 1 / 3;
+
+    @include mixins.down('lg') {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__description-point-programming {
+    grid-column: 2 / 4;
+
+    @include mixins.down('lg') {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__description-image-wrapper {
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  &__description-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__description-hover {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+    border-radius: 20px;
+    background: variable.$color-orange-primary;
+    transform: translateY(100%);
+    transition: transform .8s cubic-bezier(.55, 0, .1, 1);
+    //  Карточка фиксированной высоты: очень длинный список прокручиваем
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    //  Без курсора выезжать нечему — панель раскрывается кнопкой «Details»
+    @include mixins.touch {
+      position: static;
+      height: auto;
+      transform: none;
+      transition: none;
+      overflow: visible;
+      padding: 24px var(--card-pad-x);
+      margin: 0;
+      border-radius: 0 0 20px 20px;
+      gap: 16px 0;
+    }
+
+    @include mixins.down('sm') {
+
+      @include mixins.touch {
+        padding: 20px var(--card-pad-x);
+      }
+    }
+  }
+
+  &__description-point {
+    //  Отступы вынесены в переменные: раскрывающаяся панель на тач-устройствах
+    //  выходит за них в край карточки отрицательными полями
+    --card-pad-x: 30px;
+    --card-pad-b: 30px;
+
+    position: relative;
+    background: variable.$color-about-gray-bg;
+    border-radius: 20px;
+    padding: 80px var(--card-pad-x) var(--card-pad-b);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    @include mixins.hover-supported {
+
+      &:hover {
+        .services__description-hover {
+          transform: translateY(0);
+        }
+      }
+    }
+
+    //  Круг поднимается выше — верхний отступ меньше на 20px
+    @include mixins.down('xxl') {
+      padding-top: 60px;
+    }
+
+    @include mixins.down('lg') {
+      padding-top: 40px;
+    }
+
+    @include mixins.down('sm') {
+      --card-pad-x: 20px;
+      --card-pad-b: 20px;
+
+      padding-top: 32px;
+      //  Высота карточки здесь по контенту, space-between не разводит блоки
+      gap: 24px 0;
+      align-items: start;
+    }
+
+    //  Карточке с автовысотой нужен явный зазор: space-between ничего не разводит
+    @include mixins.touch {
+      gap: 20px 0;
+    }
+
+    //  Раскрытая кнопкой карточка (только тач-устройства)
+    &.is-open {
+
+      @include mixins.touch {
+
+        .services__description-hover-wrapper {
+          max-height: 1600px;
+          margin-bottom: calc(var(--card-pad-b) * -1);
+        }
+      }
+    }
+  }
+
+  &__description-title {
+    font-size: mixins.fluid(18px, 24px);
+    font-weight: 500;
+    margin: 0;
+    align-self: self-start;
+
+    //  В выезжающей панели заголовок дублирует заголовок карточки.
+    //  На тач-устройствах панель раскрыта всегда — второй заголовок лишний.
+    .services__description-hover & {
+
+      @include mixins.touch {
+        display: none;
+      }
+    }
+  }
+
+  &__description-image-wrapper {
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    width: 300px;
+    height: 300px;
+    max-width: 100%;
+
+    //  Круг занимал почти всю ширину карточки — уменьшаем
+    @include mixins.down('xxl') {
+      width: 250px;
+      height: 250px;
+    }
+
+    @include mixins.down('lg') {
+      width: 220px;
+      height: 220px;
+    }
+
+    //  Карточка на телефоне выравнивает контент влево (align-items: start),
+    //  а круг с фото должен стоять по центру
+    @include mixins.down('sm') {
+      width: 190px;
+      height: 190px;
+      align-self: center;
+    }
+  }
+
+  &__description-hover-wrapper {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+
+    //  Аккордеон: схлопнут, пока не нажата кнопка. Ширина с запасом на
+    //  горизонтальные отступы карточки — панель должна доходить до её края.
+    //  Нижнее поле уводим в минус только в раскрытом состоянии: у схлопнутой
+    //  панели оно подтягивало бы кнопку наверх, под заголовок
+    @include mixins.touch {
+      position: static;
+      overflow: hidden;
+      width: calc(100% + var(--card-pad-x) * 2);
+      margin: 0 calc(var(--card-pad-x) * -1);
+      max-height: 0;
+      transition: max-height .4s cubic-bezier(.4, 0, .2, 1);
+    }
+  }
+
+  //  Кнопка раскрытия карточки. Живёт только там, где нет курсора,
+  //  создаётся из JS (см. src/js/modules/serviceCards.js)
+  &__description-toggle {
+    display: none;
+
+    @include mixins.touch {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0 8px;
+      align-self: center;
+      margin: 20px 0 0;
+      padding: 10px 22px;
+      border: 1px solid variable.$color-orange-primary;
+      border-radius: 999px;
+      background: transparent;
+      color: variable.$color-orange-primary;
+      font-family: inherit;
+      font-size: 15px;
+      cursor: pointer;
+      @include mixins.tap-target(44px);
+      //  Кнопка шире своего текста — рамка вытянута. Стоит после tap-target,
+      //  иначе его min-width: 44px перебивает это значение
+      min-width: min(260px, 100%);
+
+      svg {
+        transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+      }
+
+      &[aria-expanded="true"] {
+        background: variable.$color-orange-primary;
+        color: variable.$color-main;
+
+        svg {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  &__description-list {
+    padding: 0 0 0 30px;
+    margin: 0;
+    list-style-type: disc;
+    color: white; /* Белый цвет */
+
+    @include mixins.down('sm') {
+      padding: 0 0 0 20px;
+    }
+  }
+
+  &__description-list-fire {
+    max-width: 470px;
+  }
+
+  &__description-item {
+    font-size: mixins.fluid(14px, 20px);
+    line-height: 1.5;
+
+    //  Самый длинный список (Civil Construction) не влезал в карточку
+    @include mixins.down('xxl') {
+      font-size: 15px;
+      line-height: 1.4;
+    }
+  }
+
+}

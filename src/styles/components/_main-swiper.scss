@@ -1,0 +1,92 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.main-swiper {
+  width: 100%;
+  height: 100%;
+
+  &__progress-bar {
+    position: fixed;
+    width: 100%;
+    bottom: 120px;
+    z-index: 10;
+
+    @include mixins.down('lg') {
+      bottom: 100px;
+    }
+
+    @include mixins.down('sm') {
+      bottom: 96px;
+    }
+
+    @include mixins.down('xs') {
+      bottom: 86px;
+    }
+
+    @include mixins.landscape-short {
+      bottom: 66px;
+    }
+  }
+
+  &__progress-flex {
+    display: flex;
+    gap: 0 8px;
+    width: 100%;
+
+    @include mixins.down('xs') {
+      gap: 0 5px;
+    }
+  }
+
+  &__progress-item {
+    flex: 1;
+    padding: 0;
+    margin: 0;
+    height: 10px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    border: none;
+    background-color: transparent;
+
+    //  Полоска высотой 10px — слишком мелкая цель для пальца.
+    //  Увеличиваем прозрачную область нажатия, сама линия остаётся тонкой.
+    @include mixins.touch {
+      height: 32px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__progress-fill {
+    display: block;
+    width: 100%;
+    height: 10px;
+    background-color: variable.$color-orange-primary;
+    transform: scaleX(0);
+    transform-origin: left; /* Заполнение слева направо */
+    will-change: transform;
+  }
+
+  &__progress-line {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 4px;
+    background-color: variable.$color-orange-primary;
+
+    &.is-active {
+      height: 10px;
+      background-color: rgb(95%, 44%, 13%, .5);
+    }
+
+    @include mixins.down('xs') {
+      height: 3px;
+
+      &.is-active {
+        height: 6px;
+      }
+    }
+  }
+}

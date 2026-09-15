@@ -1,0 +1,75 @@
+// Цвета
+
+$color-main: #fff;
+$color-black: #000;
+$color-black-services-card-bg: #1a1a1a;
+$color-black-contacts-form-bg: rgba(0, 0, 0, 0.5);
+$color-black-modal-bg: rgba(0, 0, 0, 0.5);
+// $color-black-services-card-bg-hover: #4d4d4d;
+$color-orange-primary: #f37021;
+$color-orange-secondary: #b08133;
+$color-gray: #595959;
+$color-gray-services-bg: #ebebeb;
+$color-gray-line-safety-risk: #333;
+$color-gray-circle-safety-risk: #787878;
+$color-gray-year: #b3b3b3;
+$color-gray-arrow-sub-safety: #6E838E;
+$color-gray-safety-description-hidden: #999;
+$color-about-gray-bg: #2f3d46;
+$color-blue: #156e9e;
+$color-red-error: #dc2626;
+
+
+// ─────────────────────────────────────────────
+//  Дизайн-токены секции Turkmenistan (3D-карта)
+//  Меняете фирменный цвет — меняете здесь.
+// ─────────────────────────────────────────────
+
+$tm-bg: #2f3c47;
+$tm-bg-deep: #26313a;
+$tm-ink: #eef3f7;
+$tm-ink-muted: #b9c6d0;
+$tm-ink-dim: #8ea0ad;
+$tm-accent: #f07e26;
+$tm-line: rgba(238, 243, 247, 0.12);
+
+$tm-font-display: 'Jost', 'Futura', 'Century Gothic', system-ui, sans-serif;
+
+$tm-radius: 4px;
+$tm-gutter: clamp(20px, 4vw, 64px);
+
+$tm-bp-md: 1024px;
+$tm-bp-sm: 680px;
+
+
+
+
+
+
+// Шрифт
+
+$font-primary: Futura;
+
+// ─────────────────────────────────────────────
+//  Брейкпоинты (desktop-first, max-width)
+// ─────────────────────────────────────────────
+
+$bp-xxl: 1600px;  // большие десктопы
+$bp-xl:  1440px;  // ноутбуки
+$bp-lg:  1280px;  // маленькие ноутбуки
+$bp-nav: 1200px;  // порог переключения меню на бургер
+$bp-md:  992px;   // планшеты (landscape)
+$bp-sm:  768px;   // планшеты (portrait)
+$bp-xs:  576px;   // крупные телефоны
+$bp-xxs: 400px;   // маленькие телефоны
+
+
+// ─────────────────────────────────────────────
+//  Отступы контейнера (адаптивные)
+// ─────────────────────────────────────────────
+
+$container-max: 1920px;
+$container-pad: 80px;
+$container-pad-lg: 40px;
+$container-pad-sm: 24px;
+$container-pad-xs: 16px;

@@ -1,0 +1,164 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.modal-h2s {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: variable.$color-black-modal-bg;
+  inset: 0;
+  //  Выше шапки и подвала (z-index: 10) — иначе они просвечивают сквозь текст
+  z-index: 40;
+  display: none;
+  padding: 130px 0;
+
+  //  Текст занимает весь экран — подложку делаем почти непрозрачной,
+  //  иначе сквозь неё просвечивают шапка и подвал страницы
+  @include mixins.down('lg') {
+    background: rgba(0, 0, 0, 0.88);
+    padding: 100px 0 40px;
+  }
+
+  @include mixins.down('sm') {
+    padding: 84px 0 24px;
+  }
+
+  &__background {
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  &__container {
+    //  min-height вместо height: пока текст помещается — он по центру, как раньше;
+    //  если выше экрана (масштаб 110–125%, низкие ноутбуки) — контейнер растёт,
+    //  и текст начинается сразу под шапкой, а не уезжает вниз/за верхний край
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    //  Длинный текст на планшете и телефоне прокручивается от верха
+    @include mixins.down('lg') {
+      align-items: flex-start;
+    }
+  }
+
+  &__flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  &__title {
+    font-size: mixins.fluid(18px, 24px);
+    font-weight: 500;
+    margin: 0 0 30px;
+    text-align: center;
+
+    @include mixins.down('sm') {
+      margin: 0 0 20px;
+    }
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: minmax(540px, 690px) 1fr;
+    margin: 0 0 50px;
+
+    @include mixins.down('xxl') {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0 40px;
+    }
+
+    @include mixins.down('lg') {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      margin: 0 0 30px;
+    }
+  }
+
+  &__content-left,
+  &__content-right {
+    max-width: 550px;
+
+    @include mixins.down('xxl') {
+      max-width: none;
+    }
+  }
+
+  &__text {
+    font-size: mixins.fluid(15px, 20px);
+    text-align: justify;
+    line-height: 1.4;
+    margin: 0;
+
+    &:not(:last-child) {
+      margin: 0 0 40px;
+    }
+
+    @include mixins.down('sm') {
+      text-align: left;
+
+      &:not(:last-child) {
+        margin: 0 0 22px;
+      }
+    }
+  }
+
+  &__list {
+    margin: 0 0 40px;
+    font-size: mixins.fluid(15px, 20px);
+    line-height: 1.4;
+    padding: 0 0 0 20px;
+
+    @include mixins.down('sm') {
+      margin: 0 0 22px;
+    }
+  }
+
+  &__close {
+    align-self: self-start;
+    flex-shrink: 0;
+    max-width: 100%;
+    width: 255px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 15px;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: variable.$color-main;
+    border: none;
+    cursor: pointer;
+    position: sticky;
+    bottom: 10px;
+
+    @media (max-height: 682px) {
+      position: static;
+    }
+
+    //  Длинный текст прокручивается — кнопка закрытия должна быть доступна
+    //  из любой точки, поэтому на планшете и телефоне это круглый крестик в углу
+    @include mixins.down('lg') {
+      position: fixed;
+      top: 14px;
+      right: 16px;
+      bottom: auto;
+      z-index: 5;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      gap: 0;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.25);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+      //  скрывает текстовую подпись, оставляя иконку
+      font-size: 0;
+    }
+  }
+
+
+}

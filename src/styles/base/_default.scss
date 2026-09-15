@@ -1,0 +1,108 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  //  Не даём мобильному Safari самовольно увеличивать текст в landscape
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  //  Ни один блок не должен создавать горизонтальную прокрутку.
+  //  Именно на html, а не на body: overflow на body делает сам body
+  //  скролл-контейнером (overflow-y вычисляется в auto), и мобильный Safari
+  //  в этом случае теряет прокрутку страницы — до подвала не добраться
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: variable.$font-primary, system-ui, sans-serif;
+  color: variable.$color-main;
+  margin: 0;
+}
+
+//  Медиа по умолчанию не вылезает за пределы своего контейнера
+
+img,
+svg,
+video,
+canvas,
+picture {
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+//  Длинные слова (email, названия) не ломают верстку на узких экранах
+
+p,
+h1, h2, h3, h4, h5, h6,
+li,
+dd, dt,
+a {
+  overflow-wrap: break-word;
+}
+
+.container {
+  box-sizing: border-box;
+  max-width: variable.$container-max;
+  padding: 0 variable.$container-pad;
+  margin: 0 auto;
+
+  @include mixins.down('lg') {
+    padding: 0 variable.$container-pad-lg;
+  }
+
+  @include mixins.down('sm') {
+    padding: 0 variable.$container-pad-sm;
+  }
+
+  @include mixins.down('xs') {
+    padding: 0 variable.$container-pad-xs;
+  }
+}
+
+/* Отключаем системную синюю подсветку при тапе на iOS/Android */
+
+input, 
+button, 
+a {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* Для старых версий Android */
+}
+
+//  На сенсорных экранах поля ввода < 16px заставляют iOS зумить страницу
+
+@include mixins.down('sm') {
+  input,
+  textarea,
+  select {
+    font-size: max(16px, 1em);
+  }
+}
+
+//  Прокрутка блокируется, когда открыто мобильное меню
+
+body.is-menu-open {
+  overflow: hidden;
+}
+
+
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden;
+}

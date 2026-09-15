@@ -1,0 +1,26 @@
+@use '../abstracts/mixins' as mixins;
+
+.footer-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include mixins.down('lg') {
+    gap: 0 24px;
+  }
+
+  //  На планшете колонки перестраиваются в сетку, на телефоне — в столбик
+  @include mixins.down('md') {
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 16px 32px;
+  }
+
+  //  На телефоне подвал — центрированный столбик: соцсети, контакты, копирайт
+  @include mixins.down('xs') {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px 0;
+  }
+}

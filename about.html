@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <load src="/src/html/head.html" />
+  <link rel="preload" href="/fonts/Futura-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Futura-500.woff2" as="font" type="font/woff2" crossorigin>
+  <title>About Us | Ynanch Hyzmat</title>
+</head>
+<body>
+  <load src="/src/html/loader.html" />
+  <script>
+  /* Оверлей скрывается после загрузки страницы, но не раньше, чем
+     проиграет вся секвенция (2.95 с). MIN_MS можно менять. */
+  (function () {
+    var MIN_MS = 2950, start = Date.now();
+    function hide() {
+      var wait = Math.max(0, MIN_MS - (Date.now() - start));
+      setTimeout(function () {
+        var el = document.getElementById('yh-loader');
+        if (el) el.classList.add('yh-hidden');
+      }, wait);
+    }
+    if (document.readyState === 'complete') hide();
+    else window.addEventListener('load', hide);
+  })();
+  </script>
+  <load src="/src/html/header.html" />
+  
+  <main class="about">
+    <section class="about__hero">
+      <div class="container about__hero-container">
+        <div class="about__hero-flex content-section js-content-section">
+          <h2 class="about__title">About Us</h2>
+          <p class="about__text">
+            For more than a decade, Ynanch Hyzmat has delivered engineering,
+            procurement, construction, maintenance, automation, and
+            specialised industrial services to the oil & gas, petrochemical,
+            energy, construction, and infrastructure sectors. Trusted by both
+            national enterprises and international operators, the company
+            combines internationally aligned engineering practices with deep
+            local expertise to execute complex projects safely, efficiently,
+            and to the highest technical standards. Today, with over
+            1,200 completed projects, more than 300 strategic partners,
+            and licenses covering 21 industrial activities, Ynanch Hyzmat
+            has established itself as one of Turkmenistan's most capable
+            industrial service companies.
+          </p>
+
+          <div class="about__hero-image-wrapper">
+            <img class="about__hero-image" src="src/assets/images/about/hero/hero-logo.png" alt="">
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="about__purpose content-section js-content-section">
+      <div class="container">
+        <h3 class="about__purpose-title">
+          Ynanch Hyzmat purpose
+        </h3>
+        <p class="about__purpose-text">
+          As industries evolve and projects become increasingly complex,
+          our purpose remains unchanged: delivering reliable solutions
+          that help clients operate with confidence. This commitment shapes
+          both our mission today and our vision of becoming a lasting pillar
+          of Turkmenistan's industrial development.
+        </p>
+        <div class="about__purpose-grid">
+          <img class="about__purpose-image" src="src/assets/images/about/purpose/purpose.jpg" alt="">
+          <div id="mission" class="about__purpose-mission content-section js-content-section">
+            <h4 class="about__purpose-sub-title">Mission</h4>
+            <p class="about__purpose-sub-text">
+              To serve as the strategic bridge between advanced industrial
+              solutions and Turkmenistan’s energy sector, delivering full-cycle
+              maintenance and support that grows alongside our clients’ needs.
+            </p>
+          </div>
+          <div id="vision" class="about__purpose-vision content-section js-content-section">
+            <h4 class="about__purpose-sub-title">Vision</h4>
+            <p class="about__purpose-sub-text">
+              To be the foundational pillar of the Turkmen industrial landscape,
+              recognized as the premier provider of full-cycle, reliable energy solutions.
+            </p>
+            <p class="about__purpose-sub-text">
+              To set the standard for institutional reliability in Central Asia,
+              where our name is synonymous with integrity, sustainable performance,
+              and the long-term success of our partners.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="history" class="about__history">
+      <div class="container">
+        <h3 class="about__sub-title">History</h3>
+        <div class="about__history-grid">
+          <div class="about__history-wrapper-text">
+            <p class="about__history-text">
+              Ynanch Hyzmat was founded in 2016 with a clear objective: to provide
+              dependable industrial services that simplify complex maintenance and
+              operational challenges for energy operators. Starting with a small
+              team of technical specialists in Ashgabat, the company focused on
+              delivering high-quality industrial maintenance services where precision,
+              safety, and reliability were essential.
+            </p>
+            <p class="about__history-text">
+              Early success in the oil and gas sector created new opportunities.
+              Following its first major shutdown project, Ynanch Hyzmat steadily
+              expanded its capabilities by investing in specialised equipment,
+              workshops, logistics infrastructure, and highly qualified personnel.
+              Strategic partnerships with Production Sharing Agreement (PSA) operators,
+              leading international manufacturers, and original equipment manufacturers
+              (OEMs) enabled the company to broaden its expertise beyond maintenance
+              into engineering, procurement, construction, automation, and integrated
+              industrial solutions.
+            </p>
+            <p class="about__history-text">
+              Over the past decade, this measured and capability-driven growth
+              has transformed Ynanch Hyzmat from a local service provider into one
+              of Turkmenistan's most comprehensive industrial service companies.
+              Today, the company supports state enterprises and international
+              operators with multidisciplinary teams, nationwide operations,
+              and the technical resources required to execute complex industrial
+              projects safely, efficiently, and to consistently high standards.
+            </p>
+          </div>
+          <div class="about__history-wrapper-image">
+            <img
+              class="about__history-image"
+              src="src/assets/images/about/history/history.jpg"
+              alt=""
+              width="880"
+              height="560"
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach" class="about__approach">
+      <div class="container">
+        <h3 class="about__sub-title">Our Approach</h3>
+        <ul class="about__approach-list">
+
+          <!-- Our Project Methodology -->
+          <li class="about__approach-item">
+            <div class="about__approach-image-wrapper">
+              <img
+                class="about__approach-image"
+                src="src/assets/images/about/approach/methodology.jpg"
+                alt=""
+                width="800"
+                height="583"
+              >
+            </div>
+            <div id="methodology" class="about__approach-content-wrapper content-section js-content-section">
+              <h4 class="about__approach-content-title">
+                Our Project Methodology: From Inquiry to Execution
+              </h4>
+              <p class="about__approach-content-text">
+                Every project we undertake follows a disciplined, engineering-led approach
+                built around one objective: delivering solutions that perform reliably in
+                demanding industrial environments. We begin by understanding the client's
+                operational requirements before developing a technically sound execution strategy,
+                carefully planning every stage of delivery, and maintaining strict quality and
+                safety controls throughout the project lifecycle.
+              </p>
+              <a class="about__approach-content-link" href="/methodology.html">
+                Learn More
+                <svg class="about__approach-content-link-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.7045 4.28377C13.3111 3.89615 12.678 3.90084 12.2904 4.29424C11.9027 4.68765 11.9074 5.3208 12.3008 5.70842L17.6712 10.9998H4C3.44771 10.9998 3 11.4475 3 11.9998C3 12.5521 3.44772 12.9998 4 12.9998H17.6646L12.3008 18.2847C11.9074 18.6723 11.9027 19.3055 12.2904 19.6989C12.678 20.0923 13.3111 20.097 13.7045 19.7094L20.6287 12.887C21.1256 12.3974 21.1256 11.5958 20.6287 11.1062L13.7045 4.28377Z" fill="white" />
+                </svg>
+              </a>
+            </div>
+          </li>
+
+          <!-- Our Partnership Philosophy -->
+          <li class="about__approach-item">
+            <div class="about__approach-image-wrapper">
+              <img
+                class="about__approach-image"
+                src="src/assets/images/about/approach/philosophy.jpg"
+                alt=""
+                width="800"
+                height="583"
+              >
+            </div>
+            <div id="philosophy" class="about__approach-content-wrapper content-section js-content-section">
+              <h4 class="about__approach-content-title">
+                Our Partnership Philosophy
+              </h4>
+              <p class="about__approach-content-text">
+                Our multidisciplinary teams combine engineering expertise, project management,
+                procurement, logistics and field execution into a single coordinated process.
+                This integrated approach enables us to reduce complexity, minimise operational
+                risk, and deliver projects efficiently without compromising technical standards.
+              </p>
+              <a class="about__approach-content-link" href="/philosophy.html">
+                Learn More
+                <svg class="about__approach-content-link-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.7045 4.28377C13.3111 3.89615 12.678 3.90084 12.2904 4.29424C11.9027 4.68765 11.9074 5.3208 12.3008 5.70842L17.6712 10.9998H4C3.44771 10.9998 3 11.4475 3 11.9998C3 12.5521 3.44772 12.9998 4 12.9998H17.6646L12.3008 18.2847C11.9074 18.6723 11.9027 19.3055 12.2904 19.6989C12.678 20.0923 13.3111 20.097 13.7045 19.7094L20.6287 12.887C21.1256 12.3974 21.1256 11.5958 20.6287 11.1062L13.7045 4.28377Z" fill="white" />
+                </svg>
+              </a>
+            </div>
+          </li>
+
+          <!-- Our Culture -->
+          <li class="about__approach-item">
+            <div class="about__approach-image-wrapper">
+              <img
+                class="about__approach-image"
+                src="src/assets/images/about/approach/culture.jpg"
+                alt=""
+                width="800"
+                height="583"
+              >
+            </div>
+            <div id="culture" class="about__approach-content-wrapper content-section js-content-section">
+              <h4 class="about__approach-content-title">
+                Our Culture
+              </h4>
+              <p class="about__approach-content-text">
+                Beyond project completion, we remain a long-term technical partner,
+                providing continued support, maintenance, and engineering expertise
+                to help our clients maximise the reliability and performance of their assets.
+              </p>
+              <a class="about__approach-content-link" href="/culture.html">
+                Learn More
+                <svg class="about__approach-content-link-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.7045 4.28377C13.3111 3.89615 12.678 3.90084 12.2904 4.29424C11.9027 4.68765 11.9074 5.3208 12.3008 5.70842L17.6712 10.9998H4C3.44771 10.9998 3 11.4475 3 11.9998C3 12.5521 3.44772 12.9998 4 12.9998H17.6646L12.3008 18.2847C11.9074 18.6723 11.9027 19.3055 12.2904 19.6989C12.678 20.0923 13.3111 20.097 13.7045 19.7094L20.6287 12.887C21.1256 12.3974 21.1256 11.5958 20.6287 11.1062L13.7045 4.28377Z" fill="white" />
+                </svg>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="achievements" class="about__achievements content-section js-content-section">
+      <div class="container">
+        <h3 class="about__sub-title">Achievements</h3>
+        <div class="about__achievements-flex">
+          <div class="about__achievements-image-wrapper">
+            <img class="about__achievements-image" src="src/assets/images/about/achievements/achievements.jpg" alt="">
+          </div>
+          <div class="about__achievements-content-wrapper">
+            <p class="about__achievements-text">
+              Our growth is measured not only by the projects we complete,
+              but by the trust we earn and the capabilities we continue to build.
+              Over the past decade, measurable results have established Ynanch Hyzmat
+              as one of Turkmenistan's one of the most capable industrial service companies.
+            </p>
+            <div class="about__achievements-swiper-wrapper-with-control">
+              
+              <button type="button" class="about__achievements-button about__achievements-button-prev">
+                <svg class="about__achievements-button-icon" width="28" height="50" viewBox="0 0 28 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M26.0324 49.9745C25.7759 49.9746 25.5218 49.9263 25.2847 49.8321C25.0476 49.7379 24.8321 49.5999 24.6507 49.4258L0.571955 26.3132C0.205732 25.9616 0 25.4849 0 24.9876C0 24.4905 0.205732 24.0136 0.571955 23.662L24.6507 0.549534C24.832 0.375369 25.0474 0.237196 25.2844 0.142908C25.5214 0.048618 25.7754 5.80945e-05 26.0319 5.2094e-08C26.2885 -5.79904e-05 26.5426 0.0483871 26.7796 0.142569C27.0166 0.236751 27.232 0.374826 27.4136 0.548909C27.595 0.722993 27.7389 0.929676 27.8372 1.15716C27.9354 1.38464 27.9861 1.62846 27.9861 1.87471C27.9862 2.12096 27.9357 2.36481 27.8376 2.59234C27.7394 2.81988 27.5955 3.02661 27.4142 3.20079L4.71596 24.987L27.4142 46.7733C27.6876 47.0355 27.8738 47.3696 27.9492 47.7335C28.0246 48.0974 27.9859 48.4745 27.838 48.8171C27.6902 49.1599 27.4396 49.4527 27.1182 49.6587C26.7968 49.8649 26.419 49.9747 26.0324 49.9745Z" fill="black"/>
+                </svg>
+              </button>
+
+              <div class="about__achievements-swiper-wrapper swiper">
+                <ul class="about__achievements-sliders-wrapper swiper-wrapper">
+                  
+                  <!-- Completed projects -->
+                  <li class="about__achievements-slider-item swiper-slide">
+                  <img
+                  class="about__achievements-projects-image"
+                    src="src/assets/images/about/achievements/swiper/darts.png"
+                    alt=""
+                    width="100"
+                    height="100"
+                  >
+                  <p class="about__achievements-slide-title about__achievements-projects-title">Completed projects</p>
+                  <p class="about__achievements-number-work">1200+</p>
+                </li>
+
+                <!-- Strategic partners -->
+                <li class="about__achievements-slider-item swiper-slide">
+                  <img
+                    class="about__achievements-partners-image"
+                    src="src/assets/images/about/achievements/swiper/hands.png"
+                    alt=""
+                  >
+                  <p class="about__achievements-slide-title">Strategic partners</p>
+                  <p class="about__achievements-number-work">+300</p>
+                </li>
+
+                <!-- Employees -->
+                <li class="about__achievements-slider-item swiper-slide">
+                  <img
+                    class="about__achievements-employees-image"
+                    src="src/assets/images/about/achievements/swiper/people.png"
+                    alt=""
+                    width="95"
+                    height="108"
+                  >
+                  <p class="about__achievements-slide-title">Employees</p>
+                  <p class="about__achievements-number-work">+100</p>
+                </li>
+
+                <!-- OEM Partnership -->
+                <li class="about__achievements-slider-item swiper-slide">
+                  <img
+                    class="about__achievements-partnership-image"
+                    src="src/assets/images/about/achievements/swiper/setting.png"
+                    alt=""
+                  >
+                  <p class="about__achievements-slide-title">OEM Partnership</p>
+                  <p class="about__achievements-number-work">39</p>
+                </li>
+
+                <!-- Engineers and certified specialists -->
+                <li class="about__achievements-slider-item swiper-slide">
+                  <img
+                    class="about__achievements-engineers-image"
+                    src="src/assets/images/about/achievements/swiper/people-work.png"
+                    alt=""
+                    width="100"
+                    height="108"
+                  >
+                  <p class="about__achievements-slide-title about__achievements-engineers-title">
+                    Engineers and certified specialists
+                  </p>
+                  <p class="about__achievements-number-work">27</p>
+                </li>
+
+                <!-- Offices -->
+                <li class="about__achievements-slider-item swiper-slide">
+                  <img
+                  class="about__achievements-offices-image"
+                  src="src/assets/images/about/achievements/swiper/builds.png"
+                    alt=""
+                    width="120"
+                    height="96"
+                  >
+                  <p class="about__achievements-slide-title">Offices</p>
+                  <p class="about__achievements-number-work">5</p>
+                </li>
+
+                <!-- Licensed activities -->
+                <li class="about__achievements-slider-item swiper-slide">
+                  <img
+                  class="about__achievements-licensed-image"
+                  src="src/assets/images/about/achievements/swiper/certificate.png"
+                    alt=""
+                  >
+                  <p class="about__achievements-slide-title">Licensed activities</p>
+                  <p class="about__achievements-number-work">21+</p>
+                </li>
+
+                <!-- Years in operation -->
+                <li class="about__achievements-slider-item swiper-slide">
+                  <img
+                    class="about__achievements-operation-image"
+                    src="src/assets/images/about/achievements/swiper/ten.png"
+                    alt=""
+                    width="146"
+                    height="100"
+                  >
+                  <p class="about__achievements-slide-title">Years in operation</p>
+                  <p class="about__achievements-number-work">10+</p>
+                </li>
+                
+                <!-- Equipment fleet -->
+                <li class="about__achievements-slider-item about__achievements-slider-item-equipment swiper-slide">
+                  <img
+                    class="about__achievements-equipment-image"
+                    src="src/assets/images/about/achievements/swiper/big-car.png"
+                    alt=""
+                  >
+                  <p class="about__achievements-slide-title about__achievements-slide-title-equipment">Equipment fleet</p>
+                  <p class="about__achievements-number-work">
+                    15
+                    <span class="about__achievements-number-span">units heavy vehicles</span>
+                  </p>
+                  <p class="about__achievements-number-work">
+                    21
+                    <span class="about__achievements-number-span">units light vehicles</span>
+                  </p>
+                </li>
+
+                <!-- Countries served -->
+                <li class="about__achievements-slider-item swiper-slide">
+                  <img
+                    class="about__achievements-served-image"
+                    src="src/assets/images/about/achievements/swiper/globus.png"
+                    alt=""
+                    width="120"
+                    height="124"
+                  >
+                  <p class="about__achievements-slide-title">Countries served</p>
+                  <p class="about__achievements-number-work">2</p>
+                </li>
+
+                <!-- Active client sites -->
+                <li class="about__achievements-slider-item swiper-slide">
+                  <img
+                    class="about__achievements-crane-image"
+                    src="src/assets/images/about/achievements/swiper/lifting-crane.png"
+                    alt=""
+                  >
+                  <p class="about__achievements-slide-title">Active client sites</p>
+                  <p class="about__achievements-number-work">2</p>
+                </li>
+                
+                <!-- Warehouses -->
+                <li class="about__achievements-slider-item swiper-slide">
+                  <img
+                    class="about__achievements-warehouses-image"
+                    src="src/assets/images/about/achievements/swiper/delivery.png"
+                    alt=""
+                    width="170"
+                    height="110"
+                    >
+                    <p class="about__achievements-slide-title">Warehouses</p>
+                    <p class="about__achievements-number-work">3</p>
+                  </li>
+                  
+                  <!-- Workshops -->
+                  <li class="about__achievements-slider-item swiper-slide">
+                    <img
+                    class="about__achievements-workshops-image"
+                    src="src/assets/images/about/achievements/swiper/workshops.png"
+                    alt=""
+                    width="106"
+                    height="100"
+                    >
+                    <p class="about__achievements-slide-title">Workshops</p>
+                    <p class="about__achievements-number-work">3</p>
+                  </li>
+                  
+                </ul>
+                
+              </div>
+              
+              <button class="about__achievements-button about__achievements-button-next">
+                <svg class="about__achievements-button-icon" width="28" height="50" viewBox="0 0 28 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1.95307 49.9514C1.56668 49.9512 1.18901 49.8412 0.867798 49.6351C0.546585 49.429 0.296269 49.1361 0.148502 48.7934C0.000735649 48.4507 -0.037842 48.0737 0.0376486 47.71C0.113139 47.3462 0.299306 47.0123 0.572607 46.7501L23.2709 24.9639L0.572607 3.17759C0.216763 2.82395 0.0198617 2.35033 0.0243125 1.85871C0.0287635 1.36709 0.23421 0.896815 0.596403 0.549175C0.958595 0.201535 1.44855 0.00434291 1.96076 7.08796e-05C2.47295 -0.00420115 2.96641 0.184789 3.33484 0.526335L27.4149 23.6389C27.7811 23.9905 27.9868 24.4673 27.9868 24.9645C27.9868 25.4616 27.7811 25.9385 27.4149 26.2901L3.33484 49.4026C3.15335 49.5766 2.93792 49.7148 2.70083 49.8089C2.46374 49.903 2.20966 49.9515 1.95307 49.9514Z" fill="black"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="clients" class="about__clients content-section js-content-section">
+      <div class="container">
+        <h3 class="about__sub-title">Our key Clients</h3>
+        <div class="about__clients-flex">
+          <div class="about__clients-image-wrapper">
+            <img class="about__clients-image" src="src/assets/images/about/clients/clients.jpg" alt="">
+          </div>
+
+          <div class="about__clients-content-wrapper">
+            <p class="about__clients-text">
+              Our growth is measured not only by the projects we complete,
+              but by the trust we earn and the capabilities we continue to build.
+              Over the past decade, measurable results have established
+              Ynanch Hyzmat as one of Turkmenistan's one of the most capable
+              industrial service companies. Our long-term partnerships with
+              key industry players demonstrate our commitment to delivering
+              exceptional services and ensuring the success of our valued clients.
+            </p>
+
+            <div class="about__clients-swiper-wrapper-with-control">
+              <button type="button" class="about__clients-button about__clients-button-prev">
+                <svg class="about__clients-button-icon" width="28" height="50" viewBox="0 0 28 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M26.0324 49.9745C25.7759 49.9746 25.5218 49.9263 25.2847 49.8321C25.0476 49.7379 24.8321 49.5999 24.6507 49.4258L0.571955 26.3132C0.205732 25.9616 0 25.4849 0 24.9876C0 24.4905 0.205732 24.0136 0.571955 23.662L24.6507 0.549534C24.832 0.375369 25.0474 0.237196 25.2844 0.142908C25.5214 0.048618 25.7754 5.80945e-05 26.0319 5.2094e-08C26.2885 -5.79904e-05 26.5426 0.0483871 26.7796 0.142569C27.0166 0.236751 27.232 0.374826 27.4136 0.548909C27.595 0.722993 27.7389 0.929676 27.8372 1.15716C27.9354 1.38464 27.9861 1.62846 27.9861 1.87471C27.9862 2.12096 27.9357 2.36481 27.8376 2.59234C27.7394 2.81988 27.5955 3.02661 27.4142 3.20079L4.71596 24.987L27.4142 46.7733C27.6876 47.0355 27.8738 47.3696 27.9492 47.7335C28.0246 48.0974 27.9859 48.4745 27.838 48.8171C27.6902 49.1599 27.4396 49.4527 27.1182 49.6587C26.7968 49.8649 26.419 49.9747 26.0324 49.9745Z" fill="black"/>
+                </svg>
+              </button>
+
+              <div class="about__clients-swiper-wrapper swiper">
+                <ul class="about__clients-sliders-wrapper swiper-wrapper">
+
+                  <!-- The Petronas company logo -->
+                  <li class="about__clients-slider-item swiper-slide">
+                    <img src="src/assets/images/about/clients/swiper/petronas.png" alt="The Petronas company logo">
+                  </li>
+
+                  <!-- The Dragon Oil company logo -->
+                  <li class="about__clients-slider-item swiper-slide">
+                    <img src="src/assets/images/about/clients/swiper/dragon.png" alt="The Dragon Oil company logo">
+                  </li>
+
+                  <!-- The Toyo company logo -->
+                  <li class="about__clients-slider-item swiper-slide">
+                    <img src="src/assets/images/about/clients/swiper/toyo.png" alt="The Toyo company logo">
+                  </li>
+
+                  <!-- The Eni company logo -->
+                  <li class="about__clients-slider-item swiper-slide">
+                    <img src="src/assets/images/about/clients/swiper/eni.png" alt="The Eni company logo">
+                  </li>
+
+                  <!-- The CNPC company logo -->
+                  <li class="about__clients-slider-item swiper-slide">
+                    <img src="src/assets/images/about/clients/swiper/cnpc.png" alt="The CNPC company logo">
+                  </li>
+
+                  <!-- The Turkmenhimiya company logo -->
+                  <li class="about__clients-slider-item swiper-slide">
+                    <img src="src/assets/images/about/clients/swiper/thimiya.png" alt="The Turkmenhimiya company logo">
+                  </li>
+
+                  <!-- The Turkmengaz company logo -->
+                  <li class="about__clients-slider-item swiper-slide">
+                    <img src="src/assets/images/about/clients/swiper/tgaz.png" alt="The Turkmengaz company logo">
+                  </li>
+
+                  <!-- The Turkmennebit company logo -->
+                  <li class="about__clients-slider-item swiper-slide">
+                    <img src="src/assets/images/about/clients/swiper/tnebit.png" alt="The Turkmennebit company logo">
+                  </li>
+
+                  <!-- The Ronesans company logo -->
+                  <li class="about__clients-slider-item swiper-slide">
+                    <img src="src/assets/images/about/clients/swiper/ronesans.png" alt="The Ronesans company logo">
+                  </li>
+
+                </ul>
+              </div>
+
+              <button type="button" class="about__clients-button about__clients-button-next">
+                <svg class="about__clients-button-icon" width="28" height="50" viewBox="0 0 28 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1.95307 49.9514C1.56668 49.9512 1.18901 49.8412 0.867798 49.6351C0.546585 49.429 0.296269 49.1361 0.148502 48.7934C0.000735649 48.4507 -0.037842 48.0737 0.0376486 47.71C0.113139 47.3462 0.299306 47.0123 0.572607 46.7501L23.2709 24.9639L0.572607 3.17759C0.216763 2.82395 0.0198617 2.35033 0.0243125 1.85871C0.0287635 1.36709 0.23421 0.896815 0.596403 0.549175C0.958595 0.201535 1.44855 0.00434291 1.96076 7.08796e-05C2.47295 -0.00420115 2.96641 0.184789 3.33484 0.526335L27.4149 23.6389C27.7811 23.9905 27.9868 24.4673 27.9868 24.9645C27.9868 25.4616 27.7811 25.9385 27.4149 26.2901L3.33484 49.4026C3.15335 49.5766 2.93792 49.7148 2.70083 49.8089C2.46374 49.903 2.20966 49.9515 1.95307 49.9514Z" fill="black"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline" class="about__timeline">
+      <div class="container">
+        <h3 class="about__timeline-title">Company Timeline</h3>
+        <div class="about__timeline-line"></div>
+
+        <div class="about__timeline-swiper-wrapper-with-control">
+
+          <div class="about__timeline-swiper-buttons-control">
+            <button type="button" class="about__timeline-button about__timeline-button-prev">
+              <svg class="about__timeline-button-icon" width="50" height="28" viewBox="0 0 50 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M49.9514 26.0469C49.9512 26.4333 49.8412 26.811 49.6351 27.1322C49.429 27.4534 49.1361 27.7037 48.7934 27.8515C48.4507 27.9993 48.0737 28.0378 47.71 27.9624C47.3462 27.8869 47.0123 27.7007 46.7501 27.4274L24.9639 4.72914L3.17759 27.4274C2.82395 27.7832 2.35033 27.9801 1.85871 27.9757C1.36709 27.9712 0.896815 27.7658 0.549175 27.4036C0.201535 27.0414 0.00434291 26.5514 7.08796e-05 26.0392C-0.00420115 25.5271 0.184789 25.0336 0.526335 24.6652L23.6389 0.585134C23.9905 0.218921 24.4673 0.0131533 24.9645 0.0131533C25.4616 0.0131533 25.9385 0.218921 26.2901 0.585134L49.4026 24.6652C49.5766 24.8467 49.7148 25.0621 49.8089 25.2992C49.903 25.5363 49.9515 25.7903 49.9514 26.0469Z" fill="black"/>
+              </svg>
+            </button>
+
+            <button type="button" class="about__timeline-button about__timeline-button-next">
+              <svg class="about__timeline-button-icon" width="50" height="28" viewBox="0 0 50 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M49.9745 1.96755C49.9746 2.22411 49.9263 2.4782 49.8321 2.71535C49.7379 2.95237 49.5999 3.16791 49.4258 3.34932L26.3132 27.428C25.9616 27.7943 25.4849 28 24.9876 28C24.4905 28 24.0136 27.7943 23.662 27.428L0.549534 3.34932C0.375369 3.16804 0.237196 2.95263 0.142908 2.71561C0.048618 2.47859 5.80945e-05 2.22463 5.2094e-08 1.96807C-5.79904e-05 1.71152 0.0483871 1.45743 0.142569 1.22041C0.236751 0.983386 0.374826 0.767982 0.548909 0.586438C0.722993 0.405024 0.929676 0.261116 1.15716 0.162791C1.38464 0.0645955 1.62846 0.0139343 1.87471 0.0139343C2.12096 0.0138041 2.36481 0.0643342 2.59234 0.162399C2.81988 0.260595 3.02661 0.404503 3.20079 0.585786L24.987 23.284L46.7733 0.585786C47.0355 0.312428 47.3696 0.126195 47.7335 0.0507907C48.0974 -0.0246139 48.4745 0.0140656 48.8171 0.16201C49.1599 0.309824 49.4527 0.56039 49.6587 0.881804C49.8649 1.20322 49.9747 1.58102 49.9745 1.96755Z" fill="black"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="about__timeline-20">
+            20
+            <svg class="about__timeline-20-circle" width="325" height="325" viewBox="0 0 325 325" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- <circle cx="161" cy="161" r="158" stroke="#F37021" stroke-width="2" /> -->
+            
+              <!-- 1. Базовый круг — тонкий, статичный, виден всегда целиком -->
+              <circle class="ring-base"
+                cx="161" cy="161" r="158"
+                stroke="#F37021" stroke-width="2" fill="none" />
+
+              <!-- 2. Прогресс-круг — толстый, изначально невидим, дорисовывается ПОВЕРХ базового -->
+              <circle class="ring-progress"
+                cx="161" cy="161" r="158"
+                stroke="#F37021" stroke-width="6" fill="none"
+                stroke-linecap="round"
+                transform="rotate(-90 161 161)" />
+            </svg>
+          </div>
+
+          <div class="about__timeline-swiper swiper">
+
+            <!-- <svg class="ring" viewBox="0 0 220 220" preserveAspectRatio="none"> -->
+              <!-- <circle cx="110" cy="110" r="100"></circle> -->
+            <!-- </svg> -->
+
+            <!-- <svg class="ring" width="322" height="322" viewBox="0 0 322 322" fill="none" xmlns="http://www.w3.org/2000/svg"> -->
+              <!-- <circle cx="161" cy="161" r="158" stroke="#F37021" stroke-width="6" /> -->
+            <!-- </svg> -->
+
+            <ul class="about__timeline-swiper-wrapper swiper-wrapper">
+
+              <li class="about__timeline-slider-item swiper-slide content-section js-content-section" data-slide-index="0">
+                <span class="about__timeline-year">16</span>
+                <div class="about__timeline-content">
+                  <h4 class="about__timeline-sub-title">
+                    Company Founded
+                  </h4>
+                  <p class="about__timeline-text">Established in Ashgabat, Turkmenistan</p>
+                  <p class="about__timeline-text">Initial industrial maintenance services</p>
+                  <p class="about__timeline-text">Small technical team</p>
+                </div>
+              </li>
+
+              <li class="about__timeline-slider-item swiper-slide content-section js-content-section" data-slide-index="1">
+                <span class="about__timeline-year">17</span>
+                <div class="about__timeline-content">
+                  <h4 class="about__timeline-sub-title">
+                    First Major Contract
+                  </h4>
+                  <p class="about__timeline-text">Entered oil & gas sector</p>
+                  <p class="about__timeline-text">Completed first shutdown project</p>
+                  <p class="about__timeline-text">Commencement of supply and service operations</p>
+                </div>
+              </li>
+
+              <li class="about__timeline-slider-item swiper-slide content-section js-content-section" data-slide-index="2">
+                <span class="about__timeline-year">18</span>
+                <div class="about__timeline-content">
+                  <h4 class="about__timeline-sub-title">
+                    Building Capacity
+                  </h4>
+                  <p class="about__timeline-text">Purchased first fleet and equipment</p>
+                  <p class="about__timeline-text">Opened first warehouse and workshop</p>
+                  <p class="about__timeline-text">Strategic agreement signed with companies operating under Production Sharing</p>
+                  <p class="about__timeline-text">Agreements (PSA) to deliver service solutions</p>
+                </div>
+              </li>
+
+              <li class="about__timeline-slider-item swiper-slide content-section js-content-section" data-slide-index="3">
+                <span class="about__timeline-year">19</span>
+                <div class="about__timeline-content">
+                  <h4 class="about__timeline-sub-title">
+                    Service Diversification
+                  </h4>
+                  <p class="about__timeline-text">Expanding the range of electrical equipment, control and measuring instruments through</p> 
+                  <p class="about__timeline-text">exclusive partnerships with international manufacturers</p>
+                  <p class="about__timeline-text">Expansion into construction through the establishment of a dedicated construction division</p>
+                  <p class="about__timeline-text">Starting procurement and logistics services by establishing a logistics division</p>
+                </div>
+              </li>
+
+              <li class="about__timeline-slider-item swiper-slide content-section js-content-section" data-slide-index="4">
+                <span class="about__timeline-year">20</span>
+                <div class="about__timeline-content">
+                  <h4 class="about__timeline-sub-title">
+                    Strategic Partnerships
+                  </h4>
+                  <p class="about__timeline-text">Continued growth and expansion of supply operations through strong partnership</p> 
+                  <p class="about__timeline-text">with international recognized brands</p>
+                  <p class="about__timeline-text">Collaboration with OEM and the creation of International Technology Partners</p>
+                </div>
+              </li>
+
+              <li class="about__timeline-slider-item swiper-slide content-section js-content-section" data-slide-index="5">
+                <span class="about__timeline-year">21</span>
+                <div class="about__timeline-content">
+                  <h4 class="about__timeline-sub-title">
+                    Expansion of operations
+                  </h4>
+                  <p class="about__timeline-text">Expanding business internationally</p>
+                  <p class="about__timeline-text">Large-scale projects and simultaneous field operations</p>
+                  <p class="about__timeline-text">Hundreds of personnel mobilized</p>
+                </div>
+              </li>
+
+              <li class="about__timeline-slider-item swiper-slide content-section js-content-section" data-slide-index="6">
+                <span class="about__timeline-year">24</span>
+                <div class="about__timeline-content">
+                  <h4 class="about__timeline-sub-title">
+                    Sustainable Growth
+                  </h4>
+                  <p class="about__timeline-text">Diversified customer portfolio with state and international oil and gas operators</p>
+                  <p class="about__timeline-text">Strong financial performance</p>
+                  <p class="about__timeline-text">Increased technical capabilities due to strategic partnerships and integrated service offerings</p>
+                </div>
+              </li>
+
+              <li class="about__timeline-slider-item swiper-slide content-section js-content-section" data-slide-index="7">
+                <span class="about__timeline-year">26</span>
+                <div class="about__timeline-content">
+                  <h4 class="about__timeline-sub-title">
+                    Trusted Industrial Partner
+                  </h4>
+                  <p class="about__timeline-text">10 years of successful operations</p>
+                  <p class="about__timeline-text">Comprehensive industrial solutions</p>
+                  <p class="about__timeline-text">Nationwide operations and</p> 
+                  <p class="about__timeline-text">growth to one of Turkmenistan's leading industrial service companies</p>
+                </div>
+              </li>
+
+            </ul>
+
+          </div>
+
+        </div>
+        
+        <!-- <svg width="322" height="322" viewBox="0 0 322 322" fill="none" xmlns="http://www.w3.org/2000/svg"> -->
+          <!-- <circle cx="161" cy="161" r="158" stroke="#F37021" stroke-width="6" /> -->
+        <!-- </svg> -->
+      </div>
+    </section>
+  </main>
+
+  <load src="/src/html/footer.html" theme="footer_black" />
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

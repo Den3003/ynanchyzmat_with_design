@@ -1,0 +1,320 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.sub-safety {
+  color: variable.$color-black;
+
+  &__wrapper-grid {
+    position: relative;
+  }
+  
+  &__line {
+    border-top: 1px solid variable.$color-black;
+    margin: 0 0 40px;
+
+    @include mixins.down('sm') {
+      margin: 0 0 28px;
+    }
+  }
+
+  &__link-arrow {
+    transition: transform .6s cubic-bezier(.55, 0, .1, 1);
+    flex-shrink: 0;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    gap: 0 10px;
+    text-decoration: none;
+    color: variable.$color-main;
+    background: variable.$color-orange-primary;
+    font-size: mixins.fluid(15px, 20px);
+    padding: 12px 22px;
+    margin: 0 0 65px;
+
+    @include mixins.hover-supported {
+
+      &:hover {
+        .sub-safety__link-arrow {
+          transform: translateX(-5px);
+        }
+      }
+    }
+
+    @include mixins.down('md') {
+      margin: 0 0 36px;
+    }
+  }
+
+  //  На широком экране заголовок вписан в свободное место художественной раскладки
+  &__title {
+    font-size: mixins.fluid(28px, 48px);
+    font-weight: 700;
+    margin: 0;
+    position: absolute;
+    top: 38%;
+    left: 33%;
+  }
+
+  &__list {
+    padding: 0;
+    margin: 0 0 100px;
+    list-style: none;
+
+    display: grid;
+    grid-template-areas: 
+      "risk hse hse"
+      "training culture leadership";
+  }
+
+  &__item {
+    width: 600px;
+    height: 470px;
+
+    @include mixins.hover-supported {
+
+      &:hover {
+        .sub-safety__item-text {
+          color: variable.$color-black;
+        }
+
+        .sub-safety__item-arrow {
+          color: variable.$color-orange-primary;
+        }
+      }
+    }
+  }
+
+  &__item-text {
+    margin: 0;
+    display: flex;
+    gap: 0 3px;
+    color: variable.$color-gray-safety-description-hidden;
+    transition: color 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  &__item-arrow {
+    color: variable.$color-gray-arrow-sub-safety;
+    transition: color .4s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  // Карточка risk
+
+  &__item-risk {
+    grid-area: risk;
+    position: relative;
+  }
+
+  &__item-text-risk {
+    max-width: 295px;
+  }
+
+  &__item-wrapper-image-risk {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &__item-arrow-risk {
+    position: absolute;
+    bottom: 20px;
+    left: 125px;
+  }
+
+  // Карточка training
+
+  &__item-training {
+    grid-area: training;
+    position: relative;
+    width: 690px;
+    height: 375px;
+    display: flex;
+    align-items: end;
+  }
+
+  &__item-text-training {
+    max-width: 360px;
+  }
+
+  &__item-wrapper-image-training {
+    position: absolute;
+    top: 0;
+    right: 200px;
+  }
+
+  &__item-arrow-training {
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+  }
+
+  // Карточка culture
+
+  &__item-culture {
+    grid-area: culture;
+    position: relative;
+    height: 480px;
+    display: flex;
+    align-items: end;
+  }
+
+  &__item-text-culture {
+    max-width: 375px;
+  }
+
+  &__item-wrapper-image-culture {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__item-arrow-culture {
+    position: absolute;
+    top: 45%;
+    right: 0;
+  }
+
+  // Карточка leadership
+
+  &__item-leadership {
+    grid-area: leadership;
+    width: 400px;
+    height: 395px;
+    position: relative;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+  }
+
+  &__item-text-leadership {
+    max-width: 295px;
+  }
+
+  &__item-wrapper-image-leadership {
+    position: absolute;
+    left: -85px;
+    top: 0;
+  }
+
+  &__item-arrow-leadership {
+    position: absolute;
+    top: -150px;
+    left: 50%;
+  }
+
+  // Карточка hse
+
+  &__item-hse {
+    grid-area: hse;
+    width: 400px;
+    position: relative;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__item-wrapper-image-hse {
+    position: absolute;
+    left: -255px;
+    top: 0;
+  }
+
+  &__item-text-hse {
+    max-width: 370px;
+  }
+
+
+  // ─────────────────────────────────────────────────────────
+  //  Линейная раскладка
+  //
+  //  Раскладка выше держится на абсолютном позиционировании внутри
+  //  карточек фиксированного размера и работает только на широком экране.
+  //  Ниже неё раскладка полностью сбрасывается: карточки становятся обычными
+  //  блоками «картинка + текст», декоративные стрелки убираются.
+  //  Порог — 1860px: именно столько нужно исходной сетке, чтобы поместиться.
+  //  Блок идёт последним, чтобы перекрыть точечные правила выше.
+  // ─────────────────────────────────────────────────────────
+
+  @include mixins.down(1860px) {
+
+    &__title {
+      position: static;
+      margin: 0 0 32px;
+    }
+
+    &__list {
+      grid-template-areas: none;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 40px;
+      margin: 0 0 64px;
+    }
+
+    &__item {
+      grid-area: auto;
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 16px 0;
+    }
+
+    //  Иллюстрации разного формата: без общей высоты соседние карточки в ряду
+    //  начинали текст на разном уровне — пункт 2 висел заметно выше пункта 1
+    &__item-wrapper-image {
+      position: static;
+      order: -1;
+      width: 100%;
+      inset: auto;
+      aspect-ratio: 4 / 3;
+      //  Обёртка — флекс-элемент колонки, у неё min-height: auto. Высокая
+      //  картинка продавливала это авто-минимум и игнорировала aspect-ratio
+      min-height: 0;
+    }
+
+    &__item-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    &__item-text {
+      max-width: none;
+      //  Текст читается сразу — подсветка по наведению здесь не нужна
+      color: variable.$color-black;
+      font-size: mixins.fluid(14px, 16px);
+      //  Номер пункта — смысловая опора списка, выделяем его
+      align-items: baseline;
+
+      span {
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+    }
+
+    //  Стрелки связывают карточки только в исходной раскладке
+    &__item-arrow {
+      display: none;
+    }
+  }
+
+  @include mixins.down('sm') {
+
+    //  Одна колонка: пункты шли слишком плотно и читались как один блок
+    &__list {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 48px;
+      margin: 0 0 48px;
+    }
+
+    &__item {
+      gap: 20px 0;
+    }
+  }
+}

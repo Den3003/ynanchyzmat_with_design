@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <load src="/src/html/head.html" />
+  <link rel="preload" href="/fonts/Futura-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Futura-500.woff2" as="font" type="font/woff2" crossorigin>
+  <title>Our team | Ynanch Hyzmat</title>
+</head>
+<body class="team-body body-team">
+  <load src="/src/html/loader.html" />
+  <script>
+/* Оверлей скрывается после загрузки страницы, но не раньше, чем
+   проиграет вся секвенция (2.95 с). MIN_MS можно менять. */
+(function () {
+  var MIN_MS = 2950, start = Date.now();
+  function hide() {
+    var wait = Math.max(0, MIN_MS - (Date.now() - start));
+    setTimeout(function () {
+      var el = document.getElementById('yh-loader');
+      if (el) el.classList.add('yh-hidden');
+    }, wait);
+  }
+  if (document.readyState === 'complete') hide();
+  else window.addEventListener('load', hide);
+})();
+</script>
+  <load src="/src/html/header.html" theme="header_contacts"/>
+
+  <main class="main-team">
+    <section class="team">
+      <div class="container team__container">
+        <h1 class="visually-hidden">Employees of Ynanch Hyzmat</h1>
+        
+        <div class="team__swiper-wrapper-with-control">
+          
+          <!-- Button swiper prev  -->
+          <button type="button" class="team__swiper-button team__swiper-button-prev">
+            <svg class="team__swiper-button-icon" width="55" height="117" viewBox="0 0 55 117" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M51.4924 3L4.78324 55.2044C2.35734 57.9157 2.4128 62.0333 4.91084 64.6783L51.4924 114" stroke="#F37021" stroke-width="6" stroke-linecap="round" />
+            </svg>
+          </button>
+
+
+          <div class="team__swiper swiper">
+            <ul class="team__list swiper-wrapper">
+
+              <!-------- Vladimir Kadyrov ---------->
+              <li class="team__item swiper-slide content-section js-content-section">
+
+                <div class="team__item-image-wrapper" data-swiper-parallax="-2500">
+                  <img class="team__item-image" src="/src/assets/images/team/vladimir.png" alt="">
+                </div>
+
+                <div class="team__item-content-wrapper">
+                  <h2 class="team__item-title" data-swiper-parallax="-2000">
+                    Vladimir Kadyrov
+                  </h2>
+                  <p class="team__item-sub-title" data-swiper-parallax="-1500">
+                    CEO
+                  </p>
+                  <p class="team__item-text" data-swiper-parallax="-1000">
+                    Brings over 25 years of experience in Turkmenistan's
+                    oil and gas sector, having held senior management
+                    roles at leading energy and industrial service
+                    companies before founding Ynanch Hyzmat. Under
+                    his leadership, Ynanch Hyzmat has grown to serve
+                    major clients across the region's energy infrastructure
+                    projects, setting the company's strategic direction
+                    and overseeing its largest partnerships.
+                  </p>
+                  <!-- <div class="team__item-socials-wrapper" data-swiper-parallax="-500"> -->
+<!--  -->
+                    <!-- facebook -->
+                    <!-- <a class="team__social-link" href="https://facebook.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-facebook"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- instagram -->
+                    <!-- <a class="team__social-link" href="https://instagram.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-instagram"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- linkedin -->
+                    <!-- <a class="team__social-link" href="https://linkedin.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-linkedin"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+                  <!-- </div> -->
+                </div>
+
+              </li>
+
+              <!-------- Nazar Agajanov ---------->
+              <li class="team__item swiper-slide content-section js-content-section">
+
+                <div class="team__item-image-wrapper" data-swiper-parallax="-2500">
+                  <img class="team__item-image" src="/src/assets/images/team/nazar.png" alt="">
+                </div>
+
+                <div class="team__item-content-wrapper">
+                  <h2 class="team__item-title" data-swiper-parallax="-2000">
+                    Nazar Agajanov
+                  </h2>
+                  <p class="team__item-sub-title" data-swiper-parallax="-1500">
+                    Managing Director
+                  </p>
+                  <p class="team__item-text" data-swiper-parallax="-1000">
+                    Nazar Agajanov holds a Bachelor of Engineering in
+                    Electronics and Mechanics from Tokyo Denki University
+                    in Japan. He built his career through senior technical
+                    roles at international firms including Hyundai Engineering &
+                    Construction and Toyo Engineering Corporation,
+                    as well as Deputy Manager of Instrumentation and
+                    Automation Control at Turkmenhimiya state concern.
+                    This engineering and international project background
+                    now drives his leadership of Ynanch Hyzmat as Managing
+                    Director.
+                  </p>
+                  <div class="team__item-socials-wrapper" data-swiper-parallax="-500">
+
+                    <!-- facebook -->
+                    <!-- <a  class="team__social-link" href="https://facebook.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-facebook"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+
+                    <!-- instagram -->
+                    <!-- <a  class="team__social-link" href="https://instagram.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-instagram"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+
+                    <!-- linkedin -->
+                    <a class="team__social-link" href="https://linkedin.com" target="_blank">
+                      <svg aria-hidden="true" width="28" height="28">
+                        <use href="#icon-linkedin"></use>
+                      </svg>
+                    </a>
+
+                    <!-- Mail -->
+                    <a class="team__social-link" href="mailto:nazar.agajanov@ynanchyzmat.com" target="_blank">
+                      <svg aria-hidden="true" width="28" height="28">
+                        <use href="#icon-mail"></use>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+
+              </li>
+
+              <!-------- Yazmyrat Annamuhammedov ---------->
+              <li class="team__item swiper-slide content-section js-content-section">
+
+                <div class="team__item-image-wrapper" data-swiper-parallax="-2500">
+                  <img class="team__item-image" src="/src/assets/images/team/yazmyrat.png" alt="">
+                </div>
+
+                <div class="team__item-content-wrapper">
+                  <h2 class="team__item-title" data-swiper-parallax="-2000">
+                    Yazmyrat Annamuhammedov
+                  </h2>
+                  <p class="team__item-sub-title" data-swiper-parallax="-1500">
+                    Chief Engineer
+                  </p>
+                  <p class="team__item-text" data-swiper-parallax="-1000">
+                    Yazmyrat is an engineer with over a two decades of
+                    experience supporting technical operations in Turkmenistan's
+                    industrial and energy sectors. He oversees the engineering
+                    integrity of Ynanch Hyzmat's projects, from technical
+                    planning and equipment specification to quality control
+                    and on-site troubleshooting. His hands-on approach and
+                    attention to detail help ensure projects are delivered
+                    safely, efficiently, and to international engineering
+                    standards.
+                  </p>
+                  <!-- <div class="team__item-socials-wrapper" data-swiper-parallax="-500"> -->
+<!--  -->
+                    <!-- facebook -->
+                    <!-- <a  class="team__social-link" href="https://facebook.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-facebook"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- instagram -->
+                    <!-- <a  class="team__social-link" href="https://instagram.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-instagram"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- linkedin -->
+                    <!-- <a class="team__social-link" href="https://linkedin.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-linkedin"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+                  <!-- </div> -->
+                </div>
+
+              </li>
+
+              <!-------- Niyaz Muhiev ---------->
+              <li class="team__item swiper-slide content-section js-content-section">
+
+                <div class="team__item-image-wrapper" data-swiper-parallax="-2500">
+                  <img class="team__item-image" src="/src/assets/images/team/niyaz.png" alt="">
+                </div>
+
+                <div class="team__item-content-wrapper">
+                  <h2 class="team__item-title" data-swiper-parallax="-2000">
+                    Niyaz Muhiev
+                  </h2>
+                  <p class="team__item-sub-title" data-swiper-parallax="-1500">
+                    Chief Engineer Technologist
+                  </p>
+                  <p class="team__item-text" data-swiper-parallax="-1000">
+                    Niyaz brings extensive technical expertise to his role as Chief
+                    Engineer Technologist, with a background in process technology
+                    and engineering support for industrial and energy projects in
+                    Turkmenistan. He is responsible for developing and refining
+                    technical processes, ensuring equipment and systems meet
+                    operational and quality standards, and providing technical
+                    guidance across project teams. His technologist's
+                    perspective helps bridge engineering design with practical,
+                    on-site implementation.
+                  </p>
+                  <!-- <div class="team__item-socials-wrapper" data-swiper-parallax="-500"> -->
+<!--  -->
+                    <!-- facebook -->
+                    <!-- <a  class="team__social-link" href="https://facebook.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-facebook"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- instagram -->
+                    <!-- <a  class="team__social-link" href="https://instagram.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-instagram"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- linkedin -->
+                    <!-- <a class="team__social-link" href="https://linkedin.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-linkedin"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+                  <!-- </div> -->
+                </div>
+
+              </li>
+
+              <!-------- Nazar Muradov ---------->
+              <li class="team__item swiper-slide content-section js-content-section">
+
+                <div class="team__item-image-wrapper" data-swiper-parallax="-2500">
+                  <img class="team__item-image" src="/src/assets/images/team/nazar-m.png" alt="">
+                </div>
+
+                <div class="team__item-content-wrapper">
+                  <h2 class="team__item-title" data-swiper-parallax="-2000">
+                    Nazar Muradov
+                  </h2>
+                  <p class="team__item-sub-title" data-swiper-parallax="-1500">
+                    HSE Manager
+                  </p>
+                  <p class="team__item-text" data-swiper-parallax="-1000">
+                    Lead Safety Specialist with over 17 years of experience
+                    in Oil & Gas projects, including offshore, subsea,
+                    and diving operations. Has a proven track record of
+                    ensuring full HSE compliance, managing high-risk
+                    activities, and supporting safe project delivery
+                    in complex offshore environments. His expertise
+                    spans implementing and monitoring HSEQ management
+                    systems in line with international standards and
+                    client requirements, with a strong background in
+                    risk assessment, permit-to-work systems, and safety
+                    leadership across multidisciplinary teams.
+                  </p>
+                  <!-- <div class="team__item-socials-wrapper" data-swiper-parallax="-500"> -->
+<!--  -->
+                    <!-- facebook -->
+                    <!-- <a  class="team__social-link" href="https://facebook.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-facebook"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- instagram -->
+                    <!-- <a  class="team__social-link" href="https://instagram.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-instagram"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- linkedin -->
+                    <!-- <a class="team__social-link" href="https://linkedin.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-linkedin"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+                  <!-- </div> -->
+                </div>
+
+              </li>
+
+              <!-------- Movlam Durdyev ---------->
+              <li class="team__item swiper-slide content-section js-content-section">
+
+                <div class="team__item-image-wrapper" data-swiper-parallax="-2500">
+                  <img class="team__item-image" src="/src/assets/images/team/movlam.png" alt="">
+                </div>
+
+                <div class="team__item-content-wrapper">
+                  <h2 class="team__item-title" data-swiper-parallax="-2000">
+                    Movlam Durdyev
+                  </h2>
+                  <p class="team__item-sub-title" data-swiper-parallax="-1500">
+                    Service Engineer
+                  </p>
+                  <p class="team__item-text" data-swiper-parallax="-1000">
+                    Movlam supports the maintenance and servicing of
+                    Ynanch Hyzmat's equipment, ensuring systems
+                    perform reliably in the field. He carries out
+                    diagnostics, repairs, and technical troubleshooting
+                    to keep projects running smoothly.
+                  </p>
+                  <!-- <div class="team__item-socials-wrapper" data-swiper-parallax="-500"> -->
+<!--  -->
+                    <!-- facebook -->
+                    <!-- <a  class="team__social-link" href="https://facebook.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-facebook"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- instagram -->
+                    <!-- <a  class="team__social-link" href="https://instagram.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-instagram"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- linkedin -->
+                    <!-- <a class="team__social-link" href="https://linkedin.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-linkedin"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+                  <!-- </div> -->
+                </div>
+
+              </li>
+
+              <!-------- Rustam Ibragimov ---------->
+              <li class="team__item swiper-slide content-section js-content-section">
+
+                <div class="team__item-image-wrapper" data-swiper-parallax="-2500">
+                  <img class="team__item-image" src="/src/assets/images/team/rustam.png" alt="">
+                </div>
+
+                <div class="team__item-content-wrapper">
+                  <h2 class="team__item-title" data-swiper-parallax="-2000">
+                    Rustam Ibragimov
+                  </h2>
+                  <p class="team__item-sub-title" data-swiper-parallax="-1500">
+                    Service Engineer
+                  </p>
+                  <p class="team__item-text" data-swiper-parallax="-1000">
+                    Rustam handles the hands-on servicing and maintenance of
+                    Ynanch Hyzmat's equipment, keeping systems running
+                    reliably in the field. He diagnoses issues, performs
+                    repairs, and supports clients with technical troubleshooting
+                    on-site.
+                  </p>
+                  <!-- <div class="team__item-socials-wrapper" data-swiper-parallax="-500"> -->
+<!--  -->
+                    <!-- facebook -->
+                    <!-- <a  class="team__social-link" href="https://facebook.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-facebook"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- instagram -->
+                    <!-- <a  class="team__social-link" href="https://instagram.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-instagram"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- linkedin -->
+                    <!-- <a class="team__social-link" href="https://linkedin.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-linkedin"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+                  <!-- </div> -->
+                </div>
+
+              </li>
+
+              <!-------- Nargiza Abdullaeva ---------->
+              <li class="team__item swiper-slide content-section js-content-section">
+
+                <div class="team__item-image-wrapper" data-swiper-parallax="-2500">
+                  <img class="team__item-image" src="/src/assets/images/team/nargiza.png" alt="">
+                </div>
+
+                <div class="team__item-content-wrapper">
+                  <h2 class="team__item-title" data-swiper-parallax="-2000">
+                    Nargiza Abdullaeva
+                  </h2>
+                  <p class="team__item-sub-title" data-swiper-parallax="-1500">
+                    Analytical Specialist
+                  </p>
+                  <p class="team__item-text" data-swiper-parallax="-1000">
+                    Nargiza leads technical analysis and engineering
+                    evaluation across Ynanch Hyzmat's projects,
+                    turning complex data into actionable insights.
+                    She oversees quality and precision in engineering
+                    deliverables, working closely with project teams to
+                    support sound technical decisions.
+                  </p>
+                  <!-- <div class="team__item-socials-wrapper" data-swiper-parallax="-500"> -->
+<!--  -->
+                    <!-- facebook -->
+                    <!-- <a  class="team__social-link" href="https://facebook.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-facebook"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- instagram -->
+                    <!-- <a  class="team__social-link" href="https://instagram.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-instagram"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- linkedin -->
+                    <!-- <a class="team__social-link" href="https://linkedin.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-linkedin"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+                  <!-- </div> -->
+                </div>
+
+              </li>
+
+              <!-------- Aynar Durdyeva ---------->
+              <li class="team__item swiper-slide content-section js-content-section">
+
+                <div class="team__item-image-wrapper" data-swiper-parallax="-2500">
+                  <img class="team__item-image" src="/src/assets/images/team/aynar.png" alt="">
+                </div>
+
+                <div class="team__item-content-wrapper">
+                  <h2 class="team__item-title" data-swiper-parallax="-2000">
+                    Aynar Durdyeva
+                  </h2>
+                  <p class="team__item-sub-title" data-swiper-parallax="-1500">
+                    Sales & Procurement
+                  </p>
+                  <p class="team__item-text" data-swiper-parallax="-1000">
+                    Aynar manages sales relationships and procurement
+                    processes for Ynanch Hyzmat, connecting client needs
+                    with the right products and services. She coordinates
+                    with suppliers to ensure timely, cost-effective
+                    sourcing while maintaining strong client communication
+                    throughout each project.
+                  </p>
+                  <!-- <div class="team__item-socials-wrapper" data-swiper-parallax="-500"> -->
+<!--  -->
+                    <!-- facebook -->
+                    <!-- <a  class="team__social-link" href="https://facebook.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-facebook"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- instagram -->
+                    <!-- <a  class="team__social-link" href="https://instagram.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-instagram"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+<!--  -->
+                    <!-- linkedin -->
+                    <!-- <a class="team__social-link" href="https://linkedin.com" target="_blank"> -->
+                      <!-- <svg aria-hidden="true" width="28" height="28"> -->
+                        <!-- <use href="#icon-linkedin"></use> -->
+                      <!-- </svg> -->
+                    <!-- </a> -->
+                  <!-- </div> -->
+                </div>
+
+              </li>
+
+            </ul>
+          </div>
+
+
+          <!-- Button swiper next  -->
+          <button type="button" class="team__swiper-button team__swiper-button-next">
+            <svg class="team__swiper-button-icon" width="55" height="117" viewBox="0 0 55 117" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3L49.7092 55.2044C52.1351 57.9157 52.0796 62.0333 49.5816 64.6783L3 114" stroke="#F37021" stroke-width="6" stroke-linecap="round" />
+            </svg>
+          </button>
+
+        </div>
+
+      </div>
+      <div class="team__line"></div>
+    </section>
+  </main>
+
+  <load src="/src/html/footer.html" theme="footer_team"/>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

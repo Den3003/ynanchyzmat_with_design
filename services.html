@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <load src="/src/html/head.html" />
+  <link rel="preload" href="/fonts/Futura-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Futura-500.woff2" as="font" type="font/woff2" crossorigin>
+  <title>Services | Ynanch Hyzmat</title>
+</head>
+<body class="services-body">
+  <load src="/src/html/loader.html" />
+  <script>
+  /* Оверлей скрывается после загрузки страницы, но не раньше, чем
+     проиграет вся секвенция (2.95 с). MIN_MS можно менять. */
+  (function () {
+    var MIN_MS = 2950, start = Date.now();
+    function hide() {
+      var wait = Math.max(0, MIN_MS - (Date.now() - start));
+      setTimeout(function () {
+        var el = document.getElementById('yh-loader');
+        if (el) el.classList.add('yh-hidden');
+      }, wait);
+    }
+    if (document.readyState === 'complete') hide();
+    else window.addEventListener('load', hide);
+  })();
+  </script>
+  <load src="/src/html/header.html" />
+
+  <main class="services">
+    <section class="services__hero">
+      <div class="container services__hero-container">
+        <div class="services__hero-flex">
+          <h1 class="services__title content-section js-content-section">Services</h1>
+          <p class="services__text content-section js-content-section">
+            Reliable performance of both dynamic and static equipment
+            is essential to maintaining safe and uninterrupted operations
+            across oil and gas facilities. From rotating machinery
+            such as pumps, compressors, and turbines to static assets
+            including pressure vessels, pipelines, and storage systems,
+            each component requires a structured maintenance approach
+            tailored to its operating conditions and criticality.
+            Effective maintenance not only minimizes unplanned downtime
+            but also extends asset life and ensures compliance with
+            industry safety standards.
+          </p>
+
+          <div class="services__hero-image-wrapper">
+            <img class="services__hero-image" src="src/assets/images/services/hero/services-logo.png" alt="">
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="services__description">
+      <div class="container">
+        <ul class="services__description-grid">
+
+          <!-- Dynamic-Static Equipment & System Maintenance -->
+          <li id="dynamic" class="services__description-point services__description-point-dynamic">
+            <div class="services__description-image-wrapper">
+              <img class="services__description-image" src="/src/assets/images/services/description/dynamic.jpg" alt="">
+            </div>
+            <h2 class="services__description-title content-section js-content-section">
+              Dynamic-Static Equipment & System Maintenance
+            </h2>
+            <div class="services__description-hover-wrapper">
+
+              <div class="services__description-hover">
+                <ul class="services__description-list">
+                  <li class="services__description-item">
+                    Preventive Maintenance
+                  </li>
+                  <li class="services__description-item">
+                    Operational DiagnosticsEquipment
+                  </li>
+                  <li class="services__description-item">
+                    Condition Assessment and Monitoring
+                  </li>
+                  <li class="services__description-item">
+                    Assembly, Installation, Routine Maintenance,
+                    Disassembly, Repair, and Component Replacement
+                  </li>
+                  <li class="services__description-item">
+                    Equipment Lifecycle Assessment
+                  </li>
+                  <li class="services__description-item">
+                    Visual Inspections
+                  </li>
+                  <li class="services__description-item">
+                    Internal Inspections
+                  </li>
+                  <li class="services__description-item">
+                    Pressure Testing
+                  </li>
+                  <li class="services__description-item">
+                    Leak Detection and Calibration
+                  </li>
+                  <li class="services__description-item">
+                    Equipment Cleaning and Maintenance
+                  </li>
+                  <li class="services__description-item">
+                    Repair Works and Replacement and/or Installation of the Latest Version
+                  </li>
+                </ul>
+                <h3 class="services__description-title">
+                  Dynamic-Static Equipment & System Maintenance
+                </h3>
+              </div>
+            </div>
+          </li>
+
+          <!-- Pipeline Integrity & Safety Solutions -->
+          <li id="pipeline" class="services__description-point">
+            <div class="services__description-image-wrapper">
+              <img class="services__description-image" src="/src/assets/images/services/description/pipeline.jpg" alt="">
+            </div>
+            <h2 class="services__description-title content-section js-content-section">
+              Pipeline Integrity & Safety Solutions
+            </h2>
+
+            <div class="services__description-hover-wrapper">
+
+              <div class="services__description-hover">
+                <ul class="services__description-list services__description-list-dynamic">
+                  <li class="services__description-item">
+                    In-line inspection and accident prevention
+                  </li>
+                  <li class="services__description-item">
+                    Emergency scenario modeling
+                  </li>
+                  <li class="services__description-item">
+                    Pipeline internal cleaning (pigging) technologies
+                  </li>
+                  <li class="services__description-item">
+                    Repair and integrity restoration solutions
+                  </li>
+                  <li class="services__description-item">
+                    Training and technical support
+                  </li>
+                  <li class="services__description-item">
+                    Leak detection
+                  </li>
+                </ul>
+                <h3 class="services__description-title">
+                  Pipeline Integrity & Safety Solutions
+                </h3>
+              </div>
+            </div>
+          </li>
+
+          <!-- Environmental Protection -->
+          <li id="environmental" class="services__description-point">
+            <div class="services__description-image-wrapper">
+              <img class="services__description-image" src="/src/assets/images/services/description/environmental.jpg" alt="">
+            </div>
+            <h2 class="services__description-title content-section js-content-section">
+              Environmental Protection
+            </h2>
+
+            <div class="services__description-hover-wrapper">
+
+              <div class="services__description-hover">
+                <ul class="services__description-list services__description-list-dynamic">
+                  <li class="services__description-item">
+                    Environmental Impact Assessment (EIA)
+                  </li>
+                  <li class="services__description-item">
+                    Industrial waste management (all types)
+                  </li>
+                  <li class="services__description-item">
+                    Waste Passports
+                  </li>
+                  <li class="services__description-item">
+                    Disposal of oilfield, industrial, and medical waste
+                  </li>
+                  <li class="services__description-item">
+                    Waste recycling
+                  </li>
+                  <li class="services__description-item">
+                    Hazardous waste disposal
+                  </li>
+                </ul>
+                <h3 class="services__description-title">
+                  Environmental Protection
+                </h3>
+              </div>
+            </div>
+          </li>
+
+          <!-- Civil Construction -->
+          <li id="civil" class="services__description-point">
+            <div class="services__description-image-wrapper">
+              <img class="services__description-image" src="/src/assets/images/services/description/civil.jpg" alt="">
+            </div>
+            <h2 class="services__description-title content-section js-content-section">
+              Civil Construction
+            </h2>
+
+            <div class="services__description-hover-wrapper">
+
+              <div class="services__description-hover">
+                <ul class="services__description-list services__description-list-dynamic">
+                  <li class="services__description-item">
+                    Earthworks
+                  </li>
+                  <li class="services__description-item">
+                    Reinforced concrete works
+                  </li>
+                  <li class="services__description-item">
+                    Installation and dismantling of scaffolding
+                  </li>
+                  <li class="services__description-item">
+                    Insulation works
+                  </li>
+                  <li class="services__description-item">
+                    Masonry walls
+                  </li>
+                  <li class="services__description-item">
+                    Painting works
+                  </li>
+                  <li class="services__description-item">
+                    Floor installation works
+                  </li>
+                  <li class="services__description-item">
+                    Finishing works on interior walls
+                  </li>
+                  <li class="services__description-item">
+                    Suspended ceilings
+                  </li>
+                  <li class="services__description-item">
+                    Facade works
+                  </li>
+                  <li class="services__description-item">
+                    Roof arrangement
+                  </li>
+                  <li class="services__description-item">
+                    Mechanical works
+                  </li>
+                  <li class="services__description-item">
+                    Electrical installation works
+                  </li>
+                  <li class="services__description-item">
+                    Furniture and equipment
+                  </li>
+                  <li class="services__description-item">
+                    Landscaping Works
+                  </li>
+                </ul>
+                <h3 class="services__description-title">
+                  Civil Construction
+                </h3>
+              </div>
+            </div>
+          </li>
+
+          <!-- Industrial Automation & Instrumentation -->
+          <li id="instrumentation" class="services__description-point">
+            <div class="services__description-image-wrapper">
+              <img class="services__description-image" src="/src/assets/images/services/description/industrial.jpg" alt="">
+            </div>
+            <h2 class="services__description-title content-section js-content-section">
+              Industrial Automation & Instrumentation
+            </h2>
+
+            <div class="services__description-hover-wrapper">
+
+              <div class="services__description-hover">
+                <ul class="services__description-list services__description-list-dynamic">
+                  <li class="services__description-item">
+                    Process Automation Solutions
+                  </li>
+                  <li class="services__description-item">
+                    Control System Integration
+                  </li>
+                  <li class="services__description-item">
+                    Field Device Calibration
+                  </li>
+                  <li class="services__description-item">
+                    Management of Measurement Devices
+                  </li>
+                  <li class="services__description-item">
+                    Data Collection and Analysis Services
+                  </li>
+                  <li class="services__description-item">
+                    Lifecycle and Risk Assessment
+                  </li>
+                  <li class="services__description-item">
+                    Technical Support and Training
+                  </li>
+                  <li class="services__description-item">
+                    Turnkey Project Implementation
+                  </li>
+                </ul>
+                <h3 class="services__description-title">
+                  Industrial Automation & Instrumentation
+                </h3>
+              </div>
+            </div>
+          </li>
+
+          <!-- Heating, Ventilation, and Air Conditioning Systems (HVAC) -->
+          <li id="hvac" class="services__description-point services__description-point-hvac">
+            <div class="services__description-image-wrapper">
+              <img class="services__description-image" src="/src/assets/images/services/description/hvac.jpg" alt="">
+            </div>
+            <h2 class="services__description-title content-section js-content-section">
+              Heating, Ventilation, and Air Conditioning Systems (HVAC)
+            </h2>
+
+            <div class="services__description-hover-wrapper">
+
+              <div class="services__description-hover">
+                <ul class="services__description-list services__description-list-dynamic">
+                  <li class="services__description-item">
+                    Installation and commissioning
+                  </li>
+                  <li class="services__description-item">
+                    Preventive maintenance
+                  </li>
+                  <li class="services__description-item">
+                    Repair and modernization solutions
+                  </li>
+                  <li class="services__description-item">
+                    Technical support
+                  </li>
+                  <li class="services__description-item">
+                    Lifecycle and risk assessment
+                  </li>
+                </ul>
+                <h3 class="services__description-title">
+                  Heating, Ventilation, and Air Conditioning Systems (HVAC)
+                </h3>
+              </div>
+            </div>
+          </li>
+
+          <!-- Oilfield Services -->
+          <li id="oilfield" class="services__description-point">
+            <div class="services__description-image-wrapper">
+              <img class="services__description-image" src="/src/assets/images/services/description/oilfield.jpg" alt="">
+            </div>
+            <h2 class="services__description-title content-section js-content-section">
+              Oilfield Services
+            </h2>
+
+            <div class="services__description-hover-wrapper">
+
+              <div class="services__description-hover">
+                <ul class="services__description-list services__description-list-dynamic">
+                  <li class="services__description-item">
+                    Equipment Rental and Servicing
+                  </li>
+                  <li class="services__description-item">
+                    Consulting and Engineering
+                  </li>
+                  <li class="services__description-item">
+                    Field Development
+                  </li>
+                  <li class="services__description-item">
+                    Drilling Equipment Service
+                  </li>
+                  <li class="services__description-item">
+                    Digital and Analytical Services
+                  </li>
+                  <li class="services__description-item">
+                    Provision of oilfield services
+                  </li>
+                </ul>
+                <h3 class="services__description-title">
+                  Oilfield Services
+                </h3>
+              </div>
+            </div>
+          </li>
+
+          <!-- Fire Protection & Alarm Systems -->
+          <li id="alarm" class="services__description-point">
+            <div class="services__description-image-wrapper">
+              <img class="services__description-image" src="/src/assets/images/services/description/fire.jpg" alt="">
+            </div>
+            <h2 class="services__description-title content-section js-content-section">
+              Fire Protection & Alarm Systems
+            </h2>
+
+            <div class="services__description-hover-wrapper">
+
+              <div class="services__description-hover">
+                <ul class="services__description-list services__description-list-fire">
+                  <li class="services__description-item">
+                    Lifecycle and risk assessment
+                  </li>
+                  <li class="services__description-item">
+                    Design, maintenance, repair,
+                    and refurbishment of fire protection systems
+                  </li>
+                  <li class="services__description-item">
+                    Fire detection and alarm systems
+                  </li>
+                  <li class="services__description-item">
+                    Integration of emergency response systems
+                  </li>
+                </ul>
+                <h3 class="services__description-title">
+                  Fire Protection & Alarm Systems
+                </h3>
+              </div>
+            </div>
+          </li>
+
+          <!-- Programming -->
+          <li id="programming" class="services__description-point services__description-point-programming">
+            <div class="services__description-image-wrapper">
+              <img class="services__description-image" src="/src/assets/images/services/description/programming.jpg" alt="">
+            </div>
+            <h2 class="services__description-title content-section js-content-section">
+              Programming
+            </h2>
+
+            <div class="services__description-hover-wrapper">
+
+              <div class="services__description-hover">
+                <ul class="services__description-list">
+                  <li class="services__description-item">
+                    Industrial programming
+                  </li>
+                  <li class="services__description-item">
+                    Supervisory Control and Data Acquisition (SCADA) systems
+                  </li>
+                  <li class="services__description-item">
+                    Alarm management
+                  </li>
+                  <li class="services__description-item">
+                    Automation and control systems, programming and integration
+                  </li>
+                  <li class="services__description-item">
+                    Training and technical support
+                  </li>
+                </ul>
+                <h3 class="services__description-title">
+                  Programming
+                </h3>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <load src="/src/html/footer.html" theme="footer_black" />
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

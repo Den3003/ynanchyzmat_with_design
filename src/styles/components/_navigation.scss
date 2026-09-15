@@ -1,0 +1,364 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.navigation {
+
+  // ─────────────────────────────────────────
+  //  Мобильный drawer (ниже $bp-nav)
+  // ─────────────────────────────────────────
+
+  @include mixins.down('nav') {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    width: min(420px, 100%);
+    background: variable.$color-main;
+    color: variable.$color-gray;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform .35s cubic-bezier(.4, 0, .2, 1), visibility .35s;
+
+    body.is-menu-open & {
+      transform: translateX(0);
+      visibility: visible;
+    }
+  }
+
+  &__list {
+    position: relative;
+    padding: 16.5px 30px;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 0 30px;
+    transition: background-color .3s ease-in, color .2s ease-in;
+
+    &:has(.navigation__link:focus-visible) {
+      background-color: variable.$color-main;
+      color: variable.$color-gray;
+    }
+    
+    &:has(.navigation__item.open) {
+      background-color: variable.$color-main;
+      color: variable.$color-gray;
+    }
+
+    &:has(.navigation__link[aria-current="page"]) {
+      background-color: variable.$color-main;
+      color: variable.$color-gray;
+    }
+
+    //  Меню плотнее, чтобы шесть пунктов помещались в строку.
+    //  Подложка теперь обжимает пункты (колонка = auto), поэтому боковые
+    //  отступы задаём здесь — иначе белая плашка липнет к тексту
+    @include mixins.down('xxl') {
+      gap: 0 20px;
+      padding: 14px 36px;
+    }
+
+    @include mixins.down('xl') {
+      gap: 0 14px;
+      padding: 12px 28px;
+    }
+
+    //  В drawer'е пункты идут колонкой
+    @include mixins.down('nav') {
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0;
+      padding: 96px 0 40px;
+      background-color: transparent;
+      color: inherit;
+
+      //  Подсветка активного пункта фоном на мобильных не нужна
+      &:has(.navigation__link:focus-visible),
+      &:has(.navigation__item.open),
+      &:has(.navigation__link[aria-current="page"]) {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &__item {
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      height: 10px;
+    }
+
+    &.open {
+
+      .navigation__panel {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    @include mixins.down('nav') {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+      //  Верхняя линия — чтобы первый пункт списка был отбит так же, как остальные
+      &:first-child {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      //  Невидимая полоса-«мостик» нужна только для hover-меню
+      &:after {
+        content: none;
+      }
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+    font-size: 20px;
+    font-weight: 500;
+    transition: color .3s ease-in;
+    white-space: nowrap;
+
+    &:hover {
+      color: variable.$color-orange-primary;
+    }
+
+    &[aria-current="page"] {
+      color: variable.$color-orange-primary;
+      font-weight: 700;
+    }
+
+    @include mixins.down('xxl') {
+      font-size: 18px;
+    }
+
+    @include mixins.down('xl') {
+      font-size: 16px;
+    }
+
+    @include mixins.down('nav') {
+      display: flex;
+      align-items: center;
+      min-height: 56px;
+      padding: 0 24px;
+      font-size: 20px;
+      color: variable.$color-black;
+      white-space: normal;
+    }
+  }
+
+  //  Кнопка-стрелка раскрытия подменю. Создаётся из JS, живёт только в drawer'е.
+  &__toggle {
+    display: none;
+
+    @include mixins.down('nav') {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: stretch;
+      width: 56px;
+      padding: 0;
+      border: none;
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      background: transparent;
+      color: variable.$color-black;
+      cursor: pointer;
+
+      svg {
+        transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+      }
+
+      &[aria-expanded="true"] svg {
+        transform: rotate(180deg);
+      }
+
+      &:focus-visible {
+        outline: 2px solid variable.$color-orange-primary;
+        outline-offset: -2px;
+      }
+    }
+  }
+
+  &__item-description {
+    color: variable.$color-black;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @include mixins.down('nav') {
+      padding: 16px 24px 0;
+    }
+  }
+
+  &__panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: variable.$color-main;
+    border-top: 1px solid variable.$color-orange-primary;
+    opacity: 0;
+    visibility: hidden;
+    display: grid;
+    grid-template-columns: 260px 1px 1fr;
+    transition: opacity .3s ease-in, visibility .3s ease-in;
+
+    @include mixins.down('xl') {
+      grid-template-columns: 220px 1px 1fr;
+    }
+
+    //  В drawer'е панель — обычный аккордеон, схлопнутый по высоте
+    @include mixins.down('nav') {
+      position: static;
+      grid-column: 1 / -1;
+      display: block;
+      border-top: none;
+      background: rgba(0, 0, 0, 0.03);
+      opacity: 1;
+      visibility: visible;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .35s cubic-bezier(.4, 0, .2, 1);
+    }
+  }
+
+  //  Раскрытый аккордеон. max-height с запасом — точное значение считает JS.
+  @include mixins.down('nav') {
+
+    &__item.open > .navigation__panel {
+      max-height: 640px;
+    }
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 7px;
+  }
+
+  &__text {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  &__line {
+    width: 1px;
+    background: variable.$color-orange-primary;
+
+    @include mixins.down('nav') {
+      width: auto;
+      height: 1px;
+      margin: 16px 24px 0;
+    }
+  }
+
+  &__sub-list {
+    padding: 20px 30px;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    @include mixins.down('nav') {
+      padding: 8px 24px 16px;
+    }
+  }
+
+  &__sub-item {
+
+    &:not(:last-child) {
+      margin: 0 0 10px;
+    }
+
+    @include mixins.down('nav') {
+
+      &:not(:last-child) {
+        margin: 0;
+      }
+    }
+  }
+
+  //  Соцсети в мобильном drawer'е. На десктопе меню — горизонтальная строка,
+  //  места для них нет, поэтому блок существует только ниже $bp-nav.
+  &__socials {
+    display: none;
+
+    @include mixins.down('nav') {
+      display: flex;
+      flex-direction: column;
+      gap: 12px 0;
+      padding: 28px 24px 0;
+      color: variable.$color-black;
+    }
+  }
+
+  &__socials-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  &__socials-links {
+    display: flex;
+    align-items: center;
+    gap: 0 18px;
+  }
+
+  &__social-link {
+    font-size: 0;
+    color: variable.$color-orange-primary;
+    @include mixins.tap-target(44px);
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__sub-link {
+    text-decoration: none;
+    color: variable.$color-black;
+    font-size: 15px;
+    position: relative;
+    outline: none;
+
+    &:after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: variable.$color-black;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &:hover:after,
+    &:focus-visible:after  {
+      transform: scaleX(1);
+    }
+
+    @include mixins.down('nav') {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      font-size: 16px;
+
+      //  Подчёркивание по hover на тач-устройствах бесполезно
+      &:after {
+        content: none;
+      }
+    }
+  }
+}

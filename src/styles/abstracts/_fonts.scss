@@ -1,0 +1,14 @@
+@use 'mixins';
+@use 'variables' as variable;
+
+@font-face { 
+  @include mixins.font(variable.$font-primary, 400)
+}
+
+@font-face { 
+  @include mixins.font(variable.$font-primary, 500)
+}
+
+@font-face { 
+  @include mixins.font(variable.$font-primary, 700)
+}

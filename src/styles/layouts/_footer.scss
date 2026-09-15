@@ -1,0 +1,227 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  padding: 30px 0 45px;
+  
+
+  &_contacts {
+    position: static;
+    padding: 25px 0;
+    border-top: 3px solid variable.$color-orange-primary;
+    background: rgba(0, 0, 0, 0.7);
+
+    .footer__contacts {
+      display: flex;
+    }
+
+    .footer__address {
+      display: flex;
+    }
+
+    .footer__time {
+      display: none;
+    }
+  }
+
+  &_team {
+    position: static;
+    flex-shrink: 0;          /* страховка от сжатия футера */
+
+    //  Запас под плавающую панель Safari: подвал можно докрутить выше неё.
+    //  Удвоенный класс — иначе перебивает общий padding .footer ниже в файле
+    @include mixins.down('sm') {
+      &.footer_team {
+        padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+      }
+    }
+  }
+
+  &.footer_black {
+    color: variable.$color-black;
+    position: static;
+    padding: 0 0 80px;
+
+    @include mixins.down('sm') {
+      padding: 0 0 48px;
+    }
+  }
+
+  &.footer_sectors {
+    position: static;
+    margin: 0 0 65px;
+    padding: 0;
+
+    @include mixins.down('sm') {
+      margin: 0 0 40px;
+    }
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+
+    @include mixins.down('md') {
+      font-size: 17px;
+    }
+  }
+
+  &__socials {
+    display: flex;
+    align-items: center;
+    gap: 0 20px;
+
+    @include mixins.down('md') {
+      gap: 0 14px;
+    }
+
+    //  На телефоне соцсети — единственный элемент строки, ставим их по центру
+    @include mixins.down('xs') {
+      width: 100%;
+      justify-content: center;
+      gap: 0 18px;
+    }
+  }
+
+  &__social-link {
+    font-size: 0;
+
+    svg {
+      @include mixins.down('md') {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  &__contacts {
+    display: none;
+    align-items: center;
+    gap: 0 20px;
+
+    @include mixins.down('xs') {
+      flex-direction: column;
+      align-items: center;
+      gap: 4px 0;
+      width: 100%;
+    }
+  }
+
+  &__contacts-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px 0;
+
+    @include mixins.down('xs') {
+      gap: 4px 0;
+    }
+  }
+
+  &__contacts-link {
+    text-decoration: none;
+    color: inherit;
+
+    @include mixins.down('md') {
+      font-size: 15px;
+    }
+  }
+
+  &__mail {
+    letter-spacing: 0.03em;
+  }
+
+  &__address {
+    display: none;
+    align-items: center;
+    gap: 0 10px;
+
+    @include mixins.down('md') {
+      align-items: start;
+      font-size: 15px;
+    }
+
+    //  Адрес — самый длинный блок, на телефоне он лишний.
+    //  Исключение — страница Contact Us: там адрес и есть содержание подвала
+    @include mixins.down('xs') {
+      display: none;
+
+      .footer_contacts & {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 4px 0;
+        width: 100%;
+      }
+    }
+  }
+
+  &__address-text {
+    margin: 0;
+
+    @include mixins.down('lg') {
+      max-width: 330px;
+    }
+  }
+
+  &__time {
+    font-size: 20px;
+    margin: 0;
+
+    @include mixins.down('md') {
+      font-size: 16px;
+    }
+
+    //  Часовой пояс на телефоне не помещается в строку с соцсетями.
+    //  На главной соцсети переезжают в бургер-меню, и время занимает их место
+    @include mixins.down('xs') {
+      display: none;
+      font-size: 14px;
+      text-align: center;
+      width: 100%;
+
+      .main-body & {
+        display: block;
+      }
+    }
+  }
+
+  //  Копирайт показываем только на телефоне — в широком подвале для него нет строки
+  &__copyright {
+    display: none;
+    margin: 0;
+
+    @include mixins.down('xs') {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.7;
+    }
+  }
+
+  //  На главной странице соцсети живут в бургер-меню
+  .main-body & {
+
+    @include mixins.down('xs') {
+
+      .footer__socials {
+        display: none;
+      }
+    }
+  }
+
+  @include mixins.down('lg') {
+    padding: 24px 0 32px;
+  }
+
+  @include mixins.down('sm') {
+    padding: 20px 0 24px;
+  }
+}

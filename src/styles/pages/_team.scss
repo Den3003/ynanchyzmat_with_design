@@ -1,0 +1,337 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+//  Телефон: высота фото сотрудника и тёмной полосы под ним
+$team-photo-h: 240px;
+$team-band-h: 40px;
+
+//  Шапка (header_contacts) и подвал (footer_team) стоят в потоке: страница
+//  собрана flex-колонкой, поэтому при длинной карточке сотрудника на планшете
+//  подвал просто уезжает ниже, а не налезает на контент.
+.team-body {
+  position: relative;
+}
+
+.body-team {
+  background: linear-gradient(270deg, #2a3c47 0%, #010101 100%);
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-team {
+  flex: 1 0 auto;          /* grow: 1, shrink: 0, basis: auto */
+  width: 100%;  
+  display: flex;
+  //  Карточка сотрудника вместе с полосой под фото — по центру по вертикали
+  //  между шапкой и подвалом (раньше прижималась к подвалу)
+  align-items: center;
+  //  Снизу отступ больше на margin-bottom шапки (header_contacts: 40px / 20px),
+  //  иначе блок визуально стоит ниже центра
+  padding-block: 40px 80px;
+
+  //  На телефоне main не растягивается на экран: иначе подвал с соцсетями
+  //  прижат к нижнему краю, прячется под панелью Safari и не поднимается при скролле
+  @include mixins.down('sm') {
+    flex: 0 0 auto;
+    padding-block: 24px 44px;
+  }
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  // height: 100%;
+  // justify-items: flex-end;
+  // height: 100vh;
+  // height: 100dvh;
+  // background: linear-gradient(270deg, #2a3c47 0%, #010101 100%);
+  // padding: 0 0 160px;
+
+  //  Тёмная полоса-подложка над подвалом
+  &__line {
+    height: 100px;
+    background: variable.$color-about-gray-bg;
+
+    @include mixins.down('xxl') {
+      height: 64px;
+    }
+
+    @include mixins.down('lg') {
+      height: 48px;
+    }
+
+    @include mixins.down('md') {
+      height: 40px;
+    }
+
+    //  На телефоне полоса переезжает под фотографию (см. &__item-image-wrapper),
+    //  внизу страницы она больше не нужна — там и так градиент секции
+    @include mixins.down('sm') {
+      display: none;
+    }
+  }
+
+  &__container {
+    // flex: 1 0 auto;          /* grow: 1, shrink: 0, basis: auto */
+    height: 100%;
+    //  У .container margin: 0 auto — в flex-колонке авто-поля отключают
+    //  растяжение, и контейнер разъезжался по ширине слайдера (1500+px)
+    width: 100%;
+  }
+
+  &__swiper-wrapper-with-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 70px;
+
+    @include mixins.down('xxl') {
+      padding: 0 30px;
+    }
+
+    //  Стрелки съедают ширину, которой на планшете уже нет
+    @include mixins.down('md') {
+      padding: 0;
+      gap: 0 10px;
+    }
+
+    //  Полоса под фото — на всю ширину экрана, от края до края
+    @include mixins.down('sm') {
+      position: relative;
+      //  Слайдер вместе со слайдами выше полосы
+      align-items: flex-start;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: $team-photo-h;
+        left: calc(50% - 50vw);
+        width: 100vw;
+        height: $team-band-h;
+        background: variable.$color-about-gray-bg;
+        pointer-events: none;
+      }
+
+      //  Стрелки — по центру фото, а не по центру всей карточки с биографией
+      .team__swiper-button {
+        margin-top: $team-photo-h * 0.5 - 22px;
+      }
+    }
+  }
+
+  &__swiper {
+    min-width: 0;
+
+    //  Слайдер сжимался по содержимому и занимал две трети строки: карточка
+    //  сотрудника и полоса под фото не доходили до краёв экрана
+    @include mixins.down('sm') {
+      flex: 1 1 auto;
+    }
+  }
+
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    //  Слайды тянутся на всю высоту слайдера: только так нижний край фото
+    //  у всех сотрудников совпадает с началом тёмной полосы
+    align-items: stretch;
+  }
+
+  &__item {
+    max-width: 1240px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0 40px;
+    height: auto;
+
+    //  Фото над текстом
+    @include mixins.down('md') {
+      flex-direction: column;
+      align-items: start;
+      gap: 24px 0;
+    }
+
+    //  slidesPerView: 'auto' меряет слайд по содержимому, и он получался уже
+    //  слайдера. Тёмная полоса под фото должна идти во всю ширину карточки
+    //  justify-content: flex-start — со space-between растянутые по самому
+    //  высокому слайду карточки ставили имя на разную высоту у разных сотрудников
+    @include mixins.down('sm') {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
+
+  &__item-image-wrapper {
+    flex-shrink: 0;
+    //  Фото стоит на полосе, а не висит по центру слайда
+    align-self: end;
+    max-width: 460px;
+
+    @include mixins.down('xxl') {
+      max-width: 400px;
+    }
+
+    @include mixins.down('lg') {
+      max-width: 34%;
+    }
+
+    @include mixins.down('md') {
+      max-width: 220px;
+      align-self: center;
+    }
+
+    //  Фотография стоит на тёмной полосе. Полоса нарисована не здесь, а на
+    //  .team__swiper-wrapper-with-control: у .swiper overflow: hidden, и внутри
+    //  слайда она не могла выйти на всю ширину экрана. Поэтому высота фото
+    //  фиксирована ($team-photo-h) — полоса стоит ровно под ним у всех сотрудников.
+    //  margin-bottom = полоса + зазор: иначе имя налезало на полосу
+    @include mixins.down('sm') {
+      max-width: none;
+      width: 100%;
+      height: $team-photo-h;
+      margin-bottom: $team-band-h + 28px;
+      align-self: stretch;
+      display: flex;
+      justify-content: center;
+
+      .team__item-image {
+        width: auto;
+        max-width: 220px;
+        height: 100%;
+        object-fit: contain;
+        object-position: bottom center;
+      }
+    }
+  }
+
+  &__item-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  &__swiper-button {
+    all: unset;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    @include mixins.tap-target(44px);
+
+    @include mixins.down('md') {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__swiper-button-icon {
+    @include mixins.down('lg') {
+      width: 36px;
+      height: auto;
+    }
+
+    @include mixins.down('md') {
+      width: 22px;
+    }
+  }
+
+  &__swiper-button-prev.swiper-button-disabled,
+  &__swiper-button-next.swiper-button-disabled {
+    opacity: 0;
+    pointer-events: none;
+    cursor: default;
+    transition: opacity 0.3s ease;
+  }
+
+  &__item-title {
+    font-size: mixins.fluid(28px, 48px);
+    font-weight: 500;
+    color: variable.$color-orange-primary;
+    margin: 0 0 20px;
+
+    @include mixins.down('sm') {
+      margin: 0 0 10px;
+    }
+  }
+
+  &__item-sub-title {
+    font-size: mixins.fluid(20px, 40px);
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    margin: 0 0 20px;
+
+    @include mixins.down('sm') {
+      margin: 0 0 12px;
+    }
+  }
+
+  &__item-text {
+    font-size: mixins.fluid(15px, 20px);
+    margin: 0 0 20px;
+    max-width: 550px;
+
+    //  Биографии сильно разной длины: самая длинная растягивала слайд и
+    //  подпирала стрелку. Высота рамки фиксирована, остальное прокручивается
+    max-height: 200px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 14px;
+    scrollbar-width: thin;
+    scrollbar-color: variable.$color-orange-primary transparent;
+
+    @include mixins.down('lg') {
+      max-height: 160px;
+    }
+
+    @include mixins.down('md') {
+      max-width: none;
+      max-height: 210px;
+    }
+  }
+
+  &__item-socials-wrapper {
+    display: flex;
+    gap: 0 20px;
+  }
+
+  //  Планшет в альбомной ориентации: карточка занимала меньше половины экрана
+  //  и жалась к тёмной полосе, а сверху оставалось пустое поле в пол-экрана.
+  //  Отдаём слайдеру всю свободную высоту и тянем фото до полосы.
+  @include mixins.between('md', 'nav') {
+
+    .team__swiper-wrapper-with-control {
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .team__swiper,
+    .team__list,
+    .team__item {
+      height: 100%;
+    }
+
+    .team__item-image-wrapper {
+      max-width: 46%;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .team__item-image {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+      object-position: bottom center;
+    }
+
+    .team__item-text {
+      max-height: 190px;
+    }
+  }
+}

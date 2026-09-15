@@ -1,0 +1,150 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.methodology {
+  // position: relative;
+  color: variable.$color-black;
+  border-top: 1px solid variable.$color-black;
+  padding: 50px 0 0;
+  margin: 0 0 65px;
+
+  @include mixins.down('md') {
+    padding: 32px 0 0;
+    margin: 0 0 48px;
+  }
+
+  @include mixins.down('sm') {
+    padding: 24px 0 0;
+    margin: 0 0 36px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(850px, 880px) 1fr;
+    grid-template-areas:
+      "title image"
+      "line  image"
+      "body  image";
+    gap: 0 80px;
+    align-items: start;
+
+    @include mixins.down('xxl') {
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+      gap: 0 40px;
+    }
+
+    //  Одна колонка. Иллюстрация встаёт сразу под заголовком: в разметке она
+    //  идёт последней, и без раскладки по областям уезжала бы в самый низ
+    //  страницы, под всю простыню текста
+    @include mixins.down('md') {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas:
+        "title"
+        "line"
+        "image"
+        "body";
+      gap: 0;
+    }
+  }
+
+  &__content {
+    grid-area: body;
+  }
+
+  &__title {
+    grid-area: title;
+    font-size: mixins.fluid(28px, 50px);
+    font-weight: 700;
+    max-width: 580px;
+    margin: 0 0 40px;
+  }
+
+  &__line {
+    grid-area: line;
+    border-top: 1px solid variable.$color-black;
+    margin: 0 0 40px;
+
+    @include mixins.down('sm') {
+      margin: 0 0 24px;
+    }
+  }
+
+  &__text {
+    font-size: mixins.fluid(15px, 20px);
+    line-height: 1.5;
+    margin: 0;
+
+    //  Текста здесь на несколько экранов — на ноутбуке он не помещался
+    //  в отведённую колонку, поэтому кегль чуть меньше базового
+    @include mixins.down('xxl') {
+      font-size: 17px;
+    }
+  }
+
+  &__list {
+    margin: 0 0 40px;
+  }
+
+  &__sub-title {
+    font-size: mixins.fluid(16px, 20px);
+    font-weight: 700;
+    //  Разделы шли сплошным текстом, без единой отбивки между ними.
+    //  Верхний отступ нужен и первому: он отбивает его от вводного абзаца
+    margin: 32px 0 10px;
+  }
+
+  &__item {
+    margin: 0;
+  }
+
+  &__button-icon {
+    transition: transform .6s cubic-bezier(.55, 0, .1, 1);
+  }
+
+  &__button {
+    text-decoration: none;
+    background: variable.$color-orange-primary;
+    color: variable.$color-main;
+    height: 51px;
+    font-size: mixins.fluid(15px, 20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 13px;
+
+    @include mixins.hover-supported {
+
+      &:hover {
+        .methodology__button-icon {
+          transform: translateX(-5px);
+        }
+      }
+    }
+  }
+
+  &__image-wrapper {
+    grid-area: image;
+    position: sticky;
+    top: 40px;
+
+    //  Sticky в одноколоночной раскладке только мешает
+    @include mixins.down('md') {
+      position: static;
+      margin: 0 0 32px;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+
+    @include mixins.down('md') {
+      height: auto;
+      max-height: 420px;
+      object-fit: cover;
+    }
+  }
+}

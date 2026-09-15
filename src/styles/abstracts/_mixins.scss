@@ -1,0 +1,104 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'variables' as variable;
+
+@mixin font($name, $weight) {
+  font: {
+    family: $name;
+    weight: $weight;
+    display: swap;
+  }
+  src: url('/fonts/#{ $name }-#{ $weight }.woff2') format("woff2"),
+      url('/fonts/#{ $name }-#{ $weight }.woff') format("woff");
+}
+
+
+// ─────────────────────────────────────────────
+//  Адаптив: карта брейкпоинтов и медиа-миксины
+// ─────────────────────────────────────────────
+
+$breakpoints: (
+  'xxl': variable.$bp-xxl,
+  'xl':  variable.$bp-xl,
+  'lg':  variable.$bp-lg,
+  'nav': variable.$bp-nav,
+  'md':  variable.$bp-md,
+  'sm':  variable.$bp-sm,
+  'xs':  variable.$bp-xs,
+  'xxs': variable.$bp-xxs,
+);
+
+//  Принимает ключ из карты ('md') либо произвольное значение (900px)
+@function bp($key) {
+  @if map.has-key($breakpoints, $key) {
+    @return map.get($breakpoints, $key);
+  }
+  @return $key;
+}
+
+//  Стили применяются на экранах УЖЕ указанного (desktop-first)
+@mixin down($key) {
+  @media (max-width: bp($key)) {
+    @content;
+  }
+}
+
+//  Стили применяются на экранах ШИРЕ указанного (mobile-first)
+@mixin up($key) {
+  @media (min-width: bp($key) + 0.02px) {
+    @content;
+  }
+}
+
+//  Диапазон между двумя брейкпоинтами
+@mixin between($from, $to) {
+  @media (min-width: bp($from) + 0.02px) and (max-width: bp($to)) {
+    @content;
+  }
+}
+
+//  Низкий экран в горизонтальной ориентации (телефон "на боку")
+@mixin landscape-short {
+  @media (max-height: 600px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+//  Только устройства с настоящим курсором — hover-эффекты
+@mixin hover-supported {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}
+
+//  Сенсорные устройства
+@mixin touch {
+  @media (hover: none), (pointer: coarse) {
+    @content;
+  }
+}
+
+
+// ─────────────────────────────────────────────
+//  Плавная (fluid) типографика и размеры
+// ─────────────────────────────────────────────
+
+//  Округление до трёх знаков — иначе clamp() распухает от хвостов вроде 7.7631578947
+@function -round3($number) {
+  @return math.div(math.round($number * 1000), 1000);
+}
+
+//  fluid(20px, 40px) → clamp() c линейной интерполяцией между $min-vw и $max-vw
+@function fluid($min, $max, $min-vw: variable.$bp-xxs, $max-vw: variable.$container-max) {
+  $slope: math.div($max - $min, $max-vw - $min-vw);
+  $intercept: -round3($min - $slope * $min-vw);
+  $vw: -round3($slope * 100);
+
+  @return clamp(#{$min}, calc(#{$intercept} + #{$vw}vw), #{$max});
+}
+
+//  Гарантированно кликабельная зона на сенсорных экранах
+@mixin tap-target($size: 44px) {
+  min-width: $size;
+  min-height: $size;
+}

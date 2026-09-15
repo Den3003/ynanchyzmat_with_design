@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en" data-theme="night" data-hero-first="theme">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <load src="/src/html/head.html" />
+
+    <!-- ==========================================================
+      СКРИПТ A — тема + preload LCP-картинки.
+      Стоит ПЕРВЫМ, до любых стилей. Выполняется синхронно,
+      до первой отрисовки, поэтому мигания темы не будет.
+      Написан на ES5: он не проходит через esbuild.
+    ========================================================== -->
+    <script>
+    (function () {
+      var BASE = '%BASE_URL%';
+      var root = document.documentElement;
+      var theme = 'night';
+
+      // Час по Ашхабаду, а не по часам пользователя
+      try {
+        var h = Number(new Intl.DateTimeFormat('en-GB', {
+          timeZone: 'Asia/Ashgabat',
+          hour: '2-digit',
+          hourCycle: 'h23'
+        }).format(new Date()));
+
+        theme = (h >= 20 || h < 8) ? 'night' : 'day';
+      } catch (e) {
+        // Экзотический браузер без Intl — остаёмся на 'night'
+      }
+
+      // Переопределение для отладки: ?theme=day
+      var qs = location.search.match(/[?&]theme=(day|night)/);
+      if (qs) theme = qs[1];
+
+      root.setAttribute('data-theme', theme);
+
+      // Preload только если тематический слайд первый (он же LCP).
+      // На внутренних страницах и при другом порядке слайдов — выходим.
+      if (root.getAttribute('data-hero-first') !== 'theme') return;
+
+      var isMobile = window.matchMedia('(max-width: 767px)').matches;
+      var name = 'hero-' + theme + (isMobile ? '-m' : '');
+
+      var l = document.createElement('link');
+      l.rel = 'preload';
+      l.as = 'image';
+      l.type = 'image/avif';
+      l.fetchPriority = 'high';
+      l.href = BASE + 'img/hero/' + name + '.avif';
+      // imageSrcset обязателен, иначе браузер скачает файл дважды
+      l.imageSrcset = BASE + 'img/hero/' + name + '.avif 1x, '
+                    + BASE + 'img/hero/' + name + '@2x.avif 2x';
+      document.head.appendChild(l);
+    })();
+  </script>
+    <link rel="preload" href="/fonts/Futura-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Futura-500.woff2" as="font" type="font/woff2" crossorigin>
+    <title>Main | Ynanchyzmat</title>
+  </head>
+  <body class="main-body">
+    <load src="/src/html/loader.html" />
+
+    <script>
+      /* Оверлей скрывается после загрузки страницы, но не раньше, чем
+         проиграет вся секвенция (2.95 с). MIN_MS можно менять. */
+      (function () {
+        var MIN_MS = 2950, start = Date.now();
+        function hide() {
+          var wait = Math.max(0, MIN_MS - (Date.now() - start));
+          setTimeout(function () {
+            var el = document.getElementById('yh-loader');
+            if (el) el.classList.add('yh-hidden');
+          }, wait);
+        }
+        if (document.readyState === 'complete') hide();
+        else window.addEventListener('load', hide);
+      })();
+    </script>
+
+    <load src="/src/html/header.html" />
+    
+    <main class="main-swiper swiper">
+        <section class="swiper-wrapper">
+          <h1 class="visually-hidden">Ynanch Hyzmat</h1>
+          <section class="swiper-slide">
+            <div class="container main-celebration">
+              <div class="main-celebration__background" data-theme-slide>
+                <!-- <img class="main-celebration__image" src="/src/assets/images/main/oil-rigs-night.jpg" alt=""> -->
+
+                <picture class="main-celebration__wrapper-image">
+
+                  <!-- мобильный кроп -->
+                  <source data-srcset="/img/hero/hero-{theme}-m.avif 1x, /img/hero/hero-{theme}-m@2x.avif 2x"
+                          media="(max-width: 767px)" type="image/avif">
+                  <source data-srcset="/img/hero/hero-{theme}-m.webp 1x, /img/hero/hero-{theme}-m@2x.webp 2x"
+                          media="(max-width: 767px)" type="image/webp">
+                  <source data-srcset="/img/hero/hero-{theme}-m.jpg 1x, /img/hero/hero-{theme}-m@2x.jpg 2x"
+                          media="(max-width: 767px)">
+
+                  <!-- десктоп -->
+                  <source data-srcset="/img/hero/hero-{theme}.avif 1x, /img/hero/hero-{theme}@2x.avif 2x"
+                          type="image/avif">
+                  <source data-srcset="/img/hero/hero-{theme}.webp 1x, /img/hero/hero-{theme}@2x.webp 2x"
+                          type="image/webp">
+                  <img class="main-celebration__image" data-src="/img/hero/hero-{theme}.jpg" alt=""
+                      data-srcset="/img/hero/hero-{theme}.jpg 1x, /img/hero/hero-{theme}@2x.jpg 2x"
+                      width="1920" height="1080"
+                      fetchpriority="high" decoding="async" draggable="false">
+                </picture>
+              </div>
+              <div class="main-celebration__block result-section" id="main-celebration" data-slide-index="0">
+                <h2 class="main-celebration__title">
+                  This year, ES Ynanch Hyzmat proudly celebrates its 10th anniversary
+                </h2>
+
+                <p class="main-celebration__text">
+                  A significant milestone that reflects a decade of dedication, growth,
+                  and successful partnership. Over the years, the company has established
+                  itself as a reliable EPC and industrial service provider,
+                  contributing to the development of Turkmenistan’s oil and gas, chemical,
+                  and energy sectors.
+                </p>
+
+                <button class="main-celebration__button" type="button">
+                  Read the CEO's Message
+                  <svg class="main-celebration__arrow" aria-hidden="true" width="18" height="16">
+                    <use href="#icon-arrow-right"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="swiper-slide">
+            <div class="container main-analyzers">
+              <div class="main-analyzers__background">
+                <!-- <img class="main-analyzers__image" src="/src/assets/images/main/analyzers.jpg" alt=""> -->
+                <picture class="main-analyzers__wrapper-image">
+                  <!-- мобильный кроп -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- type="image/avif" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                          <!-- width="768" height="1024"> -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- type="image/webp" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                          <!-- width="768" height="1024"> -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                          <!-- width="768" height="1024"> -->
+
+                  <!-- десктоп -->
+                  <source type="image/avif"
+                          srcset="/src/assets/images/main/analyzers.avif 1x, /src/assets/images/main/analyzers@2x.avif 2x">
+                  <source type="image/webp"
+                          srcset="/src/assets/images/main/analyzers.webp 1x, /src/assets/images/main/analyzers@2x.webp 2x">
+
+                  <img class="main-analyzers__image"
+                      src="/src/assets/images/main/analyzers.jpg"
+                      srcset="/src/assets/images/main/analyzers.jpg 1x, /src/assets/images/main/analyzers@2x.jpg 2x"
+                      alt=""
+                      width="1920" height="1080"
+                      loading="lazy"
+                      decoding="async"
+                      draggable="false">
+                </picture>
+              </div>
+              <div class="main-analyzers__block result-section" id="main-analyzers" data-slide-index="1">
+                <h2 class="main-analyzers__title">
+                  Ynanch Hyzmat supplies of analyzers
+                </h2>
+                
+                <button class="main-analyzers__button">
+                  Learn More
+                  <svg class="main-analyzers__arrow" aria-hidden="true" width="18" height="16">
+                    <use href="#icon-arrow-right"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="swiper-slide">
+            <div class="container main-h2s">
+              <div class="main-h2s__background">
+                <!-- <img class="main-h2s__image" src="/src/assets/images/main/h2s.jpg" alt=""> -->
+                <picture class="main-h2s__wrapper-image">
+                  <!-- мобильный кроп -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- type="image/avif" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                          <!-- width="768" height="1024"> -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- type="image/webp" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                          <!-- width="768" height="1024"> -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                          <!-- width="768" height="1024"> -->
+
+                  <!-- десктоп -->
+                  <source type="image/avif"
+                          srcset="/src/assets/images/main/h2s.avif 1x, /src/assets/images/main/h2s@2x.avif 2x">
+                  <source type="image/webp"
+                          srcset="/src/assets/images/main/h2s.webp 1x, /src/assets/images/main/h2s@2x.webp 2x">
+
+                  <img class="main-h2s__image"
+                      src="/src/assets/images/main/h2s.jpg"
+                      srcset="/src/assets/images/main/h2s.jpg 1x, /src/assets/images/main/h2s@2x.jpg 2x"
+                      alt=""
+                      width="1920" height="1080"
+                      loading="lazy"
+                      decoding="async"
+                      draggable="false">
+                </picture>
+              </div>
+              <div class="main-h2s__block result-section" id="main-h2s" data-slide-index="2">
+                <h2 class="main-h2s__title">
+                  Ynanch Hyzmat H2S dispersion modelling system
+                </h2>
+                
+                <button class="main-h2s__button">
+                  Learn More
+                  <svg class="main-h2s__arrow" aria-hidden="true" width="18" height="16">
+                    <use href="#icon-arrow-right"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="swiper-slide">
+            <div class="container main-laboratory">
+              <div class="main-laboratory__background">
+                <!-- <img class="main-laboratory__image" src="/src/assets/images/main/labaratory.jpg" alt=""> -->
+                 <picture class="main-laboratory__wrapper-image">
+                  <!-- мобильный кроп -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- type="image/avif" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                          <!-- width="768" height="1024"> -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- type="image/webp" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                          <!-- width="768" height="1024"> -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                          <!-- width="768" height="1024"> -->
+
+                  <!-- десктоп -->
+                  <source type="image/avif"
+                          srcset="/src/assets/images/main/labaratory.avif 1x, /src/assets/images/main/labaratory@2x.avif 2x">
+                  <source type="image/webp"
+                          srcset="/src/assets/images/main/labaratory.webp 1x, /src/assets/images/main/labaratory@2x.webp 2x">
+
+                  <img class="main-laboratory__image"
+                      src="/src/assets/images/main/labaratory.jpg"
+                      srcset="/src/assets/images/main/labaratory.jpg 1x, /src/assets/images/main/labaratory@2x.jpg 2x"
+                      alt=""
+                      width="1920" height="1080"
+                      loading="lazy"
+                      decoding="async"
+                      draggable="false">
+                </picture>
+              </div>
+              <div class="main-laboratory__block result-section" id="main-laboratory" data-slide-index="3">
+                <h2 class="main-laboratory__title">
+                  Laboratory services for industrial sector
+                </h2>
+                
+                <button class="main-laboratory__button">
+                  Learn More
+                  <svg class="main-laboratory__arrow" aria-hidden="true" width="18" height="16">
+                    <use href="#icon-arrow-right"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+
+
+
+          <nav class="main-swiper__progress-bar" aria-label="Slide navigation">
+            <div class="container">
+              <div class="main-swiper__progress-flex">
+                <button
+                  type="button"
+                  data-index="0"
+                  class="main-swiper__progress-item"
+                  aria-current="true"
+                  aria-label="Go to slide 1 of 4"
+                >
+                  <span class="main-swiper__progress-line">
+                    <span class="main-swiper__progress-fill"></span>
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  data-index="1"
+                  class="main-swiper__progress-item"
+                  aria-label="Go to slide 2 of 4"
+                >
+                  <span class="main-swiper__progress-line">
+                    <span class="main-swiper__progress-fill"></span>
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  data-index="2"
+                  class="main-swiper__progress-item"
+                  aria-label="Go to slide 3 of 4"
+                >
+                  <span class="main-swiper__progress-line">
+                    <span class="main-swiper__progress-fill"></span>
+                  </span>
+                </button>
+
+                <button
+                  type="button"
+                  data-index="3"
+                  class="main-swiper__progress-item"
+                  aria-label="Go to slide 4 of 4"
+                >
+                  <span class="main-swiper__progress-line">
+                    <span class="main-swiper__progress-fill"></span>
+                  </span>
+                </button>
+
+              </div>
+            </div>
+          </nav>
+        </section>
+
+        <!-- ==========================================================
+        СКРИПТ B — подстановка путей в тематический слайд.
+        Стоит сразу после hero и ДО main.js (модули = defer),
+        поэтому Swiper склонирует уже готовую разметку.
+        ========================================================== -->
+        <script>
+      (function () {
+        var t = document.documentElement.getAttribute('data-theme') || 'night';
+        var slides = document.querySelectorAll('[data-theme-slide]');
+
+        for (var s = 0; s < slides.length; s++) {
+          var nodes = slides[s].querySelectorAll('[data-srcset], [data-src]');
+
+          for (var i = 0; i < nodes.length; i++) {
+            var n = nodes[i];
+            if (n.getAttribute('data-srcset')) {
+              n.srcset = n.getAttribute('data-srcset').split('{theme}').join(t);
+            }
+            if (n.getAttribute('data-src')) {
+              n.src = n.getAttribute('data-src').split('{theme}').join(t);
+            }
+          }
+        }
+      })();
+    </script>
+        
+    </main>
+
+
+    <!------- Modal main-celebration ------->
+    <div class="modal">
+      <div class="modal__background">
+        <article class="container modal__container">
+          <div class="modal__overflow">
+            <div class="modal__flex">
+              <!-- Left column -->
+              <div class="modal__author">
+                <figure class="modal__figure">
+
+                  <div class="modal__image-wrapper">
+                    <img class="modal__image" src="src/assets/images/team/vladimir.png" alt="The man in the suit" width="220" height="211">
+                  </div>
+
+                  <figcaption>
+                    <p class="modal__author-name">
+                      Vladimir Kadyrov
+                    </p>
+                    <p class="modal__author-post">
+                      <span class="modal__author-span">CEO</span> of ES Ynanch Hyzmat
+                    </p>
+                  </figcaption>
+
+                </figure>
+                <button class="modal__close" type="button">
+                  Close the message
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.2097 4.3871L4.29289 4.29289C4.65338 3.93241 5.22061 3.90468 5.6129 4.2097L5.70711 4.29289L12 10.585L18.2929 4.29289C18.6834 3.90237 19.3166 3.90237 19.7071 4.29289C20.0976 4.68342 20.0976 5.31658 19.7071 5.70711L13.415 12L19.7071 18.2929C20.0676 18.6534 20.0953 19.2206 19.7903 19.6129L19.7071 19.7071C19.3466 20.0676 18.7794 20.0953 18.3871 19.7903L18.2929 19.7071L12 13.415L5.70711 19.7071C5.31658 20.0976 4.68342 20.0976 4.29289 19.7071C3.90237 19.3166 3.90237 18.6834 4.29289 18.2929L10.585 12L4.29289 5.70711C3.93241 5.34662 3.90468 4.77939 4.2097 4.3871L4.29289 4.29289L4.2097 4.3871Z" fill="white" />
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Right column -->
+              <div class="modal__description">
+                <p class="modal__description-title">
+                  Dear Partners and Colleagues,
+                </p>
+                <div class="modal__description-grid">
+                  <div class="modal__description-left">
+                    <p class="modal__description-text">
+                      For more than ten years, ES “Ynanch Hyzmat” has been actively contributing to the development of Turkmenistan’s
+                      oil and gas, chemical, and energy sectors by providing EPC solutions and comprehensive technical services.
+                    </p>
+                    
+                    <p class="modal__description-text">
+                      Since its establishment, our company has built its operations on the principles of professionalism, reliability,
+                      and long-term partnership. Over the years, we have developed a strong engineering and production foundation,
+                      assembled a team of highly qualified specialists, and gained practical experience in implementing projects of varying levels of complexity.
+                    </p>
+                    
+                    <p class="modal__description-text">
+                      We firmly believe that sustainable business growth is impossible without continuous improvement. Therefore, we place particular emphasis on
+                      developing technical competencies, implementing modern technologies, and enhancing our quality management system in accordance with international standards.
+                    </p>
+                  </div>
+                  <div class="modal__description-right">
+                    <p class="modal__description-text">
+                      The greatest value of our company is its people - the specialists who contribute every day to the successful execution of projects and to strengthening
+                      the trust of our clients and partners. Thanks to their professionalism and dedication, “Ynanch Hyzmat” continues to strengthen its position as a reliable EPC and service partner.
+                    </p>
+                    
+                    <p class="modal__description-text">
+                      We look confidently toward the future and are ready to undertake new large-scale projects both in Turkmenistan and beyond, creating additional value for our customers and
+                      contributing to the development of the region’s energy industry.
+                    </p>
+                    
+                    <p class="modal__description-text">
+                      On behalf of the entire team of ES “Ynanch Hyzmat”, I would like to express my sincere gratitude to our clients, partners, and employees for their trust and fruitful cooperation.
+                      I am confident that many new achievements and successful joint projects lie ahead of us.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!------- Modal main-analyzers ------->
+    
+    <div class="modal-analyzers">
+      <div class="modal-analyzers__background">
+        <div class="container modal-analyzers__container">
+          <div class="modal-analyzers__flex">
+
+            <!------- modal-analyzers  title ------->
+            <p class="modal-analyzers__title">
+              Analyzer Systems & Services
+            </p>
+
+            <!------- modal-analyzers  content ------->
+            <div class="modal-analyzers__content">
+
+              <!------- modal-analyzers  content-left ------->
+              <div class="modal-analyzers__content-left">
+                <p class="modal-analyzers__text">
+                  Comprehensive support for process and environmental
+                  analyzer systems across their full lifecycle — from
+                  assessment and maintenance to calibration, supply, engineering,
+                  and commissioning — keeping your measurement equipment accurate,
+                  reliable, and compliant.
+                </p>
+
+                <p class="modal-analyzers__text modal-analyzers__text_dot">
+                  Assessment & Diagnostics<br/>
+                  Technical audit and condition assessment · Troubleshooting and
+                  fault diagnosis · Obsolescence assessment and replacement recommendations
+                </p>
+
+                <p class="modal-analyzers__text modal-analyzers__text_dot modal-analyzers__text_margin">
+                  Maintenance & Repair<br/>
+                  Preventive and corrective maintenance · Analyzer repair and component
+                  replacement · Sample conditioning system maintenance and upgrade · Sample lines,
+                  filters, regulators, flowmeters and accessories · Analyzer shelter / analyzer
+                  house equipment support
+                </p>
+
+                <!------- modal-analyzers  button ------->
+
+                <button class="modal-analyzers__close" type="button">
+                  Close the message
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.2097 4.3871L4.29289 4.29289C4.65338 3.93241 5.22061 3.90468 5.6129 4.2097L5.70711 4.29289L12 10.585L18.2929 4.29289C18.6834 3.90237 19.3166 3.90237 19.7071 4.29289C20.0976 4.68342 20.0976 5.31658 19.7071 5.70711L13.415 12L19.7071 18.2929C20.0676 18.6534 20.0953 19.2206 19.7903 19.6129L19.7071 19.7071C19.3466 20.0676 18.7794 20.0953 18.3871 19.7903L18.2929 19.7071L12 13.415L5.70711 19.7071C5.31658 20.0976 4.68342 20.0976 4.29289 19.7071C3.90237 19.3166 3.90237 18.6834 4.29289 18.2929L10.585 12L4.29289 5.70711C3.93241 5.34662 3.90468 4.77939 4.2097 4.3871L4.29289 4.29289L4.2097 4.3871Z" fill="white" />
+                  </svg>
+                </button>
+              </div>
+
+              <!------- modal-analyzers  content-middle ------->
+              <div class="modal-analyzers__content-middle">
+
+                <p class="modal-analyzers__text modal-analyzers__text_dot">
+                  Calibration & Certification<br/>
+                  Calibration, verification and performance testing · Coordination
+                  of OEM / overseas calibration and certification
+                </p>
+
+                <p class="modal-analyzers__text modal-analyzers__text_dot">
+                  Supply & Spare Parts<br/>
+                  Supply of spare parts, consumables and replacement analyzers · Preparation
+                  of recommended spare parts lists
+                </p>
+
+                <p class="modal-analyzers__text modal-analyzers__text_dot">
+                  Engineering & Modernization<br/>
+                  Analyzer modernization and upgrade · Analyzer system engineering and modification
+                </p>
+
+                <p class="modal-analyzers__text modal-analyzers__text_dot">
+                  Installation & Commissioning<br/>
+                  Installation, supervision and commissioning · Loop checking and
+                  functional testing · Start-up and performance verification
+                </p>
+
+                <p class="modal-analyzers__text modal-analyzers__text_dot">
+                  Ongoing Support & Documentation<br/>
+                  Development of preventive maintenance programs · Long-term service agreements and
+                  resident technical support · OEM technical support coordination · Technical
+                  documentation, service reports and maintenance records · Operator and
+                  maintenance personnel training
+                </p>
+              </div>
+
+              <div class="modal-analyzers__content-right">
+                <p class="modal-analyzers__right-sub-title">Analyzer Types We Support</p>
+                <ul class="modal-analyzers__list">
+                  <li class="modal-analyzers__item">
+                    Gas Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    Oxygen Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    Moisture / Dew Point Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    H₂S Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    Hydrocarbon Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    Gas Chromatographs
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    Water Quality Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    pH / ORP Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    Conductivity Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    Silica Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    Sodium Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    Dissolved Oxygen Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    Turbidity Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    TOC Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    Oil-in-Water Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    Stack / Emission Monitoring Analyzers
+                  </li>
+
+                  <li class="modal-analyzers__item">
+                    Environmental Monitoring Analyzers
+                  </li>
+
+                </ul>
+              </div>
+            
+            </div>
+
+            
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!------- Modal main-h2s ------->
+    
+    <div class="modal-h2s">
+      <div class="modal-h2s__background">
+        <div class="container modal-h2s__container">
+          <div class="modal-h2s__flex">
+
+            <!------- main-h2s  title ------->
+            <p class="modal-h2s__title">
+              H₂S Dispersion Assessment & Modelling
+            </p>
+
+            <!------- main-h2s  content ------->
+            <div class="modal-h2s__content">
+
+            <!------- main-h2s  content-left ------->
+              <div class="modal-h2s__content-left">
+                <p class="modal-h2s__text">
+                  Advanced Modelling for Safer Oil & Gas Operations<br/>
+                  ES Ynanch Hyzmat delivers H₂S Dispersion Assessment
+                  and Modelling Services to support informed safety
+                  engineering, emergency preparedness, and risk-based
+                  decision-making across oil and gas facilities.
+                </p>
+                <p class="modal-h2s__text">
+                  Using advanced PHAST 2D and FLACS CFD modelling,
+                  we evaluate credible H₂S release scenarios and
+                  atmospheric dispersion behaviour to determine
+                  potential toxic exposure zones, hazardous areas,
+                  and safety-critical impacts.
+                </p>
+              </div>
+
+              <!------- main-h2s  content-right ------->
+              <div class="modal-h2s__content-right">
+                <p class="modal-h2s__text">
+                  Our assessments support the engineering and optimisation of:
+                </p>
+
+                <ul class="modal-h2s__list">
+
+                  <li class="modal-h2s__item">
+                    H₂S dispersion and toxic hazard modelling
+                  </li>
+
+                  <li class="modal-h2s__item">
+                    ⁠Consequence assessment for accidental gas releases
+                  </li>
+
+                  <li class="modal-h2s__item">
+                    Gas detector and monitoring system placement
+                  </li>
+
+                  <li class="modal-h2s__item">
+                    ⁠Muster point selection and safe evacuation planning
+                  </li>
+
+                  <li class="modal-h2s__item">
+                    ⁠Emergency response and contingency planning
+                  </li>
+
+                  <li class="modal-h2s__item">
+                    Risk reduction and mitigation measures
+                  </li>
+
+                  <li class="modal-h2s__item">
+                    Advanced 3D CFD analysis for complex release scenarios
+                  </li>
+
+                </ul>
+
+                <p class="modal-h2s__text">
+                  By combining engineering expertise, advanced computational
+                  modelling, and practical risk assessment, we help operators
+                  enhance process safety, protect personnel, strengthen
+                  emergency response, and improve the overall resilience
+                  of their facilities.
+                </p>
+              </div>
+            </div>
+
+            <!------- main-h2s  button ------->
+
+            <button class="modal-h2s__close" type="button">
+              Close the message
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.2097 4.3871L4.29289 4.29289C4.65338 3.93241 5.22061 3.90468 5.6129 4.2097L5.70711 4.29289L12 10.585L18.2929 4.29289C18.6834 3.90237 19.3166 3.90237 19.7071 4.29289C20.0976 4.68342 20.0976 5.31658 19.7071 5.70711L13.415 12L19.7071 18.2929C20.0676 18.6534 20.0953 19.2206 19.7903 19.6129L19.7071 19.7071C19.3466 20.0676 18.7794 20.0953 18.3871 19.7903L18.2929 19.7071L12 13.415L5.70711 19.7071C5.31658 20.0976 4.68342 20.0976 4.29289 19.7071C3.90237 19.3166 3.90237 18.6834 4.29289 18.2929L10.585 12L4.29289 5.70711C3.93241 5.34662 3.90468 4.77939 4.2097 4.3871L4.29289 4.29289L4.2097 4.3871Z" fill="white" />
+              </svg>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!------- Modal main-laboratory ------->
+    
+    <div class="modal-laboratory">
+      <div class="modal-laboratory__background">
+        <div class="container modal-laboratory__container">
+          <div class="modal-laboratory__flex">
+
+            <!------- main-laboratory  title ------->
+            <p class="modal-laboratory__title">
+              Laboratory Services
+            </p>
+
+            <!------- main-laboratory  content ------->
+            <div class="modal-laboratory__content">
+
+              <!------- main-laboratory  content-left ------->
+              <div class="modal-laboratory__content-left">
+                <p class="modal-laboratory__text">
+                  Ynanch Hyzmat provides comprehensive laboratory solutions for the
+                  industrial, chemical, and oil & gas sectors - from laboratory
+                  design and equipment supply to commissioning, analytical testing,
+                  and ongoing technical support.
+                </p>
+
+                <p class="modal-laboratory__sub-title">Our Services</p>
+
+                <p class="modal-laboratory__text modal-laboratory__text_dot">
+                  Turnkey Laboratory Solutions<br/>
+                  Design, equipment selection and supply,
+                  installation, commissioning, calibration,
+                  and personnel training for new and existing
+                  laboratories.
+                </p>
+
+                <p class="modal-laboratory__text modal-laboratory__text_dot">
+                  Chemical & Analytical Testing<br/>
+                  High-precision analysis of raw materials, process
+                  products, gases, chemicals, polymers, and finished
+                  products, including gas chromatography
+                  and quality control.
+                </p>
+              </div>
+
+              <!------- main-laboratory  content-right ------->
+              <div class="modal-laboratory__content-right">
+
+                <p class="modal-laboratory__text modal-laboratory__text_dot">
+                  Calibration & Technical Maintenance<br/>
+                  Calibration, verification, diagnostics,
+                  preventive maintenance, repair, and optimisation
+                  of laboratory and analytical equipment.
+                </p>
+
+                <p class="modal-laboratory__text modal-laboratory__text_dot">
+                  Laboratory Audits & Modernisation<br/>
+                  Assessment of existing laboratory facilities and
+                  equipment, with recommendations for restoration,
+                  modernisation, and improved performance.
+                </p>
+
+                <p class="modal-laboratory__text modal-laboratory__text_dot">
+                  Arbitration Analysis<br/>
+                  Independent sampling and control analysis at client
+                  facilities to support the objective resolution of
+                  product quality and measurement disputes.
+                </p>
+
+                <p class="modal-laboratory__text modal-laboratory__text_dot">
+                  Reliable Laboratory Solutions for Critical Industrial Operations<br/>
+                  We help our clients maintain accurate measurements,
+                  reliable quality control, and efficient laboratory
+                  performance throughout the entire lifecycle of their facilities.
+                </p>
+              </div>
+            
+            </div>
+
+            <!------- main-laboratory  button ------->
+
+            <button class="modal-laboratory__close" type="button">
+              Close the message
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.2097 4.3871L4.29289 4.29289C4.65338 3.93241 5.22061 3.90468 5.6129 4.2097L5.70711 4.29289L12 10.585L18.2929 4.29289C18.6834 3.90237 19.3166 3.90237 19.7071 4.29289C20.0976 4.68342 20.0976 5.31658 19.7071 5.70711L13.415 12L19.7071 18.2929C20.0676 18.6534 20.0953 19.2206 19.7903 19.6129L19.7071 19.7071C19.3466 20.0676 18.7794 20.0953 18.3871 19.7903L18.2929 19.7071L12 13.415L5.70711 19.7071C5.31658 20.0976 4.68342 20.0976 4.29289 19.7071C3.90237 19.3166 3.90237 18.6834 4.29289 18.2929L10.585 12L4.29289 5.70711C3.93241 5.34662 3.90468 4.77939 4.2097 4.3871L4.29289 4.29289L4.2097 4.3871Z" fill="white" />
+              </svg>
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <load src="/src/html/footer.html" />
+
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

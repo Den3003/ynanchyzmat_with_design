@@ -1,0 +1,340 @@
+@use '../abstracts/variables' as variable;
+@use '../abstracts/mixins' as mixins;
+
+.search-wrapper {
+  position: relative;
+  width: min(330px, 78vw);
+  justify-self: end;
+  flex-shrink: 0;
+
+  @include mixins.down('xl') {
+    width: min(280px, 60vw);
+  }
+
+  //  Поиск прижат к правому краю, сразу перед бургером
+  @include mixins.down('nav') {
+    order: 1;
+    margin-left: auto;
+  }
+
+  //  На телефоне свёрнутый поиск — только круглая иконка,
+  //  а раскрытый занимает всю свободную ширину строки
+  //  (место освобождает скрытый логотип, см. _header.scss)
+  @include mixins.down('sm') {
+    width: 44px;
+
+    &:has(.search.is-expanded) {
+      flex: 1 1 auto;
+      width: auto;
+      margin-left: 0;
+    }
+  }
+}
+
+.search {
+   /* ============== SEARCH WRAPPER ============== */
+
+  // position: relative;
+  display: flex;
+  align-items: center;
+  // border-radius: 20px;
+  background: variable.$color-main;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+  // width: 143px;
+  // width: min(330px, 78vw);
+  width: 100%;
+  height: 41px;
+  clip-path: inset(0 0 0 calc(100% - 143px) round 20px);
+  @media (max-width: variable.$bp-xl) {
+    clip-path: inset(0 0 0 calc(100% - 120px) round 20px);
+  }
+  @media (max-width: variable.$bp-sm) {
+    height: 44px;
+    clip-path: inset(0 0 0 calc(100% - 44px) round 22px);
+  }
+  transition: 
+    // width 0.32 cubic-bezier(0.4, 0, 0.2, 1),
+    clip-path 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s ease;
+    // transform 0.15s ease;
+    // z-index: -1;
+  will-change: clip-path;
+  
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.24);
+
+    .search__icon {
+      transform: scale(1.08);
+    }
+  }
+
+  &.is-expanded {
+    clip-path: inset(0 0 0 0 round 20px);
+    // width: min(340px, 78vw);
+    // background: var(--pill-bg-hover);
+
+    .search__panel {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .search__trigger {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  &:active .search__trigger {
+    transform: scale(0.98);
+  }
+
+  &__trigger {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 0 30px 0 0;
+    gap: 0 13px;
+    color: variable.$color-black;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:focus-visible {
+      outline: 2px solid variable.$color-orange-primary;
+      outline-offset: 3px;
+      border-radius: 20px;
+    }
+
+    @include mixins.down('xl') {
+      font-size: 17px;
+      padding: 0 22px 0 0;
+    }
+
+    //  Надпись "Search" уступает место иконке
+    @include mixins.down('sm') {
+      justify-content: center;
+      padding: 0;
+
+      span {
+        display: none;
+      }
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  &__panel {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease 0.05s;
+  }
+
+  &__panel-icon {
+    margin-left: 20px;
+    flex-shrink: 0;
+
+    @include mixins.down('sm') {
+      margin-left: 14px;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0 0 0 15px;
+    min-width: 0;
+    font-size: 20px;
+
+    @include mixins.down('xl') {
+      font-size: 17px;
+    }
+
+    //  Меньше 16px — iOS зумит страницу при фокусе
+    @include mixins.down('sm') {
+      font-size: 16px;
+      padding: 0 0 0 12px;
+    }
+  }
+
+  &__close {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 9px 0 0;
+    // background: variable.$color-orange-primary;
+    color: variable.$color-gray;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background: rgba(0,0,0,0.06);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+  }
+
+  /* ============== RESULTS DROPDOWN ============== */
+
+  &__results {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.28);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    max-height: 340px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    @include mixins.down('sm') {
+      max-height: min(60vh, 340px);
+    }
+    // z-index: 0;
+
+    &.is-open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+
+  &__result {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    padding: 12px 18px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--pill-text);
+    font-family: inherit;
+
+    &:hover {
+      background: #f4f2f0;
+    }
+
+    &.is-active {
+      background: #f4f2f0;
+    }
+
+    &-title {
+      color: variable.$color-black;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    &-meta {
+      color: variable.$color-gray;
+      font-size: 12px;
+      color: #8a8a8f;
+    }
+  }
+
+  &__hint {
+    padding: 16px 18px;
+    font-size: 13px;
+    color: #8a8a8f;
+  }
+
+  &__empty {
+    padding: 16px 18px;
+    font-size: 13px;
+    color: #8a8a8f;
+  }
+
+  &.search_black {
+
+    .search__trigger {
+      border: 1px solid variable.$color-black;
+      padding: 0;
+      justify-content: center;
+      width: 143px;
+      height: 41px;
+
+      @include mixins.down('xl') {
+        width: 120px;
+      }
+
+      @include mixins.down('sm') {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+      }
+    }
+
+    & {
+      justify-content: end;
+      clip-path: inset(0 0 0 calc(100% - 146px) round 20px);
+      height: 44px;
+
+      @include mixins.down('xl') {
+        clip-path: inset(0 0 0 calc(100% - 122px) round 20px);
+      }
+
+      @include mixins.down('sm') {
+        clip-path: inset(0 0 0 calc(100% - 44px) round 22px);
+      }
+
+      &.is-expanded {
+        clip-path: inset(0 0 0 0);
+        // width: min(340px, 78vw);
+        // background: var(--pill-bg-hover);
+
+        .search__panel {
+          opacity: 1;
+          pointer-events: auto;
+          border: 1px solid variable.$color-black;
+          border-radius: 20px;
+        }
+
+        .search__trigger {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}
+
+
+/* target section highlight when jumping from a result */
+.result-section {
+  // background-color: #fff2d6;
+  // scroll-margin-top: 24px;
+  transition: background-color 0.6s ease;
+
+  &.is-flashed {
+    background-color: #faf9f66e;
+  }
+}
