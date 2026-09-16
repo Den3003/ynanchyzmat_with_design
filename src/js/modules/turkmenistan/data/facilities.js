@@ -113,12 +113,12 @@ export const PROJECTS = [
   // Тот самый оранжевый круг у Ашхабада — редактируется целиком отсюда.
   {
     type: 'equipment',
-    at: [58.3, 37.85],
+    at: [58.3, 37.75],
     size: 'lg',
-    title: 'ÝANYJY HAZYNA',
-    diameter: 58,
+    title: 'YNANCH HYZMAT',
+    diameter: 48,
     fontSize: 7,
-    color: '#F07E26',
+    color: '#f37021',
     textColor: '#ffffff',
     glow: 1,
   },
