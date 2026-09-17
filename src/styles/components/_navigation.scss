@@ -197,6 +197,10 @@
     flex-direction: column;
     justify-content: center;
 
+    &-safety {
+      padding: 30px;
+    }
+
     @include mixins.down('nav') {
       padding: 16px 24px 0;
     }

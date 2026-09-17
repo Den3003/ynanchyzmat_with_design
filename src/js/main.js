@@ -214,7 +214,7 @@ const swiperAboutClient = new Swiper('.about__clients .swiper', {
   slidesPerView: 3,
   centeredSlides: true,
   spaceBetween: 30,
-  initialSlide: 2,
+  initialSlide: 6,
   loop: true,
 
   //  Нечётное slidesPerView — иначе centeredSlides режет крайние логотипы

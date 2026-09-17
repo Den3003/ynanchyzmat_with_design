@@ -16,8 +16,8 @@
 
   &__hero {
     // width: 100%;
-    height: 80vh;
-    max-height: 805px;
+    height: 84vh;
+    max-height: 848px;
     min-height: 758px;
     // height: 100dvh;
     background: variable.$color-about-gray-bg;
@@ -185,7 +185,7 @@
     }
 
     @include mixins.down('sm') {
-      max-width: none;
+      // max-width: none;
       font-size: mixins.fluid(15px, 20px);
       margin: 0 0 32px;
     }
