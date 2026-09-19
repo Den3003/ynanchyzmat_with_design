@@ -12,7 +12,7 @@
   //  На планшете колонки перестраиваются в сетку, на телефоне — в столбик
   @include mixins.down('md') {
     flex-wrap: wrap;
-    justify-content: start;
+    // justify-content: start;
     gap: 16px 32px;
   }
 

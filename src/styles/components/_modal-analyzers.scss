@@ -132,18 +132,24 @@
       margin: 0 0 30px;
     }
 
-    &_dot:before {
-      content: "•";
-      color: variable.$color-main;
-      font-weight: bold;
-    }
-
     @include mixins.down('sm') {
       text-align: left;
 
       &:not(:last-child) {
         margin: 0 0 20px;
       }
+    }
+  }
+
+  &__text-span {
+    display: block;
+    font-size: mixins.fluid(18px, 22px);
+    font-weight: 500;
+
+    &_dot:before {
+      content: "•";
+      color: variable.$color-main;
+      font-weight: bold;
     }
   }
 
