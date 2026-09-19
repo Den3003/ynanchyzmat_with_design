@@ -18,7 +18,7 @@
     "sass": "^1.101.0",
     "sharp": "^0.35.2",
     "vite": "^8.0.12",
-    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-eslint2": "^1.8.1",
     "vite-plugin-html-inject": "^1.1.2",
     "vite-plugin-image-optimizer": "^2.0.3",
     "vite-plugin-svg-icons-ng": "^1.9.1"

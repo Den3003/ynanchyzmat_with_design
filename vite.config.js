@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import path from 'path';
 import fs from 'fs';
-import eslintPlugin from 'vite-plugin-eslint';
+import eslintPlugin from 'vite-plugin-eslint2';
 import injectHTML from 'vite-plugin-html-inject';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons-ng';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
