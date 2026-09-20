@@ -26,7 +26,15 @@ import { initHeroTheme } from './modules/hero-theme';
 import { prewarmAll } from './image-prewarm.js';
 import { collectImageNames } from './welayat-image.js';
 import { CONTENT } from './modules/turkmenistan/data/content.js';
+import { initLoader } from './modules/loader.js';
+import { initPageTransition } from './modules/page-transition.js';
 
+
+const loader = initLoader({
+  minVisible: 1850,
+  maxWait: 6000,
+});
+initPageTransition(loader);
 
 // 1. Получаем текущий pathname без query-параметров и хэшей
   const currentPath = window.location.pathname.replace(/\/$/, '') || '/';

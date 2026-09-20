@@ -10,22 +10,22 @@
 </head>
 <body class="services-body">
   <load src="/src/html/loader.html" />
-  <script>
-  /* Оверлей скрывается после загрузки страницы, но не раньше, чем
-     проиграет вся секвенция (2.95 с). MIN_MS можно менять. */
-  (function () {
-    var MIN_MS = 2950, start = Date.now();
-    function hide() {
-      var wait = Math.max(0, MIN_MS - (Date.now() - start));
-      setTimeout(function () {
-        var el = document.getElementById('yh-loader');
-        if (el) el.classList.add('yh-hidden');
-      }, wait);
-    }
-    if (document.readyState === 'complete') hide();
-    else window.addEventListener('load', hide);
-  })();
-  </script>
+  <!-- <script> -->
+  <!-- /* Оверлей скрывается после загрузки страницы, но не раньше, чем -->
+     <!-- проиграет вся секвенция (2.95 с). MIN_MS можно менять. */ -->
+  <!-- (function () { -->
+    <!-- var MIN_MS = 2950, start = Date.now(); -->
+    <!-- function hide() { -->
+      <!-- var wait = Math.max(0, MIN_MS - (Date.now() - start)); -->
+      <!-- setTimeout(function () { -->
+        <!-- var el = document.getElementById('yh-loader'); -->
+        <!-- if (el) el.classList.add('yh-hidden'); -->
+      <!-- }, wait); -->
+    <!-- } -->
+    <!-- if (document.readyState === 'complete') hide(); -->
+    <!-- else window.addEventListener('load', hide); -->
+  <!-- })(); -->
+  <!-- </script> -->
   <load src="/src/html/header.html" />
 
   <main class="services">

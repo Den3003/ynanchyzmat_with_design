@@ -246,7 +246,7 @@
     @media (max-width: 1090px) {
       position: static;
       max-width: 690px;
-      margin: 0 0 5px;
+      margin: 0 0 15px;
       justify-self: end;
       grid-area: logo;
     }
@@ -265,7 +265,7 @@
 
     @media (max-width: 695px) {
       max-width: 385px;
-      margin: 0 0 15px;
+      // margin: 0 0 15px;
     }
 
     @media (max-width: 510px) {

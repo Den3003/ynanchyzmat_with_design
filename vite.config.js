@@ -4,7 +4,8 @@ import fs from 'fs';
 import eslintPlugin from 'vite-plugin-eslint2';
 import injectHTML from 'vite-plugin-html-inject';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons-ng';
-import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+// import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+import criticalScss from './vite-plugins/critical-scss';
 
 // 🔍 Авто-поиск всех HTML-файлов в корне проекта
 const getRootHtmlInputs = () => {
@@ -60,7 +61,7 @@ export default defineConfig({
     // 🖼️ Сжатие растровых картинок при сборке (только build, dev не трогает).
     // Исходники в src/assets сохранены в максимальном качестве — без этого
     // шага в dist уезжают файлы по 1–2 МБ.
-    ViteImageOptimizer({
+    /* ViteImageOptimizer({
       jpg: {
         quality: 72,
         mozjpeg: true,
@@ -82,9 +83,16 @@ export default defineConfig({
       //  упакован в 12 бит по каналам. Любое пережатие с потерями ломает
       //  геометрию 3D-карты, поэтому файл проходит мимо оптимизатора.
       exclude: /turkmenistan-height\.png$/i,
-    }),
+    }), */
 
     robotsReminder(),
+
+    // 🎬 Критический CSS лоадера: компилируется из SCSS и инлайнится
+    // в <head> вместо <!--@critical-css-->.
+    // Обязательно ПОСЛЕ injectHTML() — иначе плейсхолдера ещё нет в HTML.
+    criticalScss({
+      entry: path.resolve(__dirname, 'src/scss/critical/loader.scss'),
+    }),
   ],
 
   //  Локальная отладка формы: `php -S localhost:8000 -t public` рядом с dev-сервером,

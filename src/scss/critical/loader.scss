@@ -1,0 +1,241 @@
+// ============================================================
+// YH LOADER — критические стили.
+// Инлайнятся в <head> плагином critical-scss.
+// НЕ импортировать в main.scss — получите дубль.
+// ============================================================
+
+$fade:       .4s;   // длительность ухода оверлея
+$seq-draw:   1.5s;  // отрисовка контура
+$seq-fill:   1.45s; // старт заливки
+$seq-flame:  2.05s; // старт огонька
+$seq-digit:  2.35s; // старт цифры
+// Полная секвенция = $seq-digit + .6s = 2.95s → minVisible в loader.js
+
+// Финальное состояние: используется и для reduced-motion,
+// и для статичного показа при переходах между страницами.
+@mixin yh-final-state {
+  .yh-outline { display: none; }
+
+  .yh-fill,
+  .yh-flame,
+  .yh-ten {
+    opacity: 1;
+    animation: none;
+  }
+
+  .yh-flame { transform: scale(1); }
+  .yh-ten   { transform: none; }
+
+  .yh-glow,
+  .yh-body,
+  .yh-core { animation: none; }
+}
+
+/* ---------- оверлей ---------- */
+
+:root {
+  --yh-bg:    #2f3d46;
+  --yh-brand: #f37021;
+  --yh-digit: #f5f3f0;
+  --yh-size:  118px;
+}
+
+.yh-loader {
+  display: none; // без JS лоадера нет
+}
+
+// Скролл блокируется только пока лоадер реально есть в DOM.
+// Если на странице нет {{> loader }} — страница остаётся рабочей,
+// даже когда JS упал до initLoader.
+// html.is-loading:has(.yh-loader),
+// html.is-loading:has(.yh-loader) body { overflow: hidden; }
+
+// html.is-loaded .yh-loader {
+//   opacity: 0;
+//   visibility: hidden;
+//   pointer-events: none;
+//   transition: opacity $fade ease, visibility 0s linear $fade;
+// }
+
+
+// Без :has() — работает с самого первого кадра, ещё до парсинга <body>.
+// Опт-аут для страниц без лоадера — атрибут на <html>.
+html.is-loading:not([data-no-loader]) {
+  background: var(--yh-bg);
+  overflow: hidden;
+}
+html.is-loading:not([data-no-loader]) body {
+  overflow: hidden;
+}
+
+// ПОКАЗ
+html.js .yh-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--yh-bg);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity $fade ease, visibility 0s;
+}
+
+// СКРЫТИЕ — вот это правило и потерялось
+html.is-loaded .yh-loader {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity $fade ease, visibility 0s linear $fade;
+}
+
+/* ---------- знак ---------- */
+
+.yh-lockup { display: flex; align-items: flex-end; }
+
+.yh-mark {
+  position: relative;
+  height: var(--yh-size);
+  width: calc(var(--yh-size) * .8305); // 338 / 407
+  z-index: 2;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+}
+
+.yh-outline {
+  fill: none;
+  stroke: var(--yh-brand);
+  stroke-width: 5;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation:
+    yh-draw     $seq-draw cubic-bezier(.5, 0, .3, 1) forwards,
+    yh-line-out .5s linear $seq-draw forwards;
+}
+
+.yh-fill {
+  fill: var(--yh-brand);
+  opacity: 0;
+  animation: yh-in .55s ease-out $seq-fill forwards;
+}
+
+/* ---------- огонёк ---------- */
+
+.yh-flame {
+  position: absolute;
+  left: 98.2%;
+  top: 1%;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  opacity: 0;
+  animation: yh-ignite .5s cubic-bezier(.34, 1.4, .64, 1) $seq-flame forwards;
+
+  > i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+  }
+}
+
+.yh-glow {
+  width:  calc(var(--yh-size) * .37);
+  height: calc(var(--yh-size) * .37);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(255, 190, 95, .38) 0%,
+    rgba(243, 112, 33, 0) 70%);
+  transform: translate(-50%, -50%);
+  animation: yh-glow 2.2s ease-in-out infinite;
+}
+
+.yh-body {
+  width:  calc(var(--yh-size) * .085);
+  height: calc(var(--yh-size) * .161);
+  border-radius: 50% 50% 46% 46% / 64% 64% 36% 36%;
+  background: radial-gradient(ellipse at 50% 78%,
+    #fffaf0 0%, #ffd977 26%, #fb9b3a 54%,
+    rgba(243, 112, 33, .85) 74%, rgba(243, 112, 33, 0) 88%);
+  transform: translate(-50%, -100%);
+  animation: yh-flicker .62s ease-in-out infinite;
+}
+
+.yh-core {
+  width:  calc(var(--yh-size) * .034);
+  height: calc(var(--yh-size) * .068);
+  border-radius: 50% 50% 45% 45% / 62% 62% 38% 38%;
+  background: radial-gradient(ellipse at 50% 75%,
+    #fff 0%, #fff3c4 55%, rgba(255, 214, 120, 0) 100%);
+  transform: translate(-50%, -100%);
+  animation: yh-flicker .44s ease-in-out infinite reverse;
+}
+
+/* ---------- цифра ---------- */
+
+.yh-ten {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: calc(var(--yh-size) * 1.05);
+  line-height: .7;
+  font-weight: 250;
+  letter-spacing: -.06em;
+  color: var(--yh-digit);
+  margin-left: calc(var(--yh-size) * -.22);
+  z-index: 1;
+  opacity: 0;
+  animation: yh-digit-in .6s cubic-bezier(.22, 1, .36, 1) $seq-digit forwards;
+}
+
+/* ---------- keyframes ---------- */
+
+@keyframes yh-draw     { from { stroke-dashoffset: 100 } to { stroke-dashoffset: 0 } }
+@keyframes yh-line-out { from { opacity: 1 } to { opacity: 0 } }
+@keyframes yh-in       { from { opacity: 0 } to { opacity: 1 } }
+
+@keyframes yh-ignite {
+  0%   { opacity: 0; transform: scale(.12) }
+  55%  { opacity: 1; transform: scale(1.14) }
+  100% { opacity: 1; transform: scale(1) }
+}
+
+@keyframes yh-digit-in {
+  from { opacity: 0; transform: translateX(-16px) }
+  to   { opacity: 1; transform: translateX(0) }
+}
+
+@keyframes yh-glow {
+  0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: .45 }
+  50%      { transform: translate(-50%, -50%) scale(1.25); opacity: .8 }
+}
+
+@keyframes yh-flicker {
+  0%, 100% { transform: translate(-50%, -100%) scale(1, 1)      rotate(0deg);  opacity: .96 }
+  22%      { transform: translate(-50%, -100%) scale(.88, 1.14) rotate(-4deg); opacity: 1 }
+  47%      { transform: translate(-50%, -100%) scale(1.08, .92) rotate(3deg);  opacity: .86 }
+  71%      { transform: translate(-50%, -100%) scale(.94, 1.09) rotate(-2deg); opacity: 1 }
+}
+
+/* ---------- состояния ---------- */
+
+// Пустой оверлей: только фон, без знака.
+// Показывается при уходе на другую страницу, чтобы секвенция
+// на новой странице начиналась с чистого кадра.
+.yh-loader--blank .yh-lockup {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .yh-loader { transition-duration: .01ms; }
+  .yh-loader { @include yh-final-state; }
+}
+
+@media (max-width: 600px) {
+  :root { --yh-size: 86px; }
+}
