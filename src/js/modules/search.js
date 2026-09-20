@@ -151,7 +151,7 @@ export const initSearch = () => {
 
   const goToResult = (url, slideIndex, itemId) => {
     const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
-    console.log('currentPath: ', currentPath);
+    // console.log('currentPath: ', currentPath);
     if (!url) {
       return;
     }
@@ -163,7 +163,7 @@ export const initSearch = () => {
     
     // Если при поиске находимся на главной странице
     if (url.includes('index.html') && (currentPath.includes('index.html') || currentPath === '/')) {
-      console.log('Главная');
+      // console.log('Главная');
       swiper.slideToLoop(slideIndex); // просто переходим по индексу
       const target = document.getElementById(itemId);
       target.classList.add('is-flashed');

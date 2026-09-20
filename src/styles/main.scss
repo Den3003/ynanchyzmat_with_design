@@ -34,6 +34,7 @@
 @use 'components/time-zone';  //  Стили компонента timeZone
 @use 'components/risk-section';  //  Стили компонента risk-section
 @use 'components/contacts-form';  //  Стили компонента contacts-form (форма отправки контактов на странице Contact Us)
+@use 'components/to-top';  //  Стили компонента кнопки вверх
 
 // ── 5. Страницы ─────────────────────────────────
 // Папка pages ← стили конкретных страниц

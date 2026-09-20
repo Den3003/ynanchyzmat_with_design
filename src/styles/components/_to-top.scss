@@ -1,0 +1,95 @@
+@use '../abstracts/variables' as v;
+
+// Кнопка «Наверх»
+// Состояния управляются data-атрибутами из JS:
+//   [data-visible="true"] — показана
+//   [data-raised="true"]  — поднята над футером
+
+.to-top {
+  --_size: #{v.$to-top-size};
+  --_gap: #{v.$to-top-gap};
+  --_raise: 0px;
+
+  position: fixed;
+  inset-inline-end: max(var(--_gap), env(safe-area-inset-right));
+  inset-block-end: calc(var(--_gap) + env(safe-area-inset-bottom));
+  z-index: v.$z-to-top;
+
+  display: grid;
+  place-items: center;
+  inline-size: var(--_size);
+  block-size: var(--_size);
+
+  color: v.$color-main;
+  background-color: v.$color-about-gray-bg;
+  border: 3px solid v.$color-orange-primary;
+  border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  // Скрытое состояние по умолчанию
+  opacity: 0;
+  visibility: hidden; // убирает из таб-порядка и из скринридера
+  transform: translateY(10px) scale(0.9);
+
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease,
+    background-color 0.18s ease,
+    visibility 0s linear 0.22s; // visibility гасим после анимации
+
+  &[data-visible='true'] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(var(--_raise));
+    transition-delay: 0s;
+  }
+
+  // Не наезжаем на футер
+  &[data-raised='true'] {
+    --_raise: #{-1 * v.$to-top-raise};
+  }
+
+  &:hover {
+    background-color: v.$to-top-bg-hover;
+  }
+
+  &:focus-visible {
+    outline: 3px solid v.$focus-ring;
+    outline-offset: 3px;
+  }
+
+  &:active {
+    transform: translateY(var(--_raise)) scale(0.94);
+  }
+
+  svg {
+    inline-size: 45%;
+    block-size: 45%;
+    display: block;
+  }
+}
+
+// Маркер первого экрана. Ставится в разметке сразу после хиро:
+// его нижняя граница и есть порог появления кнопки.
+.js-to-top-sentinel {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 1px;
+  block-size: 1px;
+  pointer-events: none;
+}
+
+// Жёсткое отключение на странице, даже если JS ещё не отработал
+body[data-to-top='off'] .to-top {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .to-top {
+    transition: opacity 0.01ms, visibility 0.01ms;
+  }
+}

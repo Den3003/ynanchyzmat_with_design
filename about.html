@@ -26,6 +26,7 @@
     <!-- else window.addEventListener('load', hide); -->
   <!-- })(); -->
   <!-- </script> -->
+  <!-- <span id="top" tabindex="-1" aria-hidden="true"></span> -->
   <load src="/src/html/header.html" />
   
   <main class="about">
@@ -56,6 +57,8 @@
       </div>
     </section>
 
+
+    <div class="js-to-top-sentinel" aria-hidden="true"></div>
     <section id="overview" class="about__purpose content-section js-content-section">
       <div class="container">
         <h3 class="about__purpose-title">
@@ -701,6 +704,31 @@
   </main>
 
   <load src="/src/html/footer.html" theme="footer_black" />
+
+  <!-- Кнопка всегда последняя в DOM: порядок фокуса не ломается -->
+    <a class="to-top" href="#top" aria-label="Наверх">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path
+          d="M12 19V5M5 12l7-7 7 7"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </a>
+
+    <!-- Без JS кнопка просто всегда видима и работает как обычный якорь -->
+    <noscript>
+      <style>
+        .to-top {
+          opacity: 1;
+          visibility: visible;
+          transform: none;
+        }
+      </style>
+    </noscript>
 
   <script type="module" src="/src/js/main.js"></script>
 </body>

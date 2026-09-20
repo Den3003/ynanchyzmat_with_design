@@ -28,6 +28,7 @@ import { collectImageNames } from './welayat-image.js';
 import { CONTENT } from './modules/turkmenistan/data/content.js';
 import { initLoader } from './modules/loader.js';
 import { initPageTransition } from './modules/page-transition.js';
+import { initToTop } from './modules/to-top.js';
 
 
 const loader = initLoader({
@@ -38,13 +39,15 @@ initPageTransition(loader);
 
 // 1. Получаем текущий pathname без query-параметров и хэшей
   const currentPath = window.location.pathname.replace(/\/$/, '') || '/';
-  console.log('currentPath: ', currentPath);
+  // console.log('currentPath: ', currentPath);
 
 const form = document.getElementById('contactsForm');
 if (form) {
   initFeedbackForm(form);
 }
 
+
+initToTop();
 
 // Секция карты Туркменистана (страница Sectors)
 
@@ -270,10 +273,10 @@ export const swiperTimeline = new Swiper('.about__timeline .swiper', {
 });
 
 // console.log(swiperTimeline.progress);
-swiperTimeline.on('progress', (swiper, progress) => {
-  console.log(swiper);
-  console.log(progress);
-});
+// swiperTimeline.on('progress', (swiper, progress) => {
+//   // console.log(swiper);
+//   // console.log(progress);
+// });
 
 // // console.log('window.location.hash: ', window.location.hash.includes('#timeline'));
 // if (currentPath.includes('about.html') && window.location.hash.includes('#timeline-')) {
@@ -297,7 +300,7 @@ if (currentPath.includes('/about.html')
   window.location.href = '/about.html#timeline';
   swiperTimeline.slideToLoop(slideTimeline);
   // const str = 
-  console.log('slideTimeline: ', slideTimeline);
+  // console.log('slideTimeline: ', slideTimeline);
   
 }
 

@@ -2,8 +2,8 @@
 @use '../abstracts/mixins' as mixins;
 
 //  Телефон: высота фото сотрудника и тёмной полосы под ним
-$team-photo-h: 240px;
-$team-band-h: 40px;
+$team-photo-h: 485px;
+$team-band-h: 80px;
 
 //  Шапка (header_contacts) и подвал (footer_team) стоят в потоке: страница
 //  собрана flex-колонкой, поэтому при длинной карточке сотрудника на планшете
@@ -27,15 +27,20 @@ $team-band-h: 40px;
   display: flex;
   //  Карточка сотрудника вместе с полосой под фото — по центру по вертикали
   //  между шапкой и подвалом (раньше прижималась к подвалу)
-  align-items: center;
+  align-items: end;
   //  Снизу отступ больше на margin-bottom шапки (header_contacts: 40px / 20px),
   //  иначе блок визуально стоит ниже центра
-  padding-block: 40px 80px;
+  padding-block: 50px 0;
 
   //  На телефоне main не растягивается на экран: иначе подвал с соцсетями
   //  прижат к нижнему краю, прячется под панелью Safari и не поднимается при скролле
+  @include mixins.down(1040px) {
+    padding-block: 0;
+  }
+
+
   @include mixins.down('sm') {
-    flex: 0 0 auto;
+    // flex: 0 0 auto;
     padding-block: 24px 44px;
   }
 }
@@ -57,20 +62,20 @@ $team-band-h: 40px;
     background: variable.$color-about-gray-bg;
 
     @include mixins.down('xxl') {
-      height: 64px;
+      // height: 64px;
     }
 
     @include mixins.down('lg') {
-      height: 48px;
+      // height: 48px;
     }
 
     @include mixins.down('md') {
-      height: 40px;
+      // height: 40px;
     }
 
     //  На телефоне полоса переезжает под фотографию (см. &__item-image-wrapper),
     //  внизу страницы она больше не нужна — там и так градиент секции
-    @include mixins.down('sm') {
+    @include mixins.down(1040px) {
       display: none;
     }
   }
@@ -100,7 +105,7 @@ $team-band-h: 40px;
     }
 
     //  Полоса под фото — на всю ширину экрана, от края до края
-    @include mixins.down('sm') {
+    @include mixins.down(1040px) {
       position: relative;
       //  Слайдер вместе со слайдами выше полосы
       align-items: flex-start;
@@ -114,11 +119,23 @@ $team-band-h: 40px;
         height: $team-band-h;
         background: variable.$color-about-gray-bg;
         pointer-events: none;
+
+        @include mixins.down(465px) {
+          top: 345px;
+        }
+
+        @include mixins.down(410px) {
+          top: 300px;
+        }
       }
 
       //  Стрелки — по центру фото, а не по центру всей карточки с биографией
       .team__swiper-button {
         margin-top: $team-photo-h * 0.5 - 22px;
+
+        @include mixins.down(465px) {
+          margin-top: 150px;
+        }
       }
     }
   }
@@ -151,7 +168,7 @@ $team-band-h: 40px;
     height: auto;
 
     //  Фото над текстом
-    @include mixins.down('md') {
+    @include mixins.down(1040px) {
       flex-direction: column;
       align-items: start;
       gap: 24px 0;
@@ -163,7 +180,20 @@ $team-band-h: 40px;
     //  высокому слайду карточки ставили имя на разную высоту у разных сотрудников
     @include mixins.down('sm') {
       width: 100%;
+      // height: 100%;
       justify-content: flex-start;
+    }
+  }
+
+  &__item-yazmyrat {
+    @include mixins.down(492px) {
+      gap: 0;
+    }
+  }
+
+  &__item-nargiza {
+    @include mixins.down(370px) {
+      gap: 0;
     }
   }
 
@@ -178,12 +208,18 @@ $team-band-h: 40px;
     }
 
     @include mixins.down('lg') {
-      max-width: 34%;
+      max-width: 447px;
+      height: auto;
+    }
+
+    @include mixins.down(1040px) {
+      // max-width: 220px;
+      align-self: center;
     }
 
     @include mixins.down('md') {
-      max-width: 220px;
-      align-self: center;
+      max-width: 365px;
+      height: 485px;
     }
 
     //  Фотография стоит на тёмной полосе. Полоса нарисована не здесь, а на
@@ -195,25 +231,35 @@ $team-band-h: 40px;
       max-width: none;
       width: 100%;
       height: $team-photo-h;
-      margin-bottom: $team-band-h + 28px;
+      margin-bottom: 10px;
       align-self: stretch;
       display: flex;
       justify-content: center;
 
       .team__item-image {
-        width: auto;
-        max-width: 220px;
+        width: 100%;
+        // max-width: 220px;
         height: 100%;
         object-fit: contain;
         object-position: bottom center;
       }
+    }
+
+    @include mixins.down(465px) {
+      height: 345px;
+    }
+
+    @include mixins.down(410px) {
+      height: 300px;
     }
   }
 
   &__item-image {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom center;
   }
 
   &__swiper-button {
@@ -279,7 +325,7 @@ $team-band-h: 40px;
     //  Биографии сильно разной длины: самая длинная растягивала слайд и
     //  подпирала стрелку. Высота рамки фиксирована, остальное прокручивается
     max-height: 200px;
-    overflow-y: auto;
+    // overflow-y: auto;
     overscroll-behavior: contain;
     padding-right: 14px;
     scrollbar-width: thin;
@@ -289,20 +335,64 @@ $team-band-h: 40px;
       max-height: 160px;
     }
 
-    @include mixins.down('md') {
+    @include mixins.down(1040px) {
       max-width: none;
       max-height: 210px;
+    }
+
+    @include mixins.down(380px) {
+      overflow-y: auto;
+    }
+
+  }
+
+  &__item-text-nazar {
+    @media (max-width: 1056px) {
+      overflow-y: auto;
+      padding-right: 5px;
+      margin-right: 10px;
+    }
+
+    @include mixins.down(1040px) {
+      overflow: visible;
+      padding-right: 14px;
+      margin-right: 0;
+    }
+
+    @include mixins.down(447px) {
+      overflow-y: auto;
     }
   }
 
   &__item-socials-wrapper {
     display: flex;
     gap: 0 20px;
+
+    @include mixins.down('md') {
+      margin-bottom: 10px;
+    }
   }
+
+  &__item-content-wrapper {
+
+    @include mixins.down(1040px) {
+      margin: 0 0 20px;
+    }
+
+    @include mixins.down('sm') {
+      margin: 0;
+    }
+  }
+
+  
 
   //  Планшет в альбомной ориентации: карточка занимала меньше половины экрана
   //  и жалась к тёмной полосе, а сверху оставалось пустое поле в пол-экрана.
   //  Отдаём слайдеру всю свободную высоту и тянем фото до полосы.
+
+  
+
+
   @include mixins.between('md', 'nav') {
 
     .team__swiper-wrapper-with-control {
@@ -317,10 +407,14 @@ $team-band-h: 40px;
     }
 
     .team__item-image-wrapper {
-      max-width: 46%;
-      height: 100%;
+      max-width: 365px;
+      height: 485px;
       display: flex;
       align-items: flex-end;
+    }
+
+    .team__item-image-wrapper-vladimir {
+      height: 485px;
     }
 
     .team__item-image {
@@ -332,6 +426,12 @@ $team-band-h: 40px;
 
     .team__item-text {
       max-height: 190px;
+    }
+  }
+
+  @include mixins.down('md') {
+      .team__item {
+      height: 100%;
     }
   }
 }

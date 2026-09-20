@@ -32,14 +32,16 @@
   &_team {
     position: static;
     flex-shrink: 0;          /* страховка от сжатия футера */
+    padding-block: 65px;
+    border-top: 3px solid variable.$color-orange-primary;
 
     //  Запас под плавающую панель Safari: подвал можно докрутить выше неё.
     //  Удвоенный класс — иначе перебивает общий padding .footer ниже в файле
-    @include mixins.down('sm') {
+    /* @include mixins.down('sm') {
       &.footer_team {
         padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
       }
-    }
+    } */
   }
 
   &.footer_black {

@@ -73,3 +73,27 @@ $container-pad: 80px;
 $container-pad-lg: 40px;
 $container-pad-sm: 24px;
 $container-pad-xs: 16px;
+
+
+// ─────────────────────────────────────────────
+//  Переменные кнопки to-top
+// ─────────────────────────────────────────────
+
+
+// Шкала z-index — держите её в одном месте на весь проект
+$z-to-top: 40;
+$z-header: 50;
+$z-modal: 100;
+
+// Кнопка «Наверх»
+$to-top-size: 48px; // минимум 44px по WCAG 2.5.5
+$to-top-gap: 20px;
+$to-top-raise: 85px; // на сколько поднимается над футером
+// $to-top-bg: #1a1a1a;
+$to-top-bg-hover: #333333;
+$to-top-fg: #ffffff;
+
+$focus-ring: #4c8dff;
+
+// Высота залипающей шапки — нужна для scroll-padding-top
+// $header-height: 72px;

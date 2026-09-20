@@ -26,6 +26,10 @@
     <!-- else window.addEventListener('load', hide); -->
   <!-- })(); -->
   <!-- </script> -->
+  
+  <!-- Цель прокрутки. tabindex="-1" нужен, чтобы вернуть сюда фокус -->
+  <span id="top" tabindex="-1" aria-hidden="true"></span>
+  
   <load src="/src/html/header.html" />
 
   <main class="sectors">
@@ -53,6 +57,8 @@
         </div>
       </div>
     </section>
+
+    <div class="js-to-top-sentinel" aria-hidden="true"></div>
 
     <!-- Overview -->
     <section id="overview" class="sectors__overview">
@@ -178,7 +184,7 @@
           </div>
 
           <!-- До 1280px выбранный велаят открывается модалкой на весь экран.
-               На десктопе обе обёртки ведут себя как обычная колонка -->
+              На десктопе обе обёртки ведут себя как обычная колонка -->
           <aside class="tm__wrapper-panel" data-tm-wrapper-panel>
             <div class="tm__dialog">
               <button class="tm__panel-close" type="button" data-tm-panel-close aria-label="Close">
@@ -200,6 +206,31 @@
   </main>
 
   <load src="/src/html/footer.html"/>
+
+  <!-- Кнопка всегда последняя в DOM: порядок фокуса не ломается -->
+  <a class="to-top" href="#top" aria-label="Наверх">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path
+        d="M12 19V5M5 12l7-7 7 7"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </a>
+
+  <!-- Без JS кнопка просто всегда видима и работает как обычный якорь -->
+  <noscript>
+    <style>
+      .to-top {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+    </style>
+  </noscript>
 
   <script type="module" src="/src/js/main.js"></script>
 </body>

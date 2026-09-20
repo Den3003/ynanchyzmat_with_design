@@ -8,6 +8,7 @@
   left: 0;
   width: 100%;
   z-index: 10;
+  outline: none;
 
   //  Пока открыт мобильный drawer — шапка поверх любого контента страницы
   body.is-menu-open & {
@@ -18,8 +19,8 @@
     position: static;
     margin: 0 0 40px;
 
-    @include mixins.down('sm') {
-      margin: 0 0 20px;
+    @include mixins.down(992px) {
+      margin: 0;
     }
   }
 

@@ -73,7 +73,7 @@ export function auditImages() {
   }
 
   if (!problems.length) {
-    console.info('[images] комплект полный:', NAMES.size, 'изображений');
+    // console.info('[images] комплект полный:', NAMES.size, 'изображений');
     return true;
   }
 

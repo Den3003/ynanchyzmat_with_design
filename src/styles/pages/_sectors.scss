@@ -133,6 +133,12 @@
     margin: 0;
     padding: 0;
 
+    @media (max-height: 1490px) {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 80px;
+    }
+
     @include mixins.down('lg') {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
