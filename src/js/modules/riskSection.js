@@ -1,7 +1,8 @@
 
 //  Ниже этой ширины (и на любом тач-устройстве) перехват колеса мыши
 //  недоступен, поэтому таймлайн раскрывается по мере прокрутки страницы.
-const TOUCH_QUERY = '(max-width: 992px), (hover: none), (pointer: coarse)';
+// const TOUCH_QUERY = '(max-width: 992px), (hover: none), (pointer: coarse)';
+const TOUCH_QUERY = 'all';
 
 export function initRiskTimeline() {
   const section = document.querySelector('.js-risk-section');
@@ -64,7 +65,7 @@ export function initRiskTimeline() {
     const shouldTrapScroll = (isScrollingDown && progress < 1) || (isScrollingUp && progress > 0);
 
     if (shouldTrapScroll) {
-      e.preventDefault(); // Блокируем скролл страницы
+      // e.preventDefault(); // Блокируем скролл страницы
 
       progress += e.deltaY * speed;
       progress = Math.max(0, Math.min(1, progress)); // Ограничиваем от 0 до 1
