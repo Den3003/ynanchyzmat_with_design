@@ -291,7 +291,7 @@
     list-style: none;
     display: grid;
     gap: 60px;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(21, minmax(0, 1fr));
     grid-template-rows: repeat(4, 550px);
 
     @include mixins.down('xxl') {
@@ -303,47 +303,135 @@
     @include mixins.down('lg') {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: none;
-      grid-auto-rows: 460px;
+      grid-auto-rows: 420px;
       gap: 30px;
     }
 
     //  Одна колонка, высота карточки — по содержимому
     @include mixins.down('sm') {
-      grid-template-columns: minmax(0, 1fr);
-      grid-auto-rows: auto;
+      grid-template-columns: minmax(2, 1fr);
+      // grid-auto-rows: auto;
       gap: 24px;
+    }
+
+    @include mixins.down(650px) {
+      grid-template-columns: minmax(0, 1fr);
     }
 
     //  На тач-устройствах список раскрыт всегда, поэтому высота строки — по контенту
     @include mixins.touch {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       grid-template-rows: none;
       grid-auto-rows: auto;
+
+      @include mixins.down(650px) {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
   }
 
-  &__description-point-dynamic {
+  /* &__description-point-supplies {
+
+    @include mixins.down('lg') {
+      
+    }
+  } */
+
+  
+  &__description-point-xl {
+    grid-column: span 14;
+
+    /* @include mixins.down('lg') {
+      grid-column: 1 / 3;
+    } */
+  }
+
+  &__description-point-m {
+    grid-column: span 7;
+
+    /* @include mixins.down('lg') {
+      grid-column: 2;
+    } */
+  }
+
+  &__description-point-l {
+    grid-column: span 9;
+  }
+
+  &__description-point-s {
+    grid-column: span 6;
+  }
+
+  &__description-point {
+
+    @include mixins.down('lg') {
+
+      /*  {
+        grid-column: 1 / 3;
+      } */
+
+      &:not(.services__description-point-supplies):nth-child(odd) {
+        grid-column: 1 / 2;
+      }
+
+      &:nth-child(even) {
+        grid-column: 2 / 3;
+      }
+
+      /* &:not(.services__description-point-supplies) {
+        grid-column: 1 / 2;
+      } */
+
+      @include mixins.down('sm') {
+        grid-column: 1 / 2;
+      }
+
+      @include mixins.down(650px) {
+        &:not(.services__description-point-supplies):nth-child(odd) {
+          grid-column: 1;
+        }
+
+        &:nth-child(even) {
+          grid-column: 1;
+        }
+      }
+
+    }
+    
+  }
+
+  &__description-point-supplies {
+    @include mixins.down('lg') {
+      grid-column: 1 / 3;
+    }
+
+    @include mixins.down('sm') {
+        grid-column: 1 / 3;
+    }
+
+    @include mixins.down(650px) {
+      grid-column: 1;
+    }
+  }
+  
+
+  
+
+  /* &__description-point-hvac {
     grid-column: 1 / 3;
 
     @include mixins.down('lg') {
       grid-column: 1 / -1;
     }
-  }
+  } */
 
-  &__description-point-hvac {
-    grid-column: 1 / 3;
-
-    @include mixins.down('lg') {
-      grid-column: 1 / -1;
-    }
-  }
-
-  &__description-point-programming {
+  /* &__description-point-programming {
     grid-column: 2 / 4;
 
     @include mixins.down('lg') {
       grid-column: 1 / -1;
     }
-  }
+  } */
 
   &__description-image-wrapper {
     border-radius: 50%;
@@ -493,9 +581,19 @@
     //  Карточка на телефоне выравнивает контент влево (align-items: start),
     //  а круг с фото должен стоять по центру
     @include mixins.down('sm') {
-      width: 190px;
-      height: 190px;
+      // width: 190px;
+      // height: 190px;
       align-self: center;
+    }
+
+    @include mixins.down(650px) {
+      width: 260px;
+      height: 260px;
+    }
+
+    @include mixins.down(353px) {
+      width: 220px;
+      height: 220px;
     }
   }
 
@@ -566,6 +664,10 @@
 
     @include mixins.down('sm') {
       padding: 0 0 0 20px;
+    }
+
+    @include mixins.down(863px) {
+      margin: 0 0 20px;
     }
   }
 

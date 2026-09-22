@@ -155,8 +155,12 @@
     justify-content: space-between;
     gap: 0 40px;
 
+    @include mixins.down(1460px) {
+      grid-template-columns: 660px 1fr;
+    }
+
     //  Таймлайн рисков уезжает под текстовый блок
-    @include mixins.down('lg') {
+    @include mixins.down(1050px) {
       grid-template-columns: minmax(0, 1fr);
       gap: 48px 0;
     }

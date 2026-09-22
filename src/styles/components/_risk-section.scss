@@ -4,7 +4,7 @@
 
 // Секция контейнера
 .risk-section {
-  max-width: 845px;
+  max-width: 760px;
   // padding: 80px 0;
   // background-color: variable.$color-main;
   // overflow: hidden;
@@ -61,6 +61,7 @@
   // 3 Колонки: Контент слева (1fr), Центр (60px), Контент справа (1fr)
   grid-template-columns: minmax(0, 1fr) 60px minmax(0, 1fr);
   // grid-template-rows: 163px 40px 30px;
+  max-height: 200px;
   align-items: center;
   margin-bottom: 40px;
   position: relative;
@@ -80,15 +81,15 @@
   }
 
   &__center-near {
-    margin-bottom: 70px;
+    // margin-bottom: 70px;
   }
 
   &__center-incident {
-    margin-bottom: 40px;
+    // margin-bottom: 40px;
   }
 
   &__center-major {
-    margin-bottom: 70px;
+    // margin-bottom: 70px;
   }
 
   &__dot {
@@ -127,33 +128,36 @@
   }
 
   &__media {
+    max-width: 350px;
+    height: 200px;
     // grid-row: 1 / 4;
     margin: 0;
 
     img {
       width: 100%;
-      height: 233px;
+      height: 100%;
       object-fit: cover;
-      border-radius: 6px;
+      object-position: center;
+      // border-radius: 6px;
       display: block;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 
-      @include mixins.down('lg') {
-        height: 180px;
+      @include mixins.down(1050px) {
+        // height: 180px;
       }
     }
   }
 
   &__media-incident {
-    margin-top: -80px;
+    // margin-top: -80px;
   }
 
   &__media-major {
-    margin-top: -40px;
+    // margin-top: -40px;
   }
   
   &__media-lesson {
-    margin-top: -80px;
+    // margin-top: -80px;
   }
 
   &__content {
@@ -166,7 +170,7 @@
   &__card {
     background-color: variable.$color-about-gray-bg;
     color: variable.$color-main;
-    // height: 100%;
+    height: 100%;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     display: flex;
     align-items: center;
@@ -179,19 +183,23 @@
   }
 
   &__card-near {
-    padding: 54px 40px;
+    // padding: 54px 40px;
+    // height: 100%;
+    // display: flex;
+    // align-items: center;
+    padding: 0 30px 0 30px;
 
     @include mixins.down('lg') {
-      padding: 24px;
+      // padding: 24px;
     }
   }
 
   &__card-incident,
   &__card-major {
-    padding: 35px 40px;
+    padding: 0 20px;
 
     @include mixins.down('lg') {
-      padding: 24px;
+      // padding: 24px;
     }
   }
 
@@ -205,7 +213,7 @@
 
   &__text {
     margin: 0;
-    font-size: mixins.fluid(14px, 16px);
+    font-size: 14px;
   }
 
   // --- ЧЕРЕДОВАНИЕ СТОРОН (Шахматный порядок) ---
@@ -269,7 +277,7 @@
 
 //  Планшет и телефон: две колонки по бокам от линии не помещаются —
 //  таймлайн становится вертикальным, линия уходит к левому краю
-@include mixins.down('md') {
+@include mixins.down(695px) {
   .risk-section {
     padding: 0;
 
@@ -292,6 +300,7 @@
     align-items: flex-start;
     padding-left: 44px;
     margin-bottom: 40px;
+    max-height: none;
 
     &__center {
       position: absolute;
@@ -328,6 +337,7 @@
     }
 
     &__card {
+      padding: 30px;
       max-width: 100%;
     }
 
@@ -350,7 +360,7 @@
     padding-left: 34px;
 
     &__media img {
-      height: 160px;
+      // height: 160px;
     }
   }
 }
