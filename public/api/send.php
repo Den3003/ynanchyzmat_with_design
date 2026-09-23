@@ -31,7 +31,7 @@ function respond(int $code, array $body): void {  // Вынесена в отд�
 
 // Проверка HTTP-метода
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    respond(405, ['success' => false, 'message' => 'Метод не разрешён']);
+    respond(405, ['success' => false, 'message' => 'The method is not permitted.']);
 }
 
 // --- Тело запроса: поддерживаем и JSON, и обычный form-data (на случай <form method="post"> без JS) ---
@@ -40,7 +40,7 @@ if (str_contains($contentType, 'application/json')) {
     $raw = file_get_contents('php://input');
     $input = json_decode($raw, true);
     if (!is_array($input)) {
-        respond(400, ['success' => false, 'message' => 'Некорректный формат данных']);
+        respond(400, ['success' => false, 'message' => 'Incorrect data format']);
     }
 } else {
     $input = $_POST;
@@ -61,6 +61,7 @@ function sanitize(string $value): string {
 }
 
 $name    = sanitize((string)($input['name'] ?? ''));
+$organization = sanitize((string)($input['organization'] ?? ''));
 $phone   = sanitize((string)($input['phone'] ?? ''));
 $email   = sanitize((string)($input['email'] ?? ''));
 $message = sanitize((string)($input['message'] ?? ''));
@@ -69,40 +70,40 @@ $message = sanitize((string)($input['message'] ?? ''));
 $errors = [];
 
 if ($name === '' || mb_strlen($name) < 2) {
-    $errors['name'] = 'Введите корректное имя (минимум 2 символа)';
+    $errors['name'] = 'Enter a valid name (at least 2 characters)';
 } elseif (mb_strlen($name) > 100) {
-    $errors['name'] = 'Имя слишком длинное';
+    $errors['name'] = 'The name is too long';
 } elseif (!preg_match('/^[a-zA-Zа-яА-ЯёЁ\s\-]+$/u', $name)) {
-    $errors['name'] = 'Имя содержит недопустимые символы';
+    $errors['name'] = 'The name contains invalid characters';
 }
 
 $phoneDigits = preg_replace('/\D/', '', $phone);
 if ($phone === '') {
-    $errors['phone'] = 'Введите телефон';
+    $errors['phone'] = 'Enter the phone number';
 } elseif (strlen($phoneDigits) < 10 || strlen($phoneDigits) > 15) {
-    $errors['phone'] = 'Некорректный номер телефона';
+    $errors['phone'] = 'Incorrect phone number';
 } elseif (!preg_match('/^[+()\d\s\-]+$/', $phone)) {
-    $errors['phone'] = 'Телефон содержит недопустимые символы';
+    $errors['phone'] = 'The phone contains invalid characters';
 }
 
 if ($email === '') {
-    $errors['email'] = 'Введите email';
+    $errors['email'] = 'Enter your email address';
 } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors['email'] = 'Некорректный email';
+    $errors['email'] = 'Invalid email';
 } elseif (mb_strlen($email) > 150) {
-    $errors['email'] = 'Email слишком длинный';
+    $errors['email'] = 'The email is too long';
 }
 
 if ($message === '') {
-    $errors['message'] = 'Введите сообщение';
+    $errors['message'] = 'Enter a message';
 } elseif (mb_strlen($message) < 10) {
-    $errors['message'] = 'Сообщение слишком короткое';
+    $errors['message'] = 'The message is too short';
 } elseif (mb_strlen($message) > 2000) {
-    $errors['message'] = 'Сообщение слишком длинное';
+    $errors['message'] = 'The message is too long';
 }
 
 if (!empty($errors)) {
-    respond(422, ['success' => false, 'message' => 'Проверьте правильность заполнения формы', 'errors' => $errors]);
+    respond(422, ['success' => false, 'message' => 'Check that the form is filled out correctly', 'errors' => $errors]);
 }
 
 
@@ -124,32 +125,34 @@ try {
   $mail->addReplyTo($email, $name);
 
   $mail->isHTML(true);
-  $mail->Subject = 'Новая заявка с сайта от ' . $name;
+  $mail->Subject = 'A new application from the website ynanchyzmat.com from ' . $name;
 
   $safeName    = htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); // htmlspecialchars() — превращает спецсимволы HTML (<, >, ", ', &) в их безопасные HTML-эквиваленты (&lt;, &gt; и т.д.)
+  $safeOrganization = htmlspecialchars($$organization, ENT_QUOTES, 'UTF-8'); // htmlspecialchars() — превращает спецсимволы HTML (<, >, ", ', &) в их безопасные HTML-эквиваленты (&lt;, &gt; и т.д.)
   $safePhone   = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
   $safeEmail   = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
   $safeMessage = nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8')); // nl2br() — применяется только к $message, так как это единственное многострочное поле (textarea). Функция превращает реальные переносы строк (\n) в HTML-тег <br>, чтобы форматирование сообщения пользователя сохранилось при просмотре письма в HTML-виде (иначе весь текст сообщения "слипся" бы в одну строку визуально).
 
   $mail->Body = <<<HTML
-        <h2>Новая заявка с формы обратной связи</h2>
-        <p><strong>Имя:</strong> {$safeName}</p>
-        <p><strong>Телефон:</strong> {$safePhone}</p>
+        <h2>New request from the feedback form.</h2>
+        <p><strong>Name:</strong> {$safeName}</p>
+        <p><strong>Organization:</strong> {$safeOrganization}</p>
+        <p><strong>Phone number:</strong> {$safePhone}</p>
         <p><strong>Email:</strong> {$safeEmail}</p>
-        <p><strong>Сообщение:</strong><br>{$safeMessage}</p>
+        <p><strong>Subject and Message:</strong><br>{$safeMessage}</p>
     HTML;
 
-  $mail->AltBody = "Имя: $name\nТелефон: $phone\nEmail: $email\n\n$message";
+  $mail->AltBody = "Name: $name\nPhone: $phone\nEmail: $email\n\n$message";
 
   // Отправка
     $mail->send();
 
-  respond(200, ['success' => true, 'message' => 'Сообщение успешно отправлено']);
+  respond(200, ['success' => true, 'message' => 'The message has been successfully sent']);
 
 } catch (PHPMailerException $e) {
     error_log('PHPMailer error: ' . $mail->ErrorInfo);
-    respond(500, ['success' => false, 'message' => 'Не удалось отправить сообщение. Попробуйте позже.']);
+    respond(500, ['success' => false, 'message' => 'The message could not be sent. Please try again later.']);
 } catch (\Throwable $e) {
     error_log('Unexpected error: ' . $e->getMessage());
-    respond(500, ['success' => false, 'message' => 'Произошла непредвиденная ошибка.']);
+    respond(500, ['success' => false, 'message' => 'An unforeseen error has occurred.']);
 }

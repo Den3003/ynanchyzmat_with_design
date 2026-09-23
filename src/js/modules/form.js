@@ -110,7 +110,7 @@ export function initFeedbackForm(formEl) {
       });
 
       if (result.success) {
-        statusEl.textContent = 'Спасибо! Сообщение отправлено, мы свяжемся с вами.';
+        statusEl.textContent = 'Thanks! The message has been sent, we will contact you.';
         statusEl.classList.add('contacts-form__status-success');
         formEl.reset();
         FIELDS.forEach((f) => getGroup(f).classList.remove('contacts-form__group-success'));
@@ -120,11 +120,11 @@ export function initFeedbackForm(formEl) {
           Object.entries(result.errors).forEach(([field, msg]) => showFieldError(field, msg));
         }
         console.log('result.message: ', result.message);
-        statusEl.textContent = result.message || 'Не удалось отправить сообщение.';
+        statusEl.textContent = result.message || 'The message could not be sent.';
         statusEl.classList.add('contacts-form__status-error');
       }
     } catch (err) {
-      statusEl.textContent = 'Ошибка сети. Попробуйте позже.';
+      statusEl.textContent = 'Network error. Please try again later.';
       statusEl.classList.add('contacts-form__status-error');
       console.error('Feedback form error:', err);
     } finally {

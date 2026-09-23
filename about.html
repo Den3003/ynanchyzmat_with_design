@@ -6,27 +6,12 @@
   <load src="/src/html/head.html" />
   <link rel="preload" href="/fonts/Futura-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/Futura-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Futura-700.woff2" as="font" type="font/woff2" crossorigin>
   <title>About Us | Ynanch Hyzmat</title>
 </head>
 <body>
   <load src="/src/html/loader.html" />
-  <!-- <script> -->
-  <!-- /* Оверлей скрывается после загрузки страницы, но не раньше, чем -->
-     <!-- проиграет вся секвенция (2.95 с). MIN_MS можно менять. */ -->
-  <!-- (function () { -->
-    <!-- var MIN_MS = 2950, start = Date.now(); -->
-    <!-- function hide() { -->
-      <!-- var wait = Math.max(0, MIN_MS - (Date.now() - start)); -->
-      <!-- setTimeout(function () { -->
-        <!-- var el = document.getElementById('yh-loader'); -->
-        <!-- if (el) el.classList.add('yh-hidden'); -->
-      <!-- }, wait); -->
-    <!-- } -->
-    <!-- if (document.readyState === 'complete') hide(); -->
-    <!-- else window.addEventListener('load', hide); -->
-  <!-- })(); -->
-  <!-- </script> -->
-  <!-- <span id="top" tabindex="-1" aria-hidden="true"></span> -->
+  
   <load src="/src/html/header.html" />
   
   <main class="about">
@@ -49,9 +34,35 @@
             industrial service companies.
           </p>
 
-          <div class="about__hero-image-wrapper">
-            <img class="about__hero-image" src="src/assets/images/about/hero/hero-logo.png" alt="">
-          </div>
+          <picture class="about__hero-image-wrapper">
+            <!-- <img class="about__hero-image" src="src/assets/images/about/hero/hero-logo.png" alt=""> -->
+
+            <!-- мобильный кроп -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- type="image/avif" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                          <!-- width="768" height="1024"> -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- type="image/webp" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                          <!-- width="768" height="1024"> -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                          <!-- width="768" height="1024"> -->
+
+                  <!-- десктоп -->
+            <source type="image/avif"
+                    srcset="src/assets/images/about/hero/hero-logo.avif 1x, src/assets/images/about/hero/hero-logo@2x.avif 2x">
+            <source type="image/webp"
+                    srcset="src/assets/images/about/hero/hero-logo.webp 1x, src/assets/images/about/hero/hero-logo@2x.webp 2x">
+
+            <img class="about__hero-image"
+                src="src/assets/images/about/hero/hero-logo.png"
+                srcset="src/assets/images/about/hero/hero-logo.png 1x, src/assets/images/about/hero/hero-logo@2x.png 2x"
+                alt=""
+                width="1137" height="612"
+                fetchpriority="high" decoding="async" draggable="false">
+          </picture>
 
         </div>
       </div>
@@ -706,7 +717,7 @@
   <load src="/src/html/footer.html" theme="footer_black" />
 
   <!-- Кнопка всегда последняя в DOM: порядок фокуса не ломается -->
-    <a class="to-top" href="#top" aria-label="Наверх">
+    <a class="to-top" href="#top" aria-label="To top">
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path
           d="M12 19V5M5 12l7-7 7 7"

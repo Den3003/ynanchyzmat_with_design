@@ -6,26 +6,11 @@
   <load src="/src/html/head.html" />
   <link rel="preload" href="/fonts/Futura-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/Futura-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Futura-700.woff2" as="font" type="font/woff2" crossorigin>
   <title>Contact Us | Ynanch Hyzmat</title>
 </head>
 <body class="contacts-body">
   <load src="/src/html/loader.html" />
-  <!-- <script> -->
-<!-- /* Оверлей скрывается после загрузки страницы, но не раньше, чем -->
-   <!-- проиграет вся секвенция (2.95 с). MIN_MS можно менять. */ -->
-<!-- (function () { -->
-  <!-- var MIN_MS = 2950, start = Date.now(); -->
-  <!-- function hide() { -->
-    <!-- var wait = Math.max(0, MIN_MS - (Date.now() - start)); -->
-    <!-- setTimeout(function () { -->
-      <!-- var el = document.getElementById('yh-loader'); -->
-      <!-- if (el) el.classList.add('yh-hidden'); -->
-    <!-- }, wait); -->
-  <!-- } -->
-  <!-- if (document.readyState === 'complete') hide(); -->
-  <!-- else window.addEventListener('load', hide); -->
-<!-- })(); -->
-<!-- </script> -->
 
   <div class="contacts-wrapper">
     <img class="contacts-bg" alt="" fetchpriority="high" decoding="async"
@@ -36,7 +21,6 @@
     <main>
       <section class="contacts">
         <h1 class="visually-hidden">Contact details for the company Ynanch Hyzmat</h1>
-        <!-- <img class="contacts__image" src="/src/assets/images/contacts/contacts.jpg" alt=""> -->
         <div class="container contacts__container">
           <form class="contacts__form contacts-form" id="contactsForm" novalidate>
 
@@ -65,7 +49,9 @@
               <input
                 class="contacts-form__input"
                 id="organization"
+                name="organization"
                 type="text"
+                required
               >
 
               <span class="contacts-form__error" id="organization-error" role="alert" aria-live="polite"></span>

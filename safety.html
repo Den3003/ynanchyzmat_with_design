@@ -6,26 +6,11 @@
   <load src="/src/html/head.html" />
   <link rel="preload" href="/fonts/Futura-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/Futura-500.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Futura-700.woff2" as="font" type="font/woff2" crossorigin>
   <title>Safety & Compliance | Ynanch Hyzmat</title>
 </head>
 <body class="safety-body">
   <load src="/src/html/loader.html" />
-  <!-- <script> -->
-  <!-- /* Оверлей скрывается после загрузки страницы, но не раньше, чем -->
-     <!-- проиграет вся секвенция (2.95 с). MIN_MS можно менять. */ -->
-  <!-- (function () { -->
-    <!-- var MIN_MS = 2950, start = Date.now(); -->
-    <!-- function hide() { -->
-      <!-- var wait = Math.max(0, MIN_MS - (Date.now() - start)); -->
-      <!-- setTimeout(function () { -->
-        <!-- var el = document.getElementById('yh-loader'); -->
-        <!-- if (el) el.classList.add('yh-hidden'); -->
-      <!-- }, wait); -->
-    <!-- } -->
-    <!-- if (document.readyState === 'complete') hide(); -->
-    <!-- else window.addEventListener('load', hide); -->
-  <!-- })(); -->
-  <!-- </script> -->
 
   <span id="top" tabindex="-1" aria-hidden="true"></span>
   <load src="/src/html/header.html" />
@@ -79,7 +64,7 @@
               <!-- Элемент 1 (По умолчанию открыт) -->
               <article id="near" class="risk-item js-risk-item is-first" data-index="1">
                 <figure class="risk-item__media">
-                  <img src="/src/assets/images/safety/overview/risk1.jpg" alt="Petronas Plant" width="350" height="233"/>
+                  <img src="/src/assets/images/safety/overview/risk1.jpg" alt="" width="350" height="233"/>
                 </figure>
                 <div class="risk-item__center risk-item__center-near">
                   <div class="risk-item__dot js-risk-dot"></div>
@@ -100,7 +85,7 @@
               <!-- Элементы 2, 3, 4 аналогично -->
               <article class="risk-item js-risk-item" data-index="2">
                 <figure class="risk-item__media risk-item__media-incident">
-                  <img src="/src/assets/images/safety/overview/risk2.jpg" alt="Workers" width="350" height="233"/>
+                  <img src="/src/assets/images/safety/overview/risk2.jpg" alt="" width="350" height="233"/>
                 </figure>
                 <div class="risk-item__center risk-item__center-incident">
                   <div class="risk-item__dot js-risk-dot"></div>
@@ -122,7 +107,7 @@
 
               <article class="risk-item js-risk-item" data-index="3">
                 <figure class="risk-item__media risk-item__media-major">
-                  <img src="/src/assets/images/safety/overview/risk3.jpg" alt="Crane" width="350" height="233"/>
+                  <img src="/src/assets/images/safety/overview/risk3.jpg" alt="" width="350" height="233"/>
                 </figure>
                 <div class="risk-item__center risk-item__center-major">
                   <div class="risk-item__dot js-risk-dot"></div>
@@ -145,7 +130,7 @@
 
               <article class="risk-item js-risk-item" data-index="4">
                 <figure class="risk-item__media risk-item__media-lesson">
-                  <img src="/src/assets/images/safety/overview/lesson.jpg" alt="Plant 2" width="350" height="233"/>
+                  <img src="/src/assets/images/safety/overview/lesson.jpg" alt="" width="350" height="233"/>
                 </figure>
                 <div class="risk-item__center">
                   <div class="risk-item__dot js-risk-dot"></div>
@@ -365,7 +350,7 @@
 
   
   <!-- Кнопка всегда последняя в DOM: порядок фокуса не ломается -->
-  <a class="to-top" href="#top" aria-label="Наверх">
+  <a class="to-top" href="#top" aria-label="To top">
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
       <path
         d="M12 19V5M5 12l7-7 7 7"
