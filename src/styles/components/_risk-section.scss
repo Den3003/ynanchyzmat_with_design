@@ -148,18 +148,6 @@
     }
   }
 
-  &__media-incident {
-    // margin-top: -80px;
-  }
-
-  &__media-major {
-    // margin-top: -40px;
-  }
-  
-  &__media-lesson {
-    // margin-top: -80px;
-  }
-
   &__content {
     display: flex;
     justify-content: center;
@@ -316,10 +304,7 @@
     //  Ступенчатые сдвиги имели смысл только в шахматной раскладке
     &__center-near,
     &__center-incident,
-    &__center-major,
-    &__media-incident,
-    &__media-major,
-    &__media-lesson {
+    &__center-major {
       margin-top: 0;
       margin-bottom: 0;
     }

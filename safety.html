@@ -18,15 +18,44 @@
   <main class="safety">
     <!-- Hero -->
     <section class="safety__hero">
-      <div class="safety__hero-background">
-        <img
-          class="safety__hero-image"
+      <!-- <div class="safety__hero-background"> -->
+        <!-- <img -->
+          <!-- class="safety__hero-image" -->
+          <!-- src="src/assets/images/safety/hero/safety-hero.jpg" -->
+          <!-- alt="" -->
+          <!-- width="1920" -->
+          <!-- height="600" -->
+        <!-- > -->
+      <!-- </div> -->
+
+      <picture class="safety__hero-background">
+        <!-- мобильный кроп -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- type="image/avif" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                      <!-- width="768" height="1024"> -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- type="image/webp" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                      <!-- width="768" height="1024"> -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                      <!-- width="768" height="1024"> -->
+
+              <!-- десктоп -->
+        <source type="image/avif"
+                srcset="src/assets/images/safety/hero/safety-hero.avif 1x, src/assets/images/safety/hero/safety-hero@2x.avif 2x">
+        <source type="image/webp"
+                srcset="src/assets/images/safety/hero/safety-hero.webp 1x, src/assets/images/safety/hero/safety-hero@2x.webp 2x">
+
+        <img class="safety__hero-image"
           src="src/assets/images/safety/hero/safety-hero.jpg"
+          srcset="src/assets/images/safety/hero/safety-hero.jpg 1x, src/assets/images/safety/hero/safety-hero@2x.jpg 2x"
           alt=""
-          width="1920"
-          height="600"
-        >
-      </div>
+          width="1920" height="600"
+          fetchpriority="high" decoding="async" draggable="false">
+      </picture>
+
       <div class="container safety__container">
         <div class="safety__hero-content">
           <h1 class="safety__title content-section js-content-section">Safety & Compliance</h1>
@@ -63,9 +92,36 @@
 
               <!-- Элемент 1 (По умолчанию открыт) -->
               <article id="near" class="risk-item js-risk-item is-first" data-index="1">
-                <figure class="risk-item__media">
-                  <img src="/src/assets/images/safety/overview/risk1.jpg" alt="" width="350" height="233"/>
-                </figure>
+
+                <picture class="risk-item__media">
+                      <!-- мобильный кроп -->
+                      <!-- <source media="(max-width: 767px)" -->
+                              <!-- type="image/avif" -->
+                              <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                              <!-- width="768" height="1024"> -->
+                      <!-- <source media="(max-width: 767px)" -->
+                              <!-- type="image/webp" -->
+                              <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                              <!-- width="768" height="1024"> -->
+                      <!-- <source media="(max-width: 767px)" -->
+                              <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                              <!-- width="768" height="1024"> -->
+
+                      <!-- десктоп -->
+                  <source type="image/avif"
+                          srcset="src/assets/images/safety/overview/risk1.avif 1x, src/assets/images/safety/overview/risk1@2x.avif 2x">
+                  <source type="image/webp"
+                          srcset="src/assets/images/safety/overview/risk1.webp 1x, src/assets/images/safety/overview/risk1@2x.webp 2x">
+
+                  <img src="src/assets/images/safety/overview/risk1.jpg"
+                      srcset="src/assets/images/safety/overview/risk1.jpg 1x, src/assets/images/safety/overview/risk1@2x.jpg 2x"
+                      alt=""
+                      width="350" height="200"
+                      loading="lazy"
+                      decoding="async"
+                      draggable="false">
+                </picture>
+
                 <div class="risk-item__center risk-item__center-near">
                   <div class="risk-item__dot js-risk-dot"></div>
                 </div>
@@ -84,9 +140,36 @@
 
               <!-- Элементы 2, 3, 4 аналогично -->
               <article class="risk-item js-risk-item" data-index="2">
-                <figure class="risk-item__media risk-item__media-incident">
-                  <img src="/src/assets/images/safety/overview/risk2.jpg" alt="" width="350" height="233"/>
-                </figure>
+
+                <picture class="risk-item__media">
+                      <!-- мобильный кроп -->
+                      <!-- <source media="(max-width: 767px)" -->
+                              <!-- type="image/avif" -->
+                              <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                              <!-- width="768" height="1024"> -->
+                      <!-- <source media="(max-width: 767px)" -->
+                              <!-- type="image/webp" -->
+                              <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                              <!-- width="768" height="1024"> -->
+                      <!-- <source media="(max-width: 767px)" -->
+                              <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                              <!-- width="768" height="1024"> -->
+
+                      <!-- десктоп -->
+                  <source type="image/avif"
+                          srcset="src/assets/images/safety/overview/risk2.avif 1x, src/assets/images/safety/overview/risk2@2x.avif 2x">
+                  <source type="image/webp"
+                          srcset="src/assets/images/safety/overview/risk2.webp 1x, src/assets/images/safety/overview/risk2@2x.webp 2x">
+
+                  <img src="src/assets/images/safety/overview/risk2.jpg"
+                      srcset="src/assets/images/safety/overview/risk2.jpg 1x, src/assets/images/safety/overview/risk2@2x.jpg 2x"
+                      alt=""
+                      width="350" height="300"
+                      loading="lazy"
+                      decoding="async"
+                      draggable="false">
+                </picture>
+
                 <div class="risk-item__center risk-item__center-incident">
                   <div class="risk-item__dot js-risk-dot"></div>
                 </div>
@@ -106,9 +189,36 @@
               </article>
 
               <article class="risk-item js-risk-item" data-index="3">
-                <figure class="risk-item__media risk-item__media-major">
-                  <img src="/src/assets/images/safety/overview/risk3.jpg" alt="" width="350" height="233"/>
-                </figure>
+
+                <picture class="risk-item__media">
+                      <!-- мобильный кроп -->
+                      <!-- <source media="(max-width: 767px)" -->
+                              <!-- type="image/avif" -->
+                              <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                              <!-- width="768" height="1024"> -->
+                      <!-- <source media="(max-width: 767px)" -->
+                              <!-- type="image/webp" -->
+                              <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                              <!-- width="768" height="1024"> -->
+                      <!-- <source media="(max-width: 767px)" -->
+                              <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                              <!-- width="768" height="1024"> -->
+
+                      <!-- десктоп -->
+                  <source type="image/avif"
+                          srcset="src/assets/images/safety/overview/risk3.avif 1x, src/assets/images/safety/overview/risk3@2x.avif 2x">
+                  <source type="image/webp"
+                          srcset="src/assets/images/safety/overview/risk3.webp 1x, src/assets/images/safety/overview/risk3@2x.webp 2x">
+
+                  <img src="src/assets/images/safety/overview/risk3.jpg"
+                      srcset="src/assets/images/safety/overview/risk3.jpg 1x, src/assets/images/safety/overview/risk3@2x.jpg 2x"
+                      alt=""
+                      width="350" height="200"
+                      loading="lazy"
+                      decoding="async"
+                      draggable="false">
+                </picture>
+
                 <div class="risk-item__center risk-item__center-major">
                   <div class="risk-item__dot js-risk-dot"></div>
                 </div>
@@ -129,9 +239,36 @@
               </article>
 
               <article class="risk-item js-risk-item" data-index="4">
-                <figure class="risk-item__media risk-item__media-lesson">
-                  <img src="/src/assets/images/safety/overview/lesson.jpg" alt="" width="350" height="233"/>
-                </figure>
+
+                <picture class="risk-item__media">
+                      <!-- мобильный кроп -->
+                      <!-- <source media="(max-width: 767px)" -->
+                              <!-- type="image/avif" -->
+                              <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                              <!-- width="768" height="1024"> -->
+                      <!-- <source media="(max-width: 767px)" -->
+                              <!-- type="image/webp" -->
+                              <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                              <!-- width="768" height="1024"> -->
+                      <!-- <source media="(max-width: 767px)" -->
+                              <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                              <!-- width="768" height="1024"> -->
+
+                      <!-- десктоп -->
+                  <source type="image/avif"
+                          srcset="src/assets/images/safety/overview/lesson.avif 1x, src/assets/images/safety/overview/lesson@2x.avif 2x">
+                  <source type="image/webp"
+                          srcset="src/assets/images/safety/overview/lesson.webp 1x, src/assets/images/safety/overview/lesson@2x.webp 2x">
+
+                  <img src="src/assets/images/safety/overview/lesson.jpg"
+                      srcset="src/assets/images/safety/overview/lesson.jpg 1x, src/assets/images/safety/overview/lesson@2x.jpg 2x"
+                      alt=""
+                      width="350" height="263"
+                      loading="lazy"
+                      decoding="async"
+                      draggable="false">
+                </picture>
+                
                 <div class="risk-item__center">
                   <div class="risk-item__dot js-risk-dot"></div>
                 </div>

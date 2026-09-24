@@ -21,15 +21,34 @@
 
     <!-- Hero -->
     <section class="sectors__hero">
-      <div class="sectors__hero-background">
-        <img
-          class="sectors__hero-image"
+      <picture class="sectors__hero-background">
+        <!-- мобильный кроп -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- type="image/avif" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                      <!-- width="768" height="1024"> -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- type="image/webp" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                      <!-- width="768" height="1024"> -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                      <!-- width="768" height="1024"> -->
+
+              <!-- десктоп -->
+        <source type="image/avif"
+                srcset="src/assets/images/sectors/hero/sectors-hero.avif 1x, src/assets/images/sectors/hero/sectors-hero@2x.avif 2x">
+        <source type="image/webp"
+                srcset="src/assets/images/sectors/hero/sectors-hero.webp 1x, src/assets/images/sectors/hero/sectors-hero@2x.webp 2x">
+
+        <img class="sectors__hero-image"
           src="src/assets/images/sectors/hero/sectors-hero.jpg"
+          srcset="src/assets/images/sectors/hero/sectors-hero.jpg 1x, src/assets/images/sectors/hero/sectors-hero@2x.jpg 2x"
           alt=""
-          width="1920"
-          height="600"
-        >
-      </div>
+          width="1920" height="600"
+          fetchpriority="high" decoding="async" draggable="false">
+      </picture>
+
       <div class="container sectors__container">
         <div class="sectors__hero-flex">
           <h1 class="sectors__title content-section js-content-section">Sectors</h1>
@@ -65,7 +84,37 @@
         <ul id="support" class="sectors__overview-list">
 
           <li id="gas" class="sectors__overview-item">
-            <img class="sectors__overview-item-image" src="/src/assets/images/sectors/overview/oil.jpg" alt="" width="418" height="330">
+
+            <picture>
+            <!-- мобильный кроп -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- type="image/avif" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                      <!-- width="768" height="1024"> -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- type="image/webp" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                      <!-- width="768" height="1024"> -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                      <!-- width="768" height="1024"> -->
+
+                  <!-- десктоп -->
+              <source type="image/avif"
+                      srcset="src/assets/images/sectors/overview/oil.avif 1x, src/assets/images/sectors/overview/oil@2x.avif 2x">
+              <source type="image/webp"
+                      srcset="src/assets/images/sectors/overview/oil.webp 1x, src/assets/images/sectors/overview/oil@2x.webp 2x">
+
+              <img class="sectors__overview-item-image"
+                  src="src/assets/images/sectors/overview/oil.jpg"
+                  srcset="src/assets/images/sectors/overview/oil.jpg 1x, src/assets/images/sectors/overview/oil@2x.jpg 2x"
+                  alt=""
+                  width="418" height="330"
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false">
+            </picture>
+
             <h3 class="sectors__overview-item-title content-section js-content-section">
               Oil and Gas
             </h3>
@@ -82,7 +131,37 @@
           </li>
 
           <li id="energy" class="sectors__overview-item">
-            <img class="sectors__overview-item-image" src="/src/assets/images/sectors/overview/energy.jpg" alt="" width="418" height="330">
+
+            <picture>
+            <!-- мобильный кроп -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- type="image/avif" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                      <!-- width="768" height="1024"> -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- type="image/webp" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                      <!-- width="768" height="1024"> -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                      <!-- width="768" height="1024"> -->
+
+                  <!-- десктоп -->
+              <source type="image/avif"
+                      srcset="src/assets/images/sectors/overview/energy.avif 1x, src/assets/images/sectors/overview/energy@2x.avif 2x">
+              <source type="image/webp"
+                      srcset="src/assets/images/sectors/overview/energy.webp 1x, src/assets/images/sectors/overview/energy@2x.webp 2x">
+
+              <img class="sectors__overview-item-image"
+                  src="src/assets/images/sectors/overview/energy.jpg"
+                  srcset="src/assets/images/sectors/overview/energy.jpg 1x, src/assets/images/sectors/overview/energy@2x.jpg 2x"
+                  alt=""
+                  width="418" height="330"
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false">
+            </picture>
+
             <h3 class="sectors__overview-item-title content-section js-content-section">
               Energy and Power
             </h3>
@@ -99,7 +178,37 @@
           </li>
 
           <li id="petrochemistry" class="sectors__overview-item">
-            <img class="sectors__overview-item-image" src="/src/assets/images/sectors/overview/petrochemsitry.jpg" alt="" width="418" height="330">
+
+            <picture>
+            <!-- мобильный кроп -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- type="image/avif" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                      <!-- width="768" height="1024"> -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- type="image/webp" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                      <!-- width="768" height="1024"> -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                      <!-- width="768" height="1024"> -->
+
+                  <!-- десктоп -->
+              <source type="image/avif"
+                      srcset="src/assets/images/sectors/overview/petrochemsitry.avif 1x, src/assets/images/sectors/overview/petrochemsitry@2x.avif 2x">
+              <source type="image/webp"
+                      srcset="src/assets/images/sectors/overview/petrochemsitry.webp 1x, src/assets/images/sectors/overview/petrochemsitry@2x.webp 2x">
+
+              <img class="sectors__overview-item-image"
+                  src="src/assets/images/sectors/overview/petrochemsitry.jpg"
+                  srcset="src/assets/images/sectors/overview/petrochemsitry.jpg 1x, src/assets/images/sectors/overview/petrochemsitry@2x.jpg 2x"
+                  alt=""
+                  width="418" height="330"
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false">
+            </picture>
+
             <h3 class="sectors__overview-item-title content-section js-content-section">
               Petrochemistry
             </h3>
@@ -115,7 +224,37 @@
           </li>
 
           <li id="civil" class="sectors__overview-item">
-            <img class="sectors__overview-item-image" src="/src/assets/images/sectors/overview/civil.jpg" alt="" width="418" height="330">
+
+            <picture>
+            <!-- мобильный кроп -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- type="image/avif" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                      <!-- width="768" height="1024"> -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- type="image/webp" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                      <!-- width="768" height="1024"> -->
+              <!-- <source media="(max-width: 767px)" -->
+                      <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                      <!-- width="768" height="1024"> -->
+
+                  <!-- десктоп -->
+              <source type="image/avif"
+                      srcset="src/assets/images/sectors/overview/civil.avif 1x, src/assets/images/sectors/overview/civil@2x.avif 2x">
+              <source type="image/webp"
+                      srcset="src/assets/images/sectors/overview/civil.webp 1x, src/assets/images/sectors/overview/civil@2x.webp 2x">
+
+              <img class="sectors__overview-item-image"
+                  src="src/assets/images/sectors/overview/civil.jpg"
+                  srcset="src/assets/images/sectors/overview/civil.jpg 1x, src/assets/images/sectors/overview/civil@2x.jpg 2x"
+                  alt=""
+                  width="418" height="330"
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false">
+            </picture>
+
             <h3 class="sectors__overview-item-title content-section js-content-section">
               Civil Construction
             </h3>

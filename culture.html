@@ -114,16 +114,33 @@
               </svg>
             </a>
           </div>
+          <picture class="culture__image-wrapper">
+            <!-- мобильный кроп -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- type="image/avif" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.avif 1x, /img/hero/hero-newyear-m@2x.avif 2x" -->
+                          <!-- width="768" height="1024"> -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- type="image/webp" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.webp 1x, /img/hero/hero-newyear-m@2x.webp 2x" -->
+                          <!-- width="768" height="1024"> -->
+                  <!-- <source media="(max-width: 767px)" -->
+                          <!-- srcset="/img/hero/hero-newyear-m.jpg 1x, /img/hero/hero-newyear-m@2x.jpg 2x" -->
+                          <!-- width="768" height="1024"> -->
 
-          <div class="culture__image-wrapper">
-            <img
-              class="culture__image"
-              src="/src/assets/images/about/approach/culture.jpg"
-              alt=""
-              width="800"
-              height="583"
-            >
-          </div>
+                  <!-- десктоп -->
+            <source type="image/avif"
+                    srcset="src/assets/images/about/approach/culture.avif 1x, src/assets/images/about/approach/culture@2x.avif 2x">
+            <source type="image/webp"
+                    srcset="src/assets/images/about/approach/culture.webp 1x, src/assets/images/about/approach/culture@2x.webp 2x">
+
+            <img class="culture__image"
+                src="src/assets/images/about/approach/culture.jpg"
+                srcset="src/assets/images/about/approach/culture.jpg 1x, src/assets/images/about/approach/culture@2x.jpg 2x"
+                alt=""
+                width="800" height="583"
+                fetchpriority="high" decoding="async" draggable="false">
+          </picture>
         </div>
       </section>
     </div>
