@@ -466,7 +466,7 @@
     transition: transform .8s cubic-bezier(.55, 0, .1, 1);
     //  Карточка фиксированной высоты: очень длинный список прокручиваем
     overflow-y: auto;
-    overscroll-behavior: contain;
+    // overscroll-behavior: contain;
 
     //  Без курсора выезжать нечему — панель раскрывается кнопкой «Details»
     @include mixins.touch {

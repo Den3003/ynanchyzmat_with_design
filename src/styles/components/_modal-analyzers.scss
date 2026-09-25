@@ -83,43 +83,48 @@
     margin: 0;
     line-height: 1.4;
     padding-left: 20px;
-    width: 826px;
+    // width: 826px;
     max-width: 100%;
-    max-height: 252px;
+    // max-height: 252px;
     display: flex;
     flex-direction: column;
     align-content: space-between;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
 
     @media (max-width: 1500px) {
-      width: 720px;
+      // width: 720px;
     }
 
     @media (max-width: 1340px) {
-      width: 660px;
+      // width: 660px;
     }
 
     @media (max-width: 1337px) {
-      max-height: 230px;
+      // max-height: 230px;
+      width: max-content;
     }
 
     @include mixins.down('md') {
-      width: 600px;
+      // width: 600px;
     }
 
     @media (max-width: 638px) {
-      width: 535px;
+      // width: 535px;
     }
 
     @media (max-width: 565px) {
-      flex-wrap: nowrap;
+     /*  flex-wrap: nowrap;
       width: 100%;
-      max-height: 100%;
+      max-height: 100%; */
     }
   }
 
   &__item {
     max-width: 100%;
+
+    @include mixins.down('lg') {
+      width: max-content;
+    }
   }
 
   &__text {
@@ -156,14 +161,15 @@
 
   &__content {
     display: grid;
-    // grid-template-columns: minmax(540px, 630px) minmax(540px, 630px) 1fr;
-    grid-template-areas: 
+    grid-template-columns: minmax(540px, 550px) minmax(540px, 550px) 1fr;
+    /* grid-template-areas: 
       "left-content middle-content"
-      "right-content right-content";
+      "right-content right-content"; */
+    justify-content: start;
     margin: 0 0 50px;
-    max-width: 1500px;
-    width: 100%;
-    justify-items: center;
+    // max-width: 1500px;
+    // width: 100%;
+    // justify-items: center;
     
 
     //  Три колонки по 540px не помещаются уже на 1600 — делим поровну
@@ -172,14 +178,23 @@
       gap: 0 40px;
     } */
 
+    @media (max-width: 1550px) {
+      grid-template-columns: minmax(450px, 500px) minmax(450px, 500px) 1fr;
+    }
+
     @media (max-width: 1530px) {
       gap: 0 30px;
+    }
+
+    @media (max-width: 1550px) {
+      grid-template-columns: minmax(450px, 500px) minmax(450px, 500px) 280px;
     }
 
     //  Список типов анализаторов уходит под два текстовых столбца
     @include mixins.down('lg') {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       /* gap: 30px 40px; */
+      // justify-content: center;
       margin: 0 0 30px;
     }
 
@@ -190,28 +205,28 @@
   }
 
   &__content-left {
-    grid-area: left-content;
+    /* text-align: left; */
   }
   
   &__content-middle {
-    grid-area: middle-content;
+    // grid-area: middle-content;
     margin: 0 0 50px;
   }
 
   &__content-left,
   &__content-middle {
-    max-width: 700px;
+    max-width: 450px;
 
     @include mixins.down('xxl') {
-      max-width: 650px;
+      // max-width: 650px;
     }
 
     @media (max-width: 1500px) {
-      max-width: 560px;
+      // max-width: 560px;
     }
 
     @media (max-width: 1340px) {
-      max-width: 480px;
+      // max-width: 480px;
     }
 
     @include mixins.down('md') {
@@ -226,11 +241,14 @@
   }
 
   &__content-right {
-    grid-area: right-content;
+    // grid-area: right-content;
 
-    /* @include mixins.down('lg') {
-      grid-column: 1 / -1;
-    } */
+    @include mixins.down('lg') {
+      grid-column: span 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   &__close {

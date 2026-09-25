@@ -190,7 +190,7 @@
   }
 
   &__description-text-wrapper {
-    margin: 0 0 120px;
+    margin: 0 0 50px;
 
     @include mixins.down('lg') {
       margin: 0 0 64px;
@@ -199,6 +199,13 @@
     @include mixins.down('sm') {
       margin: 0 0 40px;
     }
+  }
+
+  &__description-subtitle {
+    font-size: mixins.fluid(28px, 53px);
+    font-weight: 500;
+    margin: 0 0 50px;
+    text-align: center;
   }
 
   &__description-text {

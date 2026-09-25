@@ -86,14 +86,16 @@
   }
 
   &__item {
+    // z-index: 13;
 
     &:after {
       content: '';
       position: absolute;
       left: 0;
       right: 0;
-      top: 100%;
-      height: 10px;
+      top: 0;
+      // height: 10px;
+      // z-index: -1;
     }
 
     &.open {
@@ -123,6 +125,8 @@
   }
 
   &__link {
+    // position: relative;
+    // z-index: 1;
     text-decoration: none;
     color: inherit;
     font-size: 20px;
