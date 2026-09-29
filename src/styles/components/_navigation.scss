@@ -38,6 +38,8 @@
     justify-content: center;
     gap: 0 30px;
     transition: background-color .3s ease-in, color .2s ease-in;
+    // transition: border-color .3s ease-in;
+    // transition: all .3s ease-in;
 
     &:has(.navigation__link:focus-visible) {
       background-color: variable.$color-main;
@@ -47,6 +49,9 @@
     &:has(.navigation__item.open) {
       background-color: variable.$color-main;
       color: variable.$color-gray;
+      /* border-width: 1px;
+      border-style: solid;
+      border-color: variable.$color-orange-primary; */
     }
 
     &:has(.navigation__link[aria-current="page"]) {
@@ -81,6 +86,18 @@
       &:has(.navigation__item.open),
       &:has(.navigation__link[aria-current="page"]) {
         background-color: transparent;
+      }
+    }
+  }
+
+  &__list-black {
+    &:has(.navigation__item.open) {
+      border-width: 1px;
+      border-style: solid;
+      border-color: variable.$color-orange-primary;
+
+      .navigation__panel {
+        border: 1px solid variable.$color-orange-primary;
       }
     }
   }

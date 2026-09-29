@@ -358,10 +358,15 @@ const swiperSafetyDescription = new Swiper('.safety__description .swiper', {
 
 const swiperCertificates = new Swiper('.safety__certificates .swiper', {
   modules: [Navigation],
-  slidesPerView: 'auto',
+  slidesPerView: 5,
   centeredSlides: true,
   initialSlide: 2,
   loop: true,
+  breakpoints: {
+    0: { slidesPerView: 1 },
+    577: { slidesPerView: 3 },
+    1281: { slidesPerView: 5 },
+  },
 
   navigation: {
     nextEl: '.safety__certificates-button-next',

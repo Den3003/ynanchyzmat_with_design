@@ -415,17 +415,37 @@
     margin: 0;
     list-style: none;
 
+    @include mixins.down(1560px) {
+      height: 505px;
+    }
+
     @include mixins.down('lg') {
       height: 540px;
     }
 
     @include mixins.down('sm') {
-      height: 420px;
+      height: 435px;
+    }
+
+    @include mixins.down('xs') {
+      height: 490px;
+    }
+
+    @include mixins.down('xxs') {
+      height: 425px;
     }
   }
 
   &__certificates-swiper {
     max-width: 1499px;
+
+    @include mixins.down('lg') {
+      max-width: 798px;
+    }
+
+    @include mixins.down('xs') {
+      max-width: 315px;
+    }
   }
 
   &__certificates-button {
@@ -443,36 +463,49 @@
     }
   }
 
+  &__certificates-button-next {
+    display: flex;
+    justify-content: end;
+  }
+
   &__certificates-slider-item-four {
     z-index: -1;
   }
   
 
   &__certificates-slider-item {
-    max-width: 300px;
+    // max-width: 300px;
     height: auto;
     transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
 
     @include mixins.down('lg') {
-      width: 230px;
-      height: 334px;
+      // width: 230px;
+      // height: 334px;
     }
 
     @include mixins.down('sm') {
-      width: 170px;
-      height: 246px;
+      // width: 170px;
+      // height: 246px;
     }
 
     &.swiper-slide-prev, 
     &.swiper-slide-next {
       transform: translateY(-30px);
       z-index: 2;
+
+      @include mixins.down('xs') {
+        transform: none;
+      }
     }
 
     &.swiper-slide-active {
       transform: scale(1.05) translateY(-60px); // чуть крупнее, можно подкрутить 1.05–1.15
       position: relative;
       z-index: 3;
+
+      @include mixins.down('xs') {
+        transform: none;
+      }
       // z-index: 2;
       // opacity: 1;
 

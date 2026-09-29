@@ -17,7 +17,11 @@
 
   &_contacts {
     position: static;
-    margin: 0 0 40px;
+    margin: 0;
+
+    @media (max-height: 920px) {
+      margin: 0 0 30px;
+    }
 
     @include mixins.down(992px) {
       margin: 0;

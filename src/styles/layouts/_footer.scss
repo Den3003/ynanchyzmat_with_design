@@ -27,6 +27,7 @@
     .footer__time {
       display: none;
     }
+    
   }
 
   &_team {
@@ -42,6 +43,10 @@
         padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
       }
     } */
+    
+    @media (max-height: 920px) {
+      padding-block: 45px;
+    }
   }
 
   &.footer_black {
