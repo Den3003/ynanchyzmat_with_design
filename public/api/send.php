@@ -128,7 +128,7 @@ try {
   $mail->Subject = 'A new application from the website ynanchyzmat.com from ' . $name;
 
   $safeName    = htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); // htmlspecialchars() — превращает спецсимволы HTML (<, >, ", ', &) в их безопасные HTML-эквиваленты (&lt;, &gt; и т.д.)
-  $safeOrganization = htmlspecialchars($$organization, ENT_QUOTES, 'UTF-8'); // htmlspecialchars() — превращает спецсимволы HTML (<, >, ", ', &) в их безопасные HTML-эквиваленты (&lt;, &gt; и т.д.)
+  $safeOrganization = htmlspecialchars($organization, ENT_QUOTES, 'UTF-8'); // htmlspecialchars() — превращает спецсимволы HTML (<, >, ", ', &) в их безопасные HTML-эквиваленты (&lt;, &gt; и т.д.)
   $safePhone   = htmlspecialchars($phone, ENT_QUOTES, 'UTF-8');
   $safeEmail   = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
   $safeMessage = nl2br(htmlspecialchars($message, ENT_QUOTES, 'UTF-8')); // nl2br() — применяется только к $message, так как это единственное многострочное поле (textarea). Функция превращает реальные переносы строк (\n) в HTML-тег <br>, чтобы форматирование сообщения пользователя сохранилось при просмотре письма в HTML-виде (иначе весь текст сообщения "слипся" бы в одну строку визуально).
