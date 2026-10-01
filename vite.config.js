@@ -24,21 +24,21 @@ const getRootHtmlInputs = () => {
 // public/robots.txt закрывает сайт от индексации и нужен только демо-версии.
 // Плагин печатает предупреждение в конце каждой сборки, чтобы файл не уехал
 // на продакшен незамеченным. Перед боевым запуском удалить и файл, и плагин.
-const robotsReminder = () => ({
-  name: 'robots-reminder',
-  apply: 'build',
-  closeBundle() {
-    if (!fs.existsSync(path.resolve(__dirname, 'public/robots.txt'))) {
-      return;
-    }
+// const robotsReminder = () => ({
+//   name: 'robots-reminder',
+//   apply: 'build',
+//   closeBundle() {
+//     if (!fs.existsSync(path.resolve(__dirname, 'public/robots.txt'))) {
+//       return;
+//     }
 
-    console.warn(
-      '\n\x1b[43m\x1b[30m ВНИМАНИЕ \x1b[0m ' +
-      '\x1b[33mpublic/robots.txt закрывает сайт от индексации (Disallow: /).\x1b[0m\n' +
-      '           Это нужно только демо-версии. Перед боевым запуском файл удалить.\n'
-    );
-  },
-});
+//     console.warn(
+//       '\n\x1b[43m\x1b[30m ВНИМАНИЕ \x1b[0m ' +
+//       '\x1b[33mpublic/robots.txt закрывает сайт от индексации (Disallow: /).\x1b[0m\n' +
+//       '           Это нужно только демо-версии. Перед боевым запуском файл удалить.\n'
+//     );
+//   },
+// });
 
 export default defineConfig({
   plugins: [ 
@@ -85,7 +85,7 @@ export default defineConfig({
       exclude: /turkmenistan-height\.png$/i,
     }), */
 
-    robotsReminder(),
+    // robotsReminder(),
 
     // 🎬 Критический CSS лоадера: компилируется из SCSS и инлайнится
     // в <head> вместо <!--@critical-css-->.
