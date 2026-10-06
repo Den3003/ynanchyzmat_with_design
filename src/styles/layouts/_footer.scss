@@ -133,9 +133,14 @@
   &__contacts-link {
     text-decoration: none;
     color: inherit;
+    transition: color 0.3s ease-in-out;
 
     @include mixins.down('md') {
       font-size: 15px;
+    }
+
+    &:hover {
+      color: variable.$color-orange-primary;
     }
   }
 

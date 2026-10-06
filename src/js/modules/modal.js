@@ -25,9 +25,14 @@ export const modalController = ({modal, btnOpen, btnClose, blockVisible, swiperM
       modalElem.style.opacity = 0;
       blockHidden.style.opacity = 1;
 
-      if (swiperMain && swiper?.autoplay && !swiper.autoplay.running) {
-        swiper.autoplay.start();
+      if (swiperMain && swiper.autoplay.paused) {
+
+        console.log('swiper.autoplay.paused ', swiper.autoplay.paused);
+        swiper.autoplay.resume();
       }
+      /* if (swiperMain && swiper?.autoplay && !swiper.autoplay.running) {
+        
+      } */
       
       setTimeout(() => {  
         modalElem.style.visibility = 'hidden';
@@ -41,7 +46,7 @@ export const modalController = ({modal, btnOpen, btnClose, blockVisible, swiperM
   const openModal = () => { 
       //  Пока открыта модалка, слайдер на фоне не перелистывается
       if (swiperMain && swiper?.autoplay?.running) {
-        swiper.autoplay.stop();
+        swiper.autoplay.pause();
       }
       modalElem.style.visibility = 'visible'; 
       modalElem.style.opacity = 1;   

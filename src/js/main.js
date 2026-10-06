@@ -142,6 +142,7 @@ export const swiper = new Swiper('.main-swiper.swiper', {
       const activeLine = document.querySelector(
         `.main-swiper__progress-item[data-index="${s.realIndex}"] .main-swiper__progress-line`
       );
+      // console.log('activeLine.dataset.index :', activeLine.dataset.index);
       if (activeLineFill) {
         activeLineFill.style.transform = `scaleX(${progress})`;
         activeLine?.classList.add('is-active');
@@ -169,14 +170,65 @@ export const swiper = new Swiper('.main-swiper.swiper', {
 });
 
 // Интерактив: Переключение слайдов при клике на саму оранжевую линию
+let isManualPaused = false;
 
-document.querySelectorAll('.main-swiper__progress-item').forEach(track => {
+document.querySelectorAll('.main-swiper__progress-item').forEach((track, index) => {
   track.addEventListener('click', () => {
     const targetIndex = parseInt(track.getAttribute('data-index'), 10);
     // Используем slideToLoop, так как у нас включен режим loop: true
     swiper.slideToLoop(targetIndex);
   });
+
+  // Интерактив: При наведении на прогресс слайд на паузу
+  track.addEventListener('mouseenter', ()=> {
+    // Проверяем, является ли эта кнопка АКТИВНОЙ прямо сейчас
+    if (index === swiper.realIndex && !isManualPaused) {
+      swiper.autoplay.pause();
+    }
+  });
+
+  track.addEventListener('mouseleave', () => {
+    // Если слайдер был приостановлен — возобновляем
+    if (swiper.autoplay.paused && !isManualPaused) {
+      swiper.autoplay.resume();
+    }
+  });
 });
+
+// Интерактив: При клике на кнопку срабатывание паузы или плей автопрокутки слайдера
+
+if (document.querySelector('.main-swiper__progress-bar')) {
+
+  const playPause = document.querySelector('.main-swiper__progress-paused');
+
+  playPause.addEventListener('click', () => {
+    isManualPaused = !isManualPaused;
+
+    if (isManualPaused) {
+      swiper.autoplay.pause();
+    } else {
+      swiper.autoplay.resume();
+    }
+  });
+
+}
+
+// if (document.querySelector('.main-swiper__progress-bar')) {
+//   const progressItems = document.querySelectorAll('.main-swiper__progress-item');
+//   console.log('progressItems: ', progressItems);
+//   progressItems.forEach(item => {
+//     // item.dataset.index
+//     console.log('item.dataset.index: ', item.dataset.index);
+//     item.addEventListener('mouseenter', (e) => {
+//       const target = e.target;
+//       console.log('target: ', target.closest('.swiper-wrapper'));
+//       const parent = target.closest('.swiper-wrapper');
+//       parent.querySelector('.swiper-slide');
+//       console.log("parent.querySelector('.swiper-slide') : ", parent.querySelector('.swiper-slide').className.contains('swiper-slide-active'));
+
+//     });
+//   });
+// }
 
 if (currentPath.includes('index.html') || currentPath === '/') {
   const hashTeg = window.location.hash;

@@ -17,15 +17,15 @@
 
   &_contacts {
     position: static;
-    margin: 0;
+    margin: 0 0 30px;
 
-    @media (max-height: 920px) {
+    /* @media (max-height: 920px) {
       margin: 0 0 30px;
-    }
+    } */
 
-    @include mixins.down(992px) {
+    /* @include mixins.down(992px) {
       margin: 0;
-    }
+    } */
   }
 
   &__grid {

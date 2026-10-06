@@ -30,12 +30,33 @@
 
   &__progress-flex {
     display: flex;
+    align-items: center;
     gap: 0 8px;
     width: 100%;
 
     @include mixins.down('xs') {
       gap: 0 5px;
     }
+  }
+
+  &__progress-paused {
+    all: unset;
+    padding: 5px 5px;
+    background: variable.$color-about-gray-bg;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid variable.$color-orange-primary;
+
+    @include mixins.touch {
+      display: flex;
+    }
+  }
+
+  &__progress-icon {
+    width: 24px;
+    height: 24px;
   }
 
   &__progress-item {
