@@ -112,6 +112,10 @@ $mail = new PHPMailer(true);
 
 
 try {
+
+  // ОБЯЗАТЕЛЬНО: Указываем кодировку UTF-8
+  $mail->CharSet = 'UTF-8';
+
   //  На некоторых устаревших тарифных планах GoDaddy блокирует внешние SMTP-порты (465/587). В этом случае используйте внутренний сервер ретрансляции GoDaddy без авторизации:
   $mail->isSMTP();
   $mail->Host = 'localhost'; // Или 'relay-hosting.secureserver.net'
@@ -120,7 +124,7 @@ try {
   $mail->SMTPAutoTLS = false;
   $mail->Port = 25;          // Внутренний порт GoDaddy
 
-  $mail->setFrom('info@ynanchyzmat.com', 'Заявка с сайта');
+  $mail->setFrom('info@ynanchyzmat.com');
   $mail->addAddress('info@ynanchyzmat.com');
   $mail->addReplyTo($email, $name);
 
