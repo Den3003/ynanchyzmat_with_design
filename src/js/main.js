@@ -12,7 +12,7 @@ import {
   EffectFade, 
   Mousewheel, 
   Navigation,
-  Parallax,
+  // Parallax,
 } from 'swiper/modules';
 import { modalController } from './modules/modal';
 import { initSearch } from './modules/search';
@@ -430,37 +430,37 @@ const swiperCertificates = new Swiper('.safety__certificates .swiper', {
 
 //  Слайдер страницы Our team
 
-export const swiperTeam = new Swiper('.team .swiper', {
-  modules: [Parallax, Navigation],
-  speed: 900,
-  parallax: true,
-  slidesPerView: 'auto',
-  centeredSlides: true,
-  spaceBetween: 30,
+// export const swiperTeam = new Swiper('.team .swiper', {
+//   modules: [Parallax, Navigation],
+//   speed: 900,
+//   parallax: true,
+//   slidesPerView: 'auto',
+//   centeredSlides: true,
+//   spaceBetween: 30,
 
-  breakpoints: {
-    768: { spaceBetween: 60 },
-    1280: { spaceBetween: 140 },
-  },
+//   breakpoints: {
+//     768: { spaceBetween: 60 },
+//     1280: { spaceBetween: 140 },
+//   },
 
-  // effect: 'creative',
-  /* fadeEffect: {
-    crossFade: true // Фоны будут плавно растворяться друг в друге, а не моргать
-  }, */
+//   // effect: 'creative',
+//   /* fadeEffect: {
+//     crossFade: true // Фоны будут плавно растворяться друг в друге, а не моргать
+//   }, */
 
-  navigation: {
-    nextEl: '.team__swiper-button-next',
-    prevEl: '.team__swiper-button-prev',
-  },
-});
+//   navigation: {
+//     nextEl: '.team__swiper-button-next',
+//     prevEl: '.team__swiper-button-prev',
+//   },
+// });
 
-//  Когда переходим с поиска на конкретного сотрудника
-if (currentPath.includes('team.html')) {
-  const hashTeam = window.location.hash;
-  if (hashTeam) {
-    swiperTeam.slideToLoop(hashTeam.slice(1));
-  }
-}
+// //  Когда переходим с поиска на конкретного сотрудника
+// if (currentPath.includes('team.html')) {
+//   const hashTeam = window.location.hash;
+//   if (hashTeam) {
+//     swiperTeam.slideToLoop(hashTeam.slice(1));
+//   }
+// }
 
 
 

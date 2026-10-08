@@ -1,4 +1,4 @@
-import { swiper, swiperTeam, swiperTimeline } from '../main';
+import { swiper, swiperTimeline } from '../main';
 import { debounce } from './utils';
 
 const searchWrapper = document.querySelector('.js-search');
@@ -176,10 +176,10 @@ export const initSearch = () => {
       swiperTimeline.slideToLoop(slideIndex);
     }
 
-    if (url.includes('team.html#') && currentPath === '/team.html') {
+    /* if (url.includes('team.html#') && currentPath === '/team.html') {
       swiperTeam.slideToLoop(slideIndex);
       return;
-    }
+    } */
 
     if (url.includes('about.html#timeline-') && currentPath === '/about.html') {
       swiperTimeline.slideToLoop(slideIndex);
