@@ -104,6 +104,35 @@
                       width="1920" height="1080"
                       fetchpriority="high" decoding="async" draggable="false">
                 </picture>
+
+
+                    <!-- ===== СЛОЙ 2: видео =====
+              
+                    Атрибут называется data-vsrc, а НЕ data-src — намеренно.
+                    Ваш скрипт B ищет [data-src] и [data-srcset] и подставил бы пути
+                    сразу при разборе страницы. Тогда hero-video.js при старте решил бы,
+                    что менять нечего, и не вызвал бы video.load() — видео не запустилось
+                    бы вообще. Отдельное имя атрибута разводит эти两 механизма.
+              
+                    Обязательные атрибуты:
+                      muted       — без него автовоспроизведение не разрешит ни один браузер
+                      playsinline — иначе iOS откроет полноэкранный плеер поверх сайта
+                      loop        — зацикливание
+              
+                    preload="none" — чтобы видео не отбирало полосу у постера (это LCP).
+                    JS переключит на "auto" после события load.
+              
+                    autoplay НЕ ставим: запуском управляет JS, чтобы ставить на паузу
+                    при уходе слайда, сворачивании вкладки и прокрутке.
+                -->
+                <video class="main-celebration__video" data-theme-video
+                      muted loop playsinline preload="none"
+                      aria-hidden="true" tabindex="-1" disablepictureinpicture>
+                  <source data-vsrc="/video/hero-{theme}.webm" type="video/webm">
+                  <source data-vsrc="/video/hero-{theme}.mp4"  type="video/mp4">
+                </video>
+
+
               </div>
               <div class="main-celebration__block result-section" id="main-celebration" data-slide-index="0">
                 <h2 class="main-celebration__title">

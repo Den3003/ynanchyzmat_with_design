@@ -27,7 +27,7 @@ export const modalController = ({modal, btnOpen, btnClose, blockVisible, swiperM
 
       if (swiperMain && swiper.autoplay.paused) {
 
-        console.log('swiper.autoplay.paused ', swiper.autoplay.paused);
+        // console.log('swiper.autoplay.paused ', swiper.autoplay.paused);
         swiper.autoplay.resume();
       }
       /* if (swiperMain && swiper?.autoplay && !swiper.autoplay.running) {

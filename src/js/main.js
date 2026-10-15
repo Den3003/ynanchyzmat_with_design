@@ -22,13 +22,14 @@ import { initServiceCards } from './modules/serviceCards';
 import { initFeedbackForm } from './modules/form';
 import { initTurkmenistanMap } from './modules/turkmenistan/index';
 import { getCurrentTheme, initClock } from './modules/timeZone';
-import { initHeroTheme } from './modules/hero-theme';
+// import { initHeroTheme } from './modules/hero-theme';
 import { prewarmAll } from './image-prewarm.js';
 import { collectImageNames } from './welayat-image.js';
 import { CONTENT } from './modules/turkmenistan/data/content.js';
 import { initLoader } from './modules/loader.js';
 import { initPageTransition } from './modules/page-transition.js';
 import { initToTop } from './modules/to-top.js';
+import { initHeroVideo } from './modules/hero-video.js';
 
 
 const loader = initLoader({
@@ -109,7 +110,25 @@ initSearch();
 initNavigation();
 initRiskTimeline();
 initServiceCards();
-initHeroTheme(getCurrentTheme);
+// initHeroTheme();
+initHeroVideo(getCurrentTheme);
+
+
+/**
+ * Сообщает hero-video.js, активен ли сейчас слайд с видео.
+ *
+ * Берём элемент слайда напрямую из s.slides[s.activeIndex].
+ * НЕ сравниваем классы: на момент slideChange класс
+ * swiper-slide-active ещё висит на предыдущем слайде —
+ * Swiper переставляет его позже, в updateSlidesClasses().
+ */
+function notifyVideo(s) {
+  const active = s.slides[s.activeIndex];
+
+  document.dispatchEvent(new CustomEvent('slider:change', {
+    detail: { isThemeSlide: !!active?.querySelector('[data-theme-video]') },
+  }));
+}
 
 
 // Слайдер Главной страницы на весь экран
@@ -165,9 +184,25 @@ export const swiper = new Swiper('.main-swiper.swiper', {
         }
       });
       // console.log('s: ', s);
+
+      notifyVideo(s);
+    },
+    afterInit(s) {
+      notifyVideo(s);
     },
   },
 });
+
+
+document.addEventListener('slider:wake', () => {
+  // Сбрасываем накопленные срабатывания autoplay,
+  // иначе слайдер «проскачет» несколько позиций разом
+  swiper.autoplay?.stop();
+  swiper.update();
+  notifyVideo(swiper); // сообщаем видео актуальное состояние
+  swiper.autoplay?.start();
+});
+
 
 // Интерактив: Переключение слайдов при клике на саму оранжевую линию
 let isManualPaused = false;
